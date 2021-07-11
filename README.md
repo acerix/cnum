@@ -26,7 +26,6 @@ console.log( rat(1,3).add(rat(5,7)) )
 *   `yarn lint`: Lint with ESLint
 *   `yarn test`: Run Jest and Enzyme tests
 *   `yarn clean`: Delete previous build
-*   `yarn ts-node <filename>`: Run with TS engine?
 *   `yarn docs`: Build documentation
 *   `yarn build`: Production build
 *   `yarn build-all`: Production-ready clean build of all the things
@@ -34,4 +33,4 @@ console.log( rat(1,3).add(rat(5,7)) )
 
 ## Feedback
 
-* [Bug and feature requests](https://github.com/acerix/cnum/issues)
+* Please report bug and feature requests as [GitHub Issues](https://github.com/acerix/cnum/issues)
