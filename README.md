@@ -1,6 +1,6 @@
 # Comfortably Numbers
 
-[![Build Status](https://github.com/acerix/cnum/workflows/build/badge.svg)](https://github.com/acerix/cnum/actions?query=workflow%3Abuild)
+[![Build Status](https://github.com/acerix/cnum/workflows/test/badge.svg)](https://github.com/acerix/cnum/actions?query=workflow%3Atest)
 
 Comfortably Numbers (cnum) represents rational numbers in a biginteresting way.
 
