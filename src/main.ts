@@ -147,6 +147,20 @@ class rat {
   }
 
   /**
+   * Raise this to the power of that.
+   */
+  pow(that: rat): number {
+    return Math.pow(+this, +that)
+  }
+
+  /**
+   * Returns the dot product of this and that.
+   */
+  dot(that: rat): bigint {
+    return this.n * that.n + this.d * that.d
+  }
+
+  /**
    * Returns true if this equals that.
    */
   equals(that: rat): boolean {
@@ -168,11 +182,20 @@ class rat {
   }
 
   /**
-   * Absolute value.
+   * Absolute value of this.
    */
   abs(): rat {
     const r = this.clone()
     if (r.n < 0) r.n = -r.n
+    return r
+  }
+
+  /**
+   * Opposite or negative of this.
+   */
+  opposite(): rat {
+    const r = this.clone()
+    r.n = -r.n
     return r
   }
 
@@ -189,6 +212,8 @@ class rat {
   invert(): rat {
     return new rat(this.d, this.n)
   }
+
+  // @todo https://acerix.github.io/rational.js/rat.js.html
 
 }
 

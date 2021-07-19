@@ -45,10 +45,22 @@ test('Mediant of 0/1 and 1/1 is 1/2', () => {
   expect(+a.mediant(b)).toBe(1/2)
 })
 
-test('-2/3 divided by 13/11 is as expected', () => {
+test('-2/3 divided by 13/11 is -22/39', () => {
   const a = new rat(-2, 3)
   const b = new rat(13, 11)
-  expect(+a.divide(b)).toBe( (-2/3) / (13/11) )
+  expect(+a.divide(b)).toBe(-22/39)
+})
+
+test('5 to the power of 2 is 25', () => {
+  const a = new rat(5)
+  const b = new rat(2)
+  expect(+a.pow(b)).toBe(25)
+})
+
+test('Dot product of 3/5 and 7/3 to be 36', () => {
+  const a = new rat(3, 5)
+  const b = new rat(7, 3)
+  expect(Number(a.dot(b))).toBe(36)
 })
 
 test('7/3 equals 7/3', () => {
@@ -72,6 +84,16 @@ test('11/3 is less than 12/3', () => {
 test('Absolute value of -1 is 1', () => {
   const a = new rat(-1)
   expect(+a.abs()).toBe(1)
+})
+
+test('Opposite of -3/2 is 3/2', () => {
+  const a = new rat(-3, 2)
+  expect(+a.opposite()).toBe(3/2)
+})
+
+test('-7/4 is negative', () => {
+  const a = new rat(-7, 4)
+  expect(a.isNegative()).toBe(true)
 })
 
 test('Inversion of -3/5 is -5/3', () => {

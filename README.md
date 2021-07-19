@@ -15,7 +15,7 @@ yarn add cnum
 ```typescript
 import { rat } from './main'
 
-console.log( rat(1,3).add(rat(5,7)) )
+console.log( new rat(1,3).add(new rat(5,7)) )
 ```
 
 ## Read the Docs
