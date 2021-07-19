@@ -20,7 +20,7 @@ console.log( rat(1,3).add(rat(5,7)) )
 
 ## Read the Docs
 
-[cnum docs](https://acerix.github.io/cnum/index.html)
+[cnum Documentation](https://acerix.github.io/cnum/)
 
 ## CLI Commands
 
