@@ -34,7 +34,7 @@
     "esbuild-node": "esbuild src/cli.ts --bundle --platform=node --minify --sourcemap=external --outfile=dist/esbuild/cli.js",
     "esbuild-node:dev": "esbuild src/cli.ts --bundle --sourcemap=external --outfile=dist/esbuild/cli.js",
     "esbuild-node:watch": "esbuild src/cli.ts --bundle --watch --sourcemap=external --outfile=dist/esbuild/cli.js",
-    "prepare": "yarn lint && yarn test --coverage && yarn clean && yarn build-all && yarn docs"
+    "predeploy": "yarn lint && yarn test --coverage && yarn clean && yarn build-all && yarn docs"
   },
   "devDependencies": {
     "@types/jest": "*",

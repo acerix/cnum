@@ -20,7 +20,7 @@ const b = new Rat(5, 791) // b = 5/791
 const c = a.multiply(b) // c = a*b
 
 c.toString() // 355/113
-+c // 3.14159292035
+c.valueOf() // 3.14159292035
 ```
 
 ## Read the Docs
@@ -38,7 +38,7 @@ c.toString() // 355/113
 *   `yarn docs`: Build documentation
 *   `yarn build`: Production build
 *   `yarn build-all`: Production build all the things
-*   `yarn prepare`: Prepare for publishing
+*   `yarn predeploy`: Prepare for publishing
 *   `yarn publish`: Publish to npm
 
 ## Feedback
