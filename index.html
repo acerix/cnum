@@ -61,29 +61,52 @@
 				<a href="#comfortably-numbers" id="comfortably-numbers" style="color: inherit; text-decoration: none;">
 					<h1>Comfortably Numbers</h1>
 				</a>
-				<p><a href="https://github.com/acerix/cnum/actions?query=workflow%3ATest"><img src="https://github.com/acerix/cnum/workflows/Test/badge.svg" alt="Build status"></a></p>
+				<p><a href="https://badge.fury.io/js/cnum"><img src="https://badge.fury.io/js/cnum.svg" alt="npm version"></a>
+					<a href="https://www.npmjs.com/package/cnum"><img src="https://img.shields.io/npm/l/express.svg" alt="npm"></a>
+				<a href="https://github.com/acerix/cnum/actions?query=workflow%3ATest"><img src="https://github.com/acerix/cnum/workflows/Test/badge.svg" alt="Build status"></a></p>
 				<p>Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a <em>bigint</em>eresting way.</p>
-				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
-					<h2>Install</h2>
-				</a>
-				<pre><code class="language-bash"><span style="color: #000000">yarn add cnum</span>
-</code></pre>
 				<a href="#example-usage" id="example-usage" style="color: inherit; text-decoration: none;">
 					<h2>Example Usage</h2>
 				</a>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Rat</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;cnum/Rat&#039;</span>
+				<a href="#script-tags" id="script-tags" style="color: inherit; text-decoration: none;">
+					<h3>Script Tags</h3>
+				</a>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;//unpkg.com/cnum&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #800000">&lt;script&gt;</span><span style="color: #001080">document</span><span style="color: #000000FF">.</span><span style="color: #795E26">write</span><span style="color: #000000FF">(</span><span style="color: #0000FF">new</span><span style="color: #000000FF"> </span><span style="color: #795E26">Rat</span><span style="color: #000000FF">())</span><span style="color: #800000">&lt;/script&gt;</span>
+</code></pre>
+				<a href="#command-line-interface" id="command-line-interface" style="color: inherit; text-decoration: none;">
+					<h3>Command Line Interface</h3>
+				</a>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h4>Install</h4>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add cnum</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h4>Usage</h4>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> {</span><span style="color: #0070C1">Rat</span><span style="color: #000000">} = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;./node_modules/cnum/dist/esbuild/cli.js&#039;</span><span style="color: #000000">)</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">a</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">71</span><span style="color: #000000">, </span><span style="color: #098658">7</span><span style="color: #000000">) </span><span style="color: #008000">// a = 71/7</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">b</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #098658">791</span><span style="color: #000000">) </span><span style="color: #008000">// b = 5/791</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">c</span><span style="color: #000000"> = </span><span style="color: #001080">a</span><span style="color: #000000">.</span><span style="color: #795E26">multiply</span><span style="color: #000000">(</span><span style="color: #001080">b</span><span style="color: #000000">) </span><span style="color: #008000">// c = a*b</span>
+<span style="color: #008000">// a = 71 / 7</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">a</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">71</span><span style="color: #000000">, </span><span style="color: #098658">7</span><span style="color: #000000">)</span>
+
+<span style="color: #008000">// b = 35 / 113</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">b</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">35</span><span style="color: #000000">, </span><span style="color: #098658">113</span><span style="color: #000000">)</span>
+
+<span style="color: #008000">// c = a * b</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">c</span><span style="color: #000000"> = </span><span style="color: #001080">a</span><span style="color: #000000">.</span><span style="color: #795E26">multiply</span><span style="color: #000000">(</span><span style="color: #001080">b</span><span style="color: #000000">)</span>
 
 <span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #795E26">toString</span><span style="color: #000000">() </span><span style="color: #008000">// 355/113</span>
-<span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #795E26">valueOf</span><span style="color: #000000">() </span><span style="color: #008000">// 3.14159292035</span>
+<span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #795E26">valueOf</span><span style="color: #000000">() </span><span style="color: #008000">// 3.1415929203539825</span>
 </code></pre>
+				<a href="#cli-in-yo39-browser" id="cli-in-yo39-browser" style="color: inherit; text-decoration: none;">
+					<h3>CLI In Yo&#39; Browser</h3>
+				</a>
+				<p><a href="https://npm.runkit.com/cnum">RunKit + cnum</a></p>
 				<a href="#read-the-docs" id="read-the-docs" style="color: inherit; text-decoration: none;">
 					<h2>Read the Docs</h2>
 				</a>
-				<p><a href="https://acerix.github.io/cnum/">cnum documentation</a></p>
+				<p><a href="https://acerix.github.io/cnum/">cnum Documentation</a></p>
 				<a href="#cli-commands" id="cli-commands" style="color: inherit; text-decoration: none;">
 					<h2>CLI Commands</h2>
 				</a>
