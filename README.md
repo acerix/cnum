@@ -1,19 +1,14 @@
-# Comfortably Numbers
+# cnum - Comfortably Numbers
 
-[![npm version](https://badge.fury.io/js/cnum.svg)](https://badge.fury.io/js/cnum)
-[![npm](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/cnum)
-[![Build status](https://github.com/acerix/cnum/workflows/Test/badge.svg)](https://github.com/acerix/cnum/actions?query=workflow%3ATest)
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Build Status][build-image]][build-url]
+[![Test Coverage][coverage-image]][coverage-url]
+[![GPL 3.0][license-image]](LICENSE)
 
 Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.
 
 ## Example Usage
-
-### Script Tags
-
-```html
-<script src="//unpkg.com/cnum"></script>
-<script>document.write(new Rat())</script>
-```
 
 ### Command Line Interface
 
@@ -26,7 +21,8 @@ yarn add cnum
 #### Usage
 
 ```typescript
-const {Rat} = require('./node_modules/cnum/dist/esbuild/cli.js')
+// const {Rat} = require('./node_modules/cnum/dist/esbuild/cli.js')
+const {Rat} = require('cnum')
 
 // a = 71 / 7
 const a = new Rat(71, 7)
@@ -41,9 +37,22 @@ c.toString() // 355/113
 c.valueOf() // 3.1415929203539825
 ```
 
-### CLI In Yo' Browser
+#### CLI In Yo' Browser
 
-[RunKit + cnum](https://npm.runkit.com/cnum)
+[Try with RunKit](https://npm.runkit.com/cnum)
+
+### Script Tags
+
+```html
+<script src="//unpkg.com/cnum"></script>
+```
+
+```js
+const r = new Rat(4, 13)
+document.write(r)
+```
+
+[CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL)
 
 ## Read the Docs
 
@@ -66,3 +75,13 @@ c.valueOf() // 3.1415929203539825
 ## Feedback
 
 * Please report bug and feature requests as [GitHub Issues](https://github.com/acerix/cnum/issues)
+
+[npm-image]: https://img.shields.io/npm/v/cnum.svg
+[npm-url]: https://npmjs.org/package/cnum
+[downloads-image]: https://img.shields.io/npm/dm/cnum.svg
+[downloads-url]: https://npmjs.org/package/cnum
+[build-image]: https://github.com/acerix/cnum/workflows/Test/badge.svg
+[build-url]: https://github.com/acerix/cnum/actions?query=workflow%3ATest
+[coverage-image]: https://img.shields.io/gitlab/coverage/acerix/cnum/main
+[coverage-url]: https://github.com/acerix/cnum/actions?query=workflow%3ATest
+[license-image]: https://img.shields.io/npm/l/cnum.svg
