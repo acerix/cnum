@@ -1,31 +1,53 @@
 # Comfortably Numbers
 
+[![npm version](https://badge.fury.io/js/cnum.svg)](https://badge.fury.io/js/cnum)
+[![npm](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/cnum)
 [![Build status](https://github.com/acerix/cnum/workflows/Test/badge.svg)](https://github.com/acerix/cnum/actions?query=workflow%3ATest)
 
 Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.
 
-## Install
+## Example Usage
+
+### Script Tags
+
+```html
+<script src="//unpkg.com/cnum"></script>
+<script>document.write(new Rat())</script>
+```
+
+### Command Line Interface
+
+#### Install
 
 ```bash
 yarn add cnum
 ```
 
-## Example Usage
+#### Usage
 
 ```typescript
-import Rat from 'cnum/Rat'
+const {Rat} = require('./node_modules/cnum/dist/esbuild/cli.js')
 
-const a = new Rat(71, 7) // a = 71/7
-const b = new Rat(5, 791) // b = 5/791
-const c = a.multiply(b) // c = a*b
+// a = 71 / 7
+const a = new Rat(71, 7)
+
+// b = 35 / 113
+const b = new Rat(35, 113)
+
+// c = a * b
+const c = a.multiply(b)
 
 c.toString() // 355/113
-c.valueOf() // 3.14159292035
+c.valueOf() // 3.1415929203539825
 ```
+
+### CLI In Yo' Browser
+
+[RunKit + cnum](https://npm.runkit.com/cnum)
 
 ## Read the Docs
 
-[cnum documentation](https://acerix.github.io/cnum/)
+[cnum Documentation](https://acerix.github.io/cnum/)
 
 ## CLI Commands
 

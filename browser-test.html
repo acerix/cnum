@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>cnum browser test</title>
+    <title>cnum Browser Test</title>
     <script src="./dist/esbuild/browser.js"></script>
   </head>
   <body>
@@ -12,14 +12,28 @@
 <p><em>cnum v<script>document.write(cnum.version)</script></em></p>
 
 <h2>Rat</h2>
-<h3>Create</h3>
+
+<h3>Create and Reduce</h3>
 <pre><script>
-'use strict'
 const n = 6, d = 9
-const a = new Rat(6, 9)
+const r = new Rat(n, d)
 document.write(`new Rat(${n}, ${d})\n`)
-document.write(`toString: ${a}\n`)
-document.write(`valueOf: ${+a}\n`)
+document.write(`toString: ${r}\n`)
+document.write(`valueOf: ${+r}\n`)
+</script></pre>
+
+<h3>Multiply</h3>
+<pre><script>
+const n1 = 71, d1 = 7
+const n2 = 35, d2 = 113
+document.write(`a = new Rat(${n1}, ${d1})\n`)
+const a = new Rat(n1, d1)
+document.write(`b = new Rat(${n2}, ${d2})\n`)
+const b = new Rat(n2, d2)
+document.write(`c = a.multiply(b)\n`)
+const c = a.multiply(b)
+document.write(`toString: ${c}\n`)
+document.write(`valueOf: ${+c}\n`)
 </script></pre>
 
   </body>

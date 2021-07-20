@@ -5,7 +5,7 @@ import cnum from './main'
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
 (window as any).cnum = cnum
 
-import {Rat} from './Rat'
+import Rat from './Rat'
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
 (window as any).Rat = Rat
 
