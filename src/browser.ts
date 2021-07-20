@@ -1,10 +1,20 @@
 /**
- * This file is the entrypoint of browser builds.
- * The code executes when loaded in a browser.
+ * This file is the entrypoint of browser builds; The code executes when loaded in a browser.
  */
-import rat from './main'
+import cnum from './main'
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+(window as any).cnum = cnum
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-(window as any).rat = rat  // instead of casting window to any, you can extend the Window interface: https://stackoverflow.com/a/43513740/5433572
+import {Rat} from './Rat'
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+(window as any).Rat = Rat
 
-console.log('Browser init', rat)
+// instead of casting window to any, you can extend the Window interface: https://stackoverflow.com/a/43513739/5433572
+// @todo can I?
+// declare global {
+//   interface Window {
+//     Rat: Rat
+//   }
+// }
+
+console.log(`cnum v${cnum.version} (browser)`)

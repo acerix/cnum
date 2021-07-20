@@ -1,8 +1,8 @@
 # Comfortably Numbers
 
-[![Build Status](https://github.com/acerix/cnum/workflows/Test/badge.svg)](https://github.com/acerix/cnum/actions?query=workflow%3ATest)
+[![Build status](https://github.com/acerix/cnum/workflows/Test/badge.svg)](https://github.com/acerix/cnum/actions?query=workflow%3ATest)
 
-Comfortably Numbers (cnum) represents rational numbers in a biginteresting way.
+Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.
 
 ## Install
 
@@ -13,14 +13,19 @@ yarn add cnum
 ## Example Usage
 
 ```typescript
-import { rat } from './main'
+import Rat from 'cnum/Rat'
 
-console.log( new rat(1,3).add(new rat(5,7)) )
+const a = new Rat(71, 7) // a = 71/7
+const b = new Rat(5, 791) // b = 5/791
+const c = a.multiply(b) // c = a*b
+
+c.toString() // 355/113
++c // 3.14159292035
 ```
 
 ## Read the Docs
 
-[cnum Documentation](https://acerix.github.io/cnum/)
+[cnum documentation](https://acerix.github.io/cnum/)
 
 ## CLI Commands
 
@@ -32,7 +37,8 @@ console.log( new rat(1,3).add(new rat(5,7)) )
 *   `yarn clean`: Delete previous build
 *   `yarn docs`: Build documentation
 *   `yarn build`: Production build
-*   `yarn build-all`: Production-ready clean build of all the things
+*   `yarn build-all`: Production build all the things
+*   `yarn prepare`: Prepare for publishing
 *   `yarn publish`: Publish to npm
 
 ## Feedback

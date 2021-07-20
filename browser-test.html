@@ -1,8 +1,26 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>cnum browser test</title>
     <script src="./dist/esbuild/browser.js"></script>
   </head>
   <body>
-    dev'r'up 👇
+
+<h1>cnum Browser Test</h1>
+<p><em>cnum v<script>document.write(cnum.version)</script></em></p>
+
+<h2>Rat</h2>
+<h3>Create</h3>
+<pre><script>
+'use strict'
+const n = 6, d = 9
+const a = new Rat(6, 9)
+document.write(`new Rat(${n}, ${d})\n`)
+document.write(`toString: ${a}\n`)
+document.write(`valueOf: ${+a}\n`)
+</script></pre>
+
   </body>
 </html>

@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import rat from './main'
+import cnum from './main'
 
-console.log('CLI init', rat)
+console.log(`cnum v${cnum.version} (cli)`)
