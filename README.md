@@ -50,13 +50,12 @@ new Rat(4, 13)
 ```html
 <script src="//unpkg.com/cnum"></script>
 ```
-
 ```js
 const r = new Rat(4, 13)
 document.write(r)
 ```
 
-[CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL)
+[CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
 
 ## Read the Docs
 
@@ -73,7 +72,7 @@ document.write(r)
 *   `yarn docs`: Build documentation
 *   `yarn build`: Production build
 *   `yarn build-all`: Production build all the things
-*   `yarn predeploy`: Prepare for publishing
+*   `yarn prepublish`: Prepare for publishing
 *   `yarn publish`: Publish to npm
 
 ## Feedback
