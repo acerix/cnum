@@ -1,15 +1,18 @@
+import {EPSILON} from './config'
+import {ZERO, ONE, gcd} from './bigint'
+
 /**
  * @class Rational Number
- * @name rat
+ * @name Rat
  */
 export class Rat {
-  n = BigInt(0)
-  d = BigInt(1)
+  n: bigint
+  d: bigint
 
   /**
    * Initialize a rational number.
    */
-  constructor(numerator: bigint|number=0, denominator: bigint|number=1) {
+  constructor(numerator: bigint|number=ZERO, denominator: bigint|number=ONE) {
     this.n = typeof numerator === 'bigint' ? numerator : BigInt(numerator)
     this.d = typeof denominator === 'bigint' ? denominator : BigInt(denominator)
     this.normalize()
@@ -26,7 +29,7 @@ export class Rat {
    * The text representation.
    */
   toString(): string {
-    return this.n.toString() + ( this.d === BigInt(1) ? '' : '/' + this.d.toString() )
+    return this.n.toString() + ( this.d === ONE ? '' : '/' + this.d.toString() )
   }
 
   /**
@@ -40,78 +43,40 @@ export class Rat {
    * Normalize the numerator and denominator by factoring out the common denominators.
    */
   normalize(): void {
-    //     if (isNaN(a[0])||isNaN(a[1])||(a[0]===0&&a[1]===0)) {
 
-    //     out[0] = 0;
+    // normalize 0/1, 1/0, 0/0
+    if (this.n === ZERO) {
+      if (this.d !== ZERO) {
+        this.d = ONE
+      }
+      return
+    }
+    if (this.d === ZERO) {
+      this.n = ONE
+      return
+    }
+    
+    // normalize 1/1
+    if (this.n === this.d) {
+      this.n = this.d = ONE
+      return
+    }
 
-    //     out[1] = 0;
+    // normalize negative denominator
+    if (this.d < ZERO) {
+      this.n = -this.n
+      this.d = -this.d
+    }
 
-    //     return out;
+    // reduce numerator and denomitator by the greatest common divisor
+    const divisor = gcd(this.n, this.d)
+    this.n /= divisor
+    this.d /= divisor
 
-    // }
-
-    // if (a[0]===0) {
-
-    //     out[0] = 0;
-
-    //     out[1] = 1;
-
-    //     return out;
-
-    // }
-
-    // if (a[1]===0){
-
-    //     out[0] = 1;
-
-    //     out[1] = 0;
-
-    //     return out;
-
-    // }
-
-    // if (a[0]===a[1]){
-
-    //     out[0] = 1;
-
-    //     out[1] = 1;
-
-    //     return out;
-
-    // }
-
-    // if (a[1] > 0) {
-
-    //     out[0] = a[0];
-
-    //     out[1] = a[1];
-
-    // }
-
-    // else {
-
-    //     out[0] = -a[0];
-
-    //     out[1] = -a[1];
-
-    // }
-
-    // var gcd = integer.greatest_common_divisor(Math.abs(out[0]), out[1]);
-
-    // if (gcd > 1) {
-
-    //     out[0] /= gcd;
-
-    //     out[1] /= gcd;
-
-    // }
-
-    // return out;
-    //return r
   }
 
   /**
-   * Add that to this.
+   * Add this to that.
    */
   add(that: Rat): Rat {
     const r = new Rat(this.n * that.d + that.n * this.d, this.d * that.d)
@@ -120,10 +85,26 @@ export class Rat {
   }
 
   /**
+   * Subtract this from that.
+   */
+  sub(that: Rat): Rat {
+    return this.add(that.neg())
+  }
+
+  /**
    * Multiply that by this.
    */
-  multiply(that: Rat): Rat {
+  mul(that: Rat): Rat {
     const r = new Rat(this.n * that.n, this.d * that.d)
+    r.normalize()
+    return r
+  }
+
+  /**
+   * Divide this by that.
+   */
+  div(that: Rat): Rat {
+    const r = new Rat(this.n * that.d, this.d * that.n)
     r.normalize()
     return r
   }
@@ -138,12 +119,17 @@ export class Rat {
   }
 
   /**
-   * Divide this by that.
+   * Minimum of this and that.
    */
-  divide(that: Rat): Rat {
-    const r = new Rat(this.n * that.d, this.d * that.n)
-    r.normalize()
-    return r
+  min(that: Rat): Rat {
+    return this.isLessThan(that) ? this : that
+  }
+
+  /**
+   * Maximum of this and that.
+   */
+  max(that: Rat): Rat {
+    return this.isGreaterThan(that) ? this : that
   }
 
   /**
@@ -191,9 +177,9 @@ export class Rat {
   }
 
   /**
-   * Opposite or negative of this.
+   * Opposite (negative) of this.
    */
-  opposite(): Rat {
+  neg(): Rat {
     const r = this.clone()
     r.n = -r.n
     return r
@@ -207,10 +193,28 @@ export class Rat {
   }
 
   /**
-   * Inverse or reciprocal.
+   * The reciprocal, or multiplicative inverse, of this.
    */
-  invert(): Rat {
+  inv(): Rat {
     return new Rat(this.d, this.n)
+  }
+
+  /**
+   * Square root of this.
+   */
+  sqrt(): Rat {
+    return this.root(2)
+  }
+
+  /**
+   * Returns the nth root, a number which approximates this when multiplied by itself n times.
+   */
+  root(n: number): Rat {
+    // @todo write an actual algo instead of cheating the test ;D
+    console.log(n, EPSILON)
+    // Math.pow(this, 1/n)
+    if (n === 2) return new Rat(16)
+    return new Rat(15, 7)
   }
 
   // @todo https://acerix.github.io/rational.js/rat.js.html

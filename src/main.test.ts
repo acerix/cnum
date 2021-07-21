@@ -6,7 +6,7 @@ test('Version matches semver format', () => {
   expect(cnum.version).toEqual(expect.stringMatching(serverRegex))
 })
 
-test('New Rat from main is expected type', () => {
+test('New Rat from main is the expected type', () => {
   const a = new Rat()
   expect(typeof a).toBe('object')
   expect(a.constructor.name).toBe('Rat')

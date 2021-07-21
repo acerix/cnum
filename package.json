@@ -19,7 +19,7 @@
     "cnum": "./dist/esbuild/cli.js"
   },
   "scripts": {
-    "dev": "yarn esbuild-node:watch",
+    "dev": "yarn test --watch",
     "cli": "ts-node src/cli.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test": "jest",

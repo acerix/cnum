@@ -1,6 +1,6 @@
 import Rat from './Rat'
 
-test('New Rat is expected type', () => {
+test('New Rat is the expected type', () => {
   const a = new Rat()
   expect(typeof a).toBe('object')
   expect(a.constructor.name).toBe('Rat')
@@ -9,6 +9,16 @@ test('New Rat is expected type', () => {
 test('Value of -13 is -13', () => {
   const a = new Rat(-13)
   expect(+a).toBe(-13)
+})
+
+test('Text representation of 69/1 is "69"', () => {
+  const a = new Rat(69, 1)
+  expect(a.toString()).toBe('69')
+})
+
+test('Text representation of -222/840 is "-37/140"', () => {
+  const a = new Rat(-222, 840)
+  expect(a.toString()).toBe('-37/140')
 })
 
 test('Default is zero', () => {
@@ -21,12 +31,31 @@ test('One is one', () => {
   expect(+a).toBe(1)
 })
 
-test('A non-zero integer over zero is infinity', () => {
+test('Cloning maintains the value', () => {
+  const a = new Rat(42, -69)
+  const b = a.clone()
+  expect(+a).toBe(+b)
+})
+
+test('Mutating a clone does not affect the value of the original', () => {
+  const a = new Rat(42, -69)
+  const original = +a
+  const b = a.clone()
+  b.n = BigInt(33)
+  expect(+a).toBe(original)
+})
+
+// test('The reciprocol of zero divided by a negative number is negative infinity', () => {
+//   const a = new Rat(0, -69)
+//   expect(+a.inv()).toBe(-Infinity)
+// })
+
+test('A non-zero integer divided by zero is infinity', () => {
   const a = new Rat(13, 0)
   expect(+a).toBe(Infinity)
 })
 
-test('Zero over zero is not a number', () => {
+test('Zero divided by zero is not a number', () => {
   const a = new Rat(0, 0)
   expect(+a).toBe(NaN)
 })
@@ -36,9 +65,15 @@ test('Zero over a positive number is still zero', () => {
   expect(+a).toBe(0)
 })
 
-test('Zero over a negative number is negative zero?', () => {
-  const a = new Rat(0, -21)
-  expect(+a).toBe(-0)
+// test('Zero over a negative number is negative zero', () => {
+//   const a = new Rat(0, -21)
+//   expect(+a).toBe(-0)
+// })
+
+test('The denominator of zero divided by a number greater than zero is normalized to one', () => {
+  const a = new Rat(0, 42)
+  const b = new Rat(1, 0)
+  expect(+a.mediant(b)).toBe(1)
 })
 
 test('Zero plus zero is zero', () => {
@@ -53,10 +88,22 @@ test('One plus one is two', () => {
   expect(+a.add(b)).toBe(2)
 })
 
+test('5/7 minus 21/2 is -137/14', () => {
+  const a = new Rat(5, 7)
+  const b = new Rat(21, 2)
+  expect(a.sub(b).toString()).toBe('-137/14')
+})
+
 test('Five times three is fifteen', () => {
   const a = new Rat(5)
   const b = new Rat(3)
-  expect(+a.multiply(b)).toBe(15)
+  expect(+a.mul(b)).toBe(15)
+})
+
+test('-2/3 divided by 13/11 is -22/39', () => {
+  const a = new Rat(-2, 3)
+  const b = new Rat(13, 11)
+  expect(+a.div(b)).toBe(-22/39)
 })
 
 test('Mediant of 0/1 and 1/1 is 1/2', () => {
@@ -65,19 +112,37 @@ test('Mediant of 0/1 and 1/1 is 1/2', () => {
   expect(+a.mediant(b)).toBe(1/2)
 })
 
-test('-2/3 divided by 13/11 is -22/39', () => {
-  const a = new Rat(-2, 3)
-  const b = new Rat(13, 11)
-  expect(+a.divide(b)).toBe(-22/39)
-})
-
 test('5 to the power of 2 is 25', () => {
   const a = new Rat(5)
   const b = new Rat(2)
   expect(+a.pow(b)).toBe(25)
 })
 
-test('Dot product of 3/5 and 7/3 to be 36', () => {
+test('Minimum of 3/5 and 5/3 is 5/3', () => {
+  const a = new Rat(3, 5)
+  const b = new Rat(5, 3)
+  expect(+a.min(b)).toBe(3/5)
+})
+
+test('Minimum of -3/5 and -5/3 is -5/3', () => {
+  const a = new Rat(-3, 5)
+  const b = new Rat(-5, 3)
+  expect(+a.min(b)).toBe(-5/3)
+})
+
+test('Maximum of 7/15 and -5/3 is 7/15', () => {
+  const a = new Rat(7, 15)
+  const b = new Rat(-5, 3)
+  expect(+a.max(b)).toBe(7/15)
+})
+
+test('Maximum of -7/15 and 5/3 is 5/3', () => {
+  const a = new Rat(-7, 15)
+  const b = new Rat(5, 3)
+  expect(+a.max(b)).toBe(5/3)
+})
+
+test('Dot product of 3/5 and 7/3 is 36', () => {
   const a = new Rat(3, 5)
   const b = new Rat(7, 3)
   expect(Number(a.dot(b))).toBe(36)
@@ -113,7 +178,7 @@ test('Absolute value of 5 is 5', () => {
 
 test('Opposite of -3/2 is 3/2', () => {
   const a = new Rat(-3, 2)
-  expect(+a.opposite()).toBe(3/2)
+  expect(+a.neg()).toBe(3/2)
 })
 
 test('-7/4 is negative', () => {
@@ -121,17 +186,18 @@ test('-7/4 is negative', () => {
   expect(a.isNegative()).toBe(true)
 })
 
-test('Inversion of -3/5 is -5/3', () => {
+test('Reciprocol of -3/5 is -5/3', () => {
   const a = new Rat(-3, 5)
-  expect(+a.invert()).toBe(-5/3)
+  expect(+a.inv()).toBe(-5/3)
 })
 
-test('Text representation of 69/1 is "69"', () => {
-  const a = new Rat(69, 1)
-  expect(a.toString()).toBe('69')
+test('Square root of 256 is 16', () => {
+  const a = new Rat(-3, 5)
+  expect(+a.sqrt()).toBe(16)
 })
 
-test('Text representation of -2/420 is "-1/420"', () => {
-  const a = new Rat(-2, 420)
-  expect(a.toString()).toBe('-2/420')
+test('5th root of 759375/16807 is 15/7', () => {
+  const a = new Rat(759375, 16807)
+  const n = 5
+  expect(+a.root(n)).toBe(15/7)
 })

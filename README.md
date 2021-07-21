@@ -3,41 +3,45 @@
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][build-image]][build-url]
-[![Test Coverage][coverage-image]][coverage-url]
 [![GPL 3.0][license-image]](LICENSE)
 
 Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.
 
-## Example Usage
-
-### Command Line Interface
-
-#### Install
+## Install
 
 ```bash
 yarn add cnum
 ```
 
-#### Usage
+## Usage
+
+### Build System
 
 ```typescript
-// const {Rat} = require('./node_modules/cnum/dist/esbuild/cli.js')
-const {Rat} = require('cnum')
+import {Rat} from 'cnum'
 
-// a = 71 / 7
+// a = 71/7
 const a = new Rat(71, 7)
 
-// b = 35 / 113
+// b = 35/113
 const b = new Rat(35, 113)
 
-// c = a * b
+// c = a⋅b
 const c = a.multiply(b)
 
 c.toString() // 355/113
 c.valueOf() // 3.1415929203539825
 ```
 
-#### CLI In Yo' Browser
+### Command Line Interface
+
+```typescript
+// const {Rat} = require('./node_modules/cnum/dist/esbuild/cli.js')
+const {Rat} = require('cnum')
+new Rat(4, 13)
+```
+
+#### In Your Browser
 
 [Try with RunKit](https://npm.runkit.com/cnum)
 
@@ -60,8 +64,8 @@ document.write(r)
 
 ## CLI Commands
 
-*   `yarn install`: Installs dependencies
-*   `yarn dev`: Run a development server
+*   `yarn install`: Install dependencies
+*   `yarn dev`: Run tests when source files are changed
 *   `yarn cli`: Start a command line interface
 *   `yarn lint`: Lint with ESLint
 *   `yarn test`: Run Jest and Enzyme tests
@@ -82,6 +86,4 @@ document.write(r)
 [downloads-url]: https://npmjs.org/package/cnum
 [build-image]: https://github.com/acerix/cnum/workflows/Test/badge.svg
 [build-url]: https://github.com/acerix/cnum/actions?query=workflow%3ATest
-[coverage-image]: https://img.shields.io/gitlab/coverage/acerix/cnum/main
-[coverage-url]: https://github.com/acerix/cnum/actions?query=workflow%3ATest
 [license-image]: https://img.shields.io/npm/l/cnum.svg
