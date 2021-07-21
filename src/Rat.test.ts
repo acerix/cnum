@@ -1,4 +1,4 @@
-import Rat from './Rat'
+import Rat, {FloatToRat} from './Rat'
 
 test('New Rat is the expected type', () => {
   const a = new Rat()
@@ -154,6 +154,30 @@ test('7/3 equals 7/3', () => {
   expect(a.equals(b)).toBe(true)
 })
 
+test('7/3 does not equal 5/3', () => {
+  const a = new Rat(7, 3)
+  const b = new Rat(5, 3)
+  expect(a.equals(b)).toBe(false)
+})
+
+test('7/3 approximates 7/3', () => {
+  const a = new Rat(7, 3)
+  const b = new Rat(7, 3)
+  expect(a.approximates(+b)).toBe(true)
+})
+
+test('7/3 does not approximate 47/3', () => {
+  const a = new Rat(7, 3)
+  const b = new Rat(37, 3)
+  expect(a.approximates(+b)).toBe(false)
+})
+
+test('1/100000000000000001 approximates 1/100000000000000002', () => {
+  const a = new Rat(1, BigInt('100000000000000001'))
+  const b = new Rat(1, BigInt('100000000000000002'))
+  expect(a.approximates(+b)).toBe(true)
+})
+
 test('13/3 is greater than 12/3', () => {
   const a = new Rat(13, 3)
   const b = new Rat(12, 3)
@@ -192,7 +216,7 @@ test('Reciprocol of -3/5 is -5/3', () => {
 })
 
 test('Square root of 256 is 16', () => {
-  const a = new Rat(-3, 5)
+  const a = new Rat(256)
   expect(+a.sqrt()).toBe(16)
 })
 
@@ -200,4 +224,57 @@ test('5th root of 759375/16807 is 15/7', () => {
   const a = new Rat(759375, 16807)
   const n = 5
   expect(+a.root(n)).toBe(15/7)
+})
+
+test('Root of a negative throws up', () => {
+  const a = new Rat(-1)
+  expect(() => {+a.sqrt()}).toThrow('Roots of negative numbers like -1 are too complex for this basic library')
+})
+
+test('4242/666 is rounded to 6', () => {
+  const a = new Rat(4242, 666)
+  expect(Number(a.round())).toBe(6)
+})
+
+test('Continued fraction coefficients of 6/9 are [0, 1, 2]', () => {
+  const a = new Rat(6, 9)
+  const cf = []
+  for (const n of a.continuedFraction()) cf.push(Number(n))
+  console.log(cf)
+  expect(cf).toStrictEqual([0, 1, 2])
+})
+
+test('0.5 is converted to "1/2"', () => {
+  const n = .5
+  expect(FloatToRat(n).toString()).toBe('1/2')
+})
+
+test('Not a number is converted to "0/0"', () => {
+  const n = 0/0
+  expect(FloatToRat(n).toString()).toBe('0/0')
+})
+
+test('Infinity is converted to "1/0"', () => {
+  const n = Infinity
+  expect(FloatToRat(n).toString()).toBe('1/0')
+})
+
+// test('-Infinity is converted to "-1/0"', () => {
+//   const n = -Infinity
+//   expect(FloatToRat(n).toString()).toBe('-1/0')
+// })
+
+test('42069 is converted to "42069"', () => {
+  const n = 42069
+  expect(FloatToRat(n).toString()).toBe('42069')
+})
+
+test('-1/42069 is converted to "-1/42069"', () => {
+  const n = -1/42069
+  expect(FloatToRat(n).toString()).toBe('-1/42069')
+})
+
+test('-420/69 converted to a float and back to a Rat is "-140/23"', () => {
+  const a = new Rat(-420, 69)
+  expect(FloatToRat(+a).toString()).toBe('-140/23')
 })

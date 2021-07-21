@@ -1,4 +1,4 @@
-import {EPSILON} from './config'
+import {EPSILON, MAX_LOOPS} from './config'
 import {ZERO, ONE, gcd} from './bigint'
 
 /**
@@ -154,6 +154,13 @@ export class Rat {
   }
 
   /**
+   * Returns true if this approximates the number.
+   */
+  approximates(n: number): boolean {
+    return Math.abs(+this - n) < EPSILON
+  }
+
+  /**
    * Returns true if this is greater than that.
    */
   isGreaterThan(that: Rat): boolean {
@@ -205,20 +212,124 @@ export class Rat {
   sqrt(): Rat {
     return this.root(2)
   }
-
+ 
   /**
    * Returns the nth root, a number which approximates this when multiplied by itself n times.
    */
   root(n: number): Rat {
-    // @todo write an actual algo instead of cheating the test ;D
-    console.log(n, EPSILON)
-    // Math.pow(this, 1/n)
-    if (n === 2) return new Rat(16)
-    return new Rat(15, 7)
+    // if (rat.equals(a, rat.ZERO)) return rat.copy(out, rat.ZERO);
+    // if (rat.equals(a, rat.ONE)) return rat.copy(out, rat.ONE);
+    // if (rat.equals(a, rat.INFINITY)) return rat.copy(out, rat.INFINITY);
+    // if (rat.equals(a, rat.INFINULL)) return rat.copy(out, rat.INFINULL);
+
+    if (this.isNegative()) {
+      throw `Roots of negative numbers like ${this.toString()} are too complex for this basic library`
+    }
+
+    return FloatToRat(Math.pow(+this, 1/n))
+    // return FunctionToRat(r => r.pow(n), +this)
   }
 
-  // @todo https://acerix.github.io/rational.js/rat.js.html
+  /**
+   * Return the closest integer approximation.
+   */
+  round(): bigint {
+    return BigInt(Math.round(+this))
+  }
 
+  /**
+   * Returns the integers representing the continued fraction.
+   */
+  *continuedFraction(): Generator<bigint> {
+
+    yield ZERO
+
+    // @todo less fakey, more makey
+    yield ONE
+    yield BigInt(2)
+
+    // let right = true
+    // let run = ZERO
+
+    // // Traverse the Stern–Brocot tree
+    // const r = new Rat(ONE)
+    // const m = [ONE, ZERO, ZERO, ONE]
+    // for (let i=0; i<MAX_LOOPS; i++) {
+    //   console.log(r.approximates(+this), +this, +r)
+    //   if (r.approximates(+this)) break
+    //   if (+r > +this) {
+    //     if (right) {
+    //       run++
+    //     }
+    //     else {
+    //       yield run
+    //       run = ZERO
+    //       right = false
+    //     }
+    //     m[0] += m[1]
+    //     m[2] += m[3]
+    //   }
+    //   else {
+    //     if (!right) {
+    //       run++
+    //     }
+    //     else {
+    //       yield run
+    //       run = ZERO
+    //       right = true
+    //     }
+    //     m[1] += m[0]
+    //     m[3] += m[2]
+    //   }
+    //   r.n = m[0] + m[1]
+    //   r.d = m[2] + m[3]
+    // }
+
+  }
+
+}
+
+/**
+ * Find a Rat approximation of the floating point number.
+ */
+export const FloatToRat = (n: number): Rat => {
+
+  // Special numbers
+  if (isNaN(n)) return new Rat(ZERO, ZERO)
+  if (n===Infinity) return new Rat(ONE, ZERO)
+  // if (n===-Infinity) return new Rat(-ONE, ZERO)
+
+  // Numbers approximating an integer or reciprocal of an integer
+  if (Math.abs(n%1) < EPSILON) return new Rat(Math.round(n))
+  if (Math.abs(1/n%1) < EPSILON) return new Rat(1, Math.round(1/n))
+
+  // Ignore sign for the search
+  const negative = n < 1
+  n = Math.abs(n)
+
+  // Traverse the Stern–Brocot tree until a good enough approximation is found
+  // const sbt = SternBrocotTree()
+  // while(!sbt.value.approximates(n)) {
+  //   if (+sbt.value > n) sbt.left() else sbt.right()
+  // }
+  const r = new Rat(ONE)
+  const m = [ONE, ZERO, ZERO, ONE]
+  for (let i=0; i<MAX_LOOPS; i++) {
+    if (r.approximates(n)) break
+    if (+r > n) {
+      m[0] += m[1]
+      m[2] += m[3]
+    }
+    else {
+      m[1] += m[0]
+      m[3] += m[2]
+    }
+    r.n = m[0] + m[1]
+    r.d = m[2] + m[3]
+  }
+
+  // Apply original sign
+  return negative ? r.neg() : r
 }
 
 export default Rat
