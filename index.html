@@ -58,51 +58,59 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#comfortably-numbers" id="comfortably-numbers" style="color: inherit; text-decoration: none;">
-					<h1>Comfortably Numbers</h1>
+				<a href="#cnum---comfortably-numbers" id="cnum---comfortably-numbers" style="color: inherit; text-decoration: none;">
+					<h1>cnum - Comfortably Numbers</h1>
 				</a>
-				<p><a href="https://badge.fury.io/js/cnum"><img src="https://badge.fury.io/js/cnum.svg" alt="npm version"></a>
-					<a href="https://www.npmjs.com/package/cnum"><img src="https://img.shields.io/npm/l/express.svg" alt="npm"></a>
-				<a href="https://github.com/acerix/cnum/actions?query=workflow%3ATest"><img src="https://github.com/acerix/cnum/workflows/Test/badge.svg" alt="Build status"></a></p>
+				<p><a href="https://npmjs.org/package/cnum"><img src="https://img.shields.io/npm/v/cnum.svg" alt="NPM Version"></a>
+					<a href="https://npmjs.org/package/cnum"><img src="https://img.shields.io/npm/dm/cnum.svg" alt="NPM Downloads"></a>
+					<a href="https://github.com/acerix/cnum/actions?query=workflow%3ATest"><img src="https://github.com/acerix/cnum/workflows/Test/badge.svg" alt="Build Status"></a>
+				<a href="LICENSE"><img src="https://img.shields.io/npm/l/cnum.svg" alt="GPL 3.0"></a></p>
 				<p>Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a <em>bigint</em>eresting way.</p>
-				<a href="#example-usage" id="example-usage" style="color: inherit; text-decoration: none;">
-					<h2>Example Usage</h2>
-				</a>
-				<a href="#script-tags" id="script-tags" style="color: inherit; text-decoration: none;">
-					<h3>Script Tags</h3>
-				</a>
-				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;//unpkg.com/cnum&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
-<span style="color: #800000">&lt;script&gt;</span><span style="color: #001080">document</span><span style="color: #000000FF">.</span><span style="color: #795E26">write</span><span style="color: #000000FF">(</span><span style="color: #0000FF">new</span><span style="color: #000000FF"> </span><span style="color: #795E26">Rat</span><span style="color: #000000FF">())</span><span style="color: #800000">&lt;/script&gt;</span>
-</code></pre>
-				<a href="#command-line-interface" id="command-line-interface" style="color: inherit; text-decoration: none;">
-					<h3>Command Line Interface</h3>
-				</a>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
-					<h4>Install</h4>
+					<h2>Install</h2>
 				</a>
 				<pre><code class="language-bash"><span style="color: #000000">yarn add cnum</span>
 </code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h4>Usage</h4>
+					<h2>Usage</h2>
 				</a>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> {</span><span style="color: #0070C1">Rat</span><span style="color: #000000">} = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;./node_modules/cnum/dist/esbuild/cli.js&#039;</span><span style="color: #000000">)</span>
+				<a href="#build-system" id="build-system" style="color: inherit; text-decoration: none;">
+					<h3>Build System</h3>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">Rat</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;cnum&#039;</span>
 
-<span style="color: #008000">// a = 71 / 7</span>
+<span style="color: #008000">// a = 71/7</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">a</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">71</span><span style="color: #000000">, </span><span style="color: #098658">7</span><span style="color: #000000">)</span>
 
-<span style="color: #008000">// b = 35 / 113</span>
+<span style="color: #008000">// b = 35/113</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">b</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">35</span><span style="color: #000000">, </span><span style="color: #098658">113</span><span style="color: #000000">)</span>
 
-<span style="color: #008000">// c = a * b</span>
+<span style="color: #008000">// c = a⋅b</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">c</span><span style="color: #000000"> = </span><span style="color: #001080">a</span><span style="color: #000000">.</span><span style="color: #795E26">multiply</span><span style="color: #000000">(</span><span style="color: #001080">b</span><span style="color: #000000">)</span>
 
 <span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #795E26">toString</span><span style="color: #000000">() </span><span style="color: #008000">// 355/113</span>
 <span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #795E26">valueOf</span><span style="color: #000000">() </span><span style="color: #008000">// 3.1415929203539825</span>
 </code></pre>
-				<a href="#cli-in-yo39-browser" id="cli-in-yo39-browser" style="color: inherit; text-decoration: none;">
-					<h3>CLI In Yo&#39; Browser</h3>
+				<a href="#command-line-interface" id="command-line-interface" style="color: inherit; text-decoration: none;">
+					<h3>Command Line Interface</h3>
 				</a>
-				<p><a href="https://npm.runkit.com/cnum">RunKit + cnum</a></p>
+				<pre><code class="language-typescript"><span style="color: #008000">// const {Rat} = require(&#039;./node_modules/cnum/dist/esbuild/cli.js&#039;)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> {</span><span style="color: #0070C1">Rat</span><span style="color: #000000">} = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;cnum&#039;</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">13</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#in-your-browser" id="in-your-browser" style="color: inherit; text-decoration: none;">
+					<h4>In Your Browser</h4>
+				</a>
+				<p><a href="https://npm.runkit.com/cnum">Try with RunKit</a></p>
+				<a href="#script-tags" id="script-tags" style="color: inherit; text-decoration: none;">
+					<h3>Script Tags</h3>
+				</a>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;//unpkg.com/cnum&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">r</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">13</span><span style="color: #000000">)</span>
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">write</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">)</span>
+</code></pre>
+				<p><a href="https://codepen.io/acerix/pen/GRmvmYL">CodePen Demo</a></p>
 				<a href="#read-the-docs" id="read-the-docs" style="color: inherit; text-decoration: none;">
 					<h2>Read the Docs</h2>
 				</a>
@@ -111,8 +119,8 @@
 					<h2>CLI Commands</h2>
 				</a>
 				<ul>
-					<li>  <code>yarn install</code>: Installs dependencies</li>
-					<li>  <code>yarn dev</code>: Run a development server</li>
+					<li>  <code>yarn install</code>: Install dependencies</li>
+					<li>  <code>yarn dev</code>: Run tests when source files are changed</li>
 					<li>  <code>yarn cli</code>: Start a command line interface</li>
 					<li>  <code>yarn lint</code>: Lint with ESLint</li>
 					<li>  <code>yarn test</code>: Run Jest and Enzyme tests</li>

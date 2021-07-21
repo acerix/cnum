@@ -69,7 +69,7 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>name</dt>
-						<dd><p>rat</p>
+						<dd><p>Rat</p>
 						</dd>
 					</dl>
 				</div>
@@ -105,18 +105,23 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#abs" class="tsd-kind-icon">abs</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#add" class="tsd-kind-icon">add</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#clone" class="tsd-kind-icon">clone</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#divide" class="tsd-kind-icon">divide</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#div" class="tsd-kind-icon">div</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#dot" class="tsd-kind-icon">dot</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#equals" class="tsd-kind-icon">equals</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#invert" class="tsd-kind-icon">invert</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#inv" class="tsd-kind-icon">inv</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#isGreaterThan" class="tsd-kind-icon">is<wbr>Greater<wbr>Than</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#isLessThan" class="tsd-kind-icon">is<wbr>Less<wbr>Than</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#isNegative" class="tsd-kind-icon">is<wbr>Negative</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#max" class="tsd-kind-icon">max</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#mediant" class="tsd-kind-icon">mediant</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#multiply" class="tsd-kind-icon">multiply</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#min" class="tsd-kind-icon">min</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#mul" class="tsd-kind-icon">mul</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#neg" class="tsd-kind-icon">neg</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#normalize" class="tsd-kind-icon">normalize</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#opposite" class="tsd-kind-icon">opposite</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#pow" class="tsd-kind-icon">pow</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#root" class="tsd-kind-icon">root</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#sqrt" class="tsd-kind-icon">sqrt</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#sub" class="tsd-kind-icon">sub</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#toString" class="tsd-kind-icon">to<wbr>String</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Rat.html#valueOf" class="tsd-kind-icon">value<wbr>Of</a></li>
 							</ul>
@@ -136,7 +141,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L12">Rat.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L15">Rat.ts:15</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -147,10 +152,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>numerator: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span><span class="tsd-signature-symbol"> = 0</span></h5>
+									<h5>numerator: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span><span class="tsd-signature-symbol"> = ...</span></h5>
 								</li>
 								<li>
-									<h5>denominator: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span><span class="tsd-signature-symbol"> = 1</span></h5>
+									<h5>denominator: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span><span class="tsd-signature-symbol"> = ...</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
@@ -163,20 +168,20 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="d" class="tsd-anchor"></a>
 					<h3>d</h3>
-					<div class="tsd-signature tsd-kind-icon">d<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">bigint</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<div class="tsd-signature tsd-kind-icon">d<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">bigint</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L7">Rat.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L10">Rat.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="n" class="tsd-anchor"></a>
 					<h3>n</h3>
-					<div class="tsd-signature tsd-kind-icon">n<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">bigint</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<div class="tsd-signature tsd-kind-icon">n<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">bigint</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L6">Rat.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L9">Rat.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -193,7 +198,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L187">Rat.ts:187</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L173">Rat.ts:173</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -215,12 +220,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L116">Rat.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L81">Rat.ts:81</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Add that to this.</p>
+									<p>Add this to that.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -243,7 +248,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L35">Rat.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L38">Rat.ts:38</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -256,16 +261,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="divide" class="tsd-anchor"></a>
-					<h3>divide</h3>
+					<a name="div" class="tsd-anchor"></a>
+					<h3>div</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">divide<span class="tsd-signature-symbol">(</span>that<span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+						<li class="tsd-signature tsd-kind-icon">div<span class="tsd-signature-symbol">(</span>that<span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L143">Rat.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L106">Rat.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -293,7 +298,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L159">Rat.ts:159</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L145">Rat.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -321,7 +326,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L166">Rat.ts:166</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L152">Rat.ts:152</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -340,21 +345,21 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="invert" class="tsd-anchor"></a>
-					<h3>invert</h3>
+					<a name="inv" class="tsd-anchor"></a>
+					<h3>inv</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">invert<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+						<li class="tsd-signature tsd-kind-icon">inv<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L212">Rat.ts:212</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L198">Rat.ts:198</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Inverse or reciprocal.</p>
+									<p>The reciprocal, or multiplicative inverse, of this.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
@@ -371,7 +376,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L173">Rat.ts:173</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L159">Rat.ts:159</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -399,7 +404,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L180">Rat.ts:180</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L166">Rat.ts:166</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -427,7 +432,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L205">Rat.ts:205</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L191">Rat.ts:191</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -436,6 +441,34 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="max" class="tsd-anchor"></a>
+					<h3>max</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">max<span class="tsd-signature-symbol">(</span>that<span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L131">Rat.ts:131</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Maximum of this and that.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>that: <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -449,7 +482,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L134">Rat.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L115">Rat.ts:115</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -468,16 +501,44 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="multiply" class="tsd-anchor"></a>
-					<h3>multiply</h3>
+					<a name="min" class="tsd-anchor"></a>
+					<h3>min</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">multiply<span class="tsd-signature-symbol">(</span>that<span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+						<li class="tsd-signature tsd-kind-icon">min<span class="tsd-signature-symbol">(</span>that<span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L125">Rat.ts:125</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L124">Rat.ts:124</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Minimum of this and that.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>that: <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="mul" class="tsd-anchor"></a>
+					<h3>mul</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">mul<span class="tsd-signature-symbol">(</span>that<span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L97">Rat.ts:97</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -496,6 +557,28 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="neg" class="tsd-anchor"></a>
+					<h3>neg</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">neg<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L182">Rat.ts:182</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Opposite (negative) of this.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="normalize" class="tsd-anchor"></a>
 					<h3>normalize</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -505,7 +588,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L42">Rat.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L45">Rat.ts:45</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -514,28 +597,6 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="opposite" class="tsd-anchor"></a>
-					<h3>opposite</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">opposite<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L196">Rat.ts:196</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Opposite or negative of this.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -549,7 +610,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L152">Rat.ts:152</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L138">Rat.ts:138</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -568,6 +629,84 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="root" class="tsd-anchor"></a>
+					<h3>root</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">root<span class="tsd-signature-symbol">(</span>n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L212">Rat.ts:212</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the nth root, a number which approximates this when multiplied by itself n times.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>n: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sqrt" class="tsd-anchor"></a>
+					<h3>sqrt</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">sqrt<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L205">Rat.ts:205</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Square root of this.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sub" class="tsd-anchor"></a>
+					<h3>sub</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">sub<span class="tsd-signature-symbol">(</span>that<span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L90">Rat.ts:90</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Subtract this from that.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>that: <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Rat.html" class="tsd-signature-type" data-tsd-kind="Class">Rat</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="toString" class="tsd-anchor"></a>
 					<h3>to<wbr>String</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -577,7 +716,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L28">Rat.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L31">Rat.ts:31</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -599,7 +738,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/acerix/cnum/blob/d967b58/src/Rat.ts#L21">Rat.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/acerix/cnum/blob/137342f/src/Rat.ts#L24">Rat.ts:24</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -647,7 +786,7 @@
 								<a href="Rat.html#clone" class="tsd-kind-icon">clone</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="Rat.html#divide" class="tsd-kind-icon">divide</a>
+								<a href="Rat.html#div" class="tsd-kind-icon">div</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="Rat.html#dot" class="tsd-kind-icon">dot</a>
@@ -656,7 +795,7 @@
 								<a href="Rat.html#equals" class="tsd-kind-icon">equals</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="Rat.html#invert" class="tsd-kind-icon">invert</a>
+								<a href="Rat.html#inv" class="tsd-kind-icon">inv</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="Rat.html#isGreaterThan" class="tsd-kind-icon">is<wbr>Greater<wbr>Than</a>
@@ -668,19 +807,34 @@
 								<a href="Rat.html#isNegative" class="tsd-kind-icon">is<wbr>Negative</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Rat.html#max" class="tsd-kind-icon">max</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="Rat.html#mediant" class="tsd-kind-icon">mediant</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="Rat.html#multiply" class="tsd-kind-icon">multiply</a>
+								<a href="Rat.html#min" class="tsd-kind-icon">min</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Rat.html#mul" class="tsd-kind-icon">mul</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Rat.html#neg" class="tsd-kind-icon">neg</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="Rat.html#normalize" class="tsd-kind-icon">normalize</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="Rat.html#opposite" class="tsd-kind-icon">opposite</a>
+								<a href="Rat.html#pow" class="tsd-kind-icon">pow</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="Rat.html#pow" class="tsd-kind-icon">pow</a>
+								<a href="Rat.html#root" class="tsd-kind-icon">root</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Rat.html#sqrt" class="tsd-kind-icon">sqrt</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Rat.html#sub" class="tsd-kind-icon">sub</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="Rat.html#toString" class="tsd-kind-icon">to<wbr>String</a>
