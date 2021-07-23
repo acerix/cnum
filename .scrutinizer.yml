@@ -12,7 +12,7 @@ build:
         coverage:
             tests:
                 override:
-                - command: 'yarn test --coverage'
-                    coverage:
-                    file: 'coverage/clover.xml'
-                    format: clover
+                    - command: 'yarn test --coverage'
+                        coverage:
+                        file: 'coverage/clover.xml'
+                        format: clover
