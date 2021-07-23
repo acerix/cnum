@@ -39,6 +39,7 @@ c.valueOf() // 3.1415929203539825
 ```typescript
 // const {Rat} = require('./node_modules/cnum/dist/esbuild/cli.js')
 const {Rat} = require('cnum')
+
 new Rat(4, 13)
 ```
 
@@ -53,7 +54,8 @@ new Rat(4, 13)
 ```
 ```js
 const r = new Rat(4, 13)
-document.write(r)
+
+console.log(r.continuedFraction())
 ```
 
 [CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
@@ -86,6 +88,8 @@ document.write(r)
 [downloads-url]: https://npmjs.org/package/cnum
 [build-image]: https://github.com/acerix/cnum/workflows/Test/badge.svg
 [build-url]: https://github.com/acerix/cnum/actions?query=workflow%2ATest
+[coverage-image]: https://scrutinizer-ci.com/g/acerix/cnum/badges/coverage.png?b=main
+[coverage-url]: https://scrutinizer-ci.com/g/acerix/cnum/?branch=main
 [scrutinizer-image]: https://scrutinizer-ci.com/g/acerix/cnum/badges/quality-score.png?b=main
 [scrutinizer-url]: https://scrutinizer-ci.com/g/acerix/cnum/?branch=main
 [license-image]: https://img.shields.io/npm/l/cnum.svg

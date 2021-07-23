@@ -52,7 +52,7 @@ export class Rat {
       return
     }
     if (this.d === ZERO) {
-      this.n = ONE
+      this.n = this.n > ZERO ? ONE : -ONE
       return
     }
     
