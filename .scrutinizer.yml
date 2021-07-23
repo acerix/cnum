@@ -9,3 +9,10 @@ build:
                 override:
                     - js-scrutinizer-run
         tests: true
+        coverage:
+            tests:
+                override:
+                - command: yarn test --coverage
+                    coverage:
+                    file: coverage/clover.xml
+                    format: clover

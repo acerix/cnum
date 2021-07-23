@@ -259,10 +259,10 @@ test('Infinity is converted to "1/0"', () => {
   expect(FloatToRat(n).toString()).toBe('1/0')
 })
 
-// test('-Infinity is converted to "-1/0"', () => {
-//   const n = -Infinity
-//   expect(FloatToRat(n).toString()).toBe('-1/0')
-// })
+test('-Infinity is converted to "-1/0"', () => {
+  const n = -Infinity
+  expect(FloatToRat(n).toString()).toBe('-1/0')
+})
 
 test('42069 is converted to "42069"', () => {
   const n = 42069

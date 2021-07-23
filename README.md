@@ -3,6 +3,7 @@
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][build-image]][build-url]
+[![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
 [![GPL 3.0][license-image]](LICENSE)
 
 Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.
@@ -84,5 +85,7 @@ document.write(r)
 [downloads-image]: https://img.shields.io/npm/dm/cnum.svg
 [downloads-url]: https://npmjs.org/package/cnum
 [build-image]: https://github.com/acerix/cnum/workflows/Test/badge.svg
-[build-url]: https://github.com/acerix/cnum/actions?query=workflow%3ATest
+[build-url]: https://github.com/acerix/cnum/actions?query=workflow%2ATest
+[scrutinizer-image]: https://scrutinizer-ci.com/g/acerix/cnum/badges/quality-score.png?b=main
+[scrutinizer-url]: https://scrutinizer-ci.com/g/acerix/cnum/?branch=main
 [license-image]: https://img.shields.io/npm/l/cnum.svg

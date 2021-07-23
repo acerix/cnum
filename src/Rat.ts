@@ -294,10 +294,10 @@ export class Rat {
  */
 export const FloatToRat = (n: number): Rat => {
 
-  // Special numbers
+  // Special numbers: 0/0, 1/0, -1/0
   if (isNaN(n)) return new Rat(ZERO, ZERO)
   if (n===Infinity) return new Rat(ONE, ZERO)
-  // if (n===-Infinity) return new Rat(-ONE, ZERO)
+  if (n===-Infinity) return new Rat(-ONE, ZERO)
 
   // Numbers approximating an integer or reciprocal of an integer
   if (Math.abs(n%1) < EPSILON) return new Rat(Math.round(n))
