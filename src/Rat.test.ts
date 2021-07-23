@@ -240,7 +240,6 @@ test('Continued fraction coefficients of 6/9 are [0, 1, 2]', () => {
   const a = new Rat(6, 9)
   const cf = []
   for (const n of a.continuedFraction()) cf.push(Number(n))
-  console.log(cf)
   expect(cf).toStrictEqual([0, 1, 2])
 })
 

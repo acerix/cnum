@@ -4,6 +4,7 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][build-image]][build-url]
 [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
+[![Code Coverage][coverage-image]][coverage-url]
 [![GPL 3.0][license-image]](LICENSE)
 
 Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.
@@ -34,18 +35,15 @@ c.toString() // 355/113
 c.valueOf() // 3.1415929203539825
 ```
 
-### Command Line Interface
+### Node
 
-```typescript
-// const {Rat} = require('./node_modules/cnum/dist/esbuild/cli.js')
+```js
 const {Rat} = require('cnum')
 
-new Rat(4, 13)
+const r = new Rat(7, 11)
+
+r.continuedFraction()
 ```
-
-#### In Your Browser
-
-[Try with RunKit](https://npm.runkit.com/cnum)
 
 ### Script Tags
 
@@ -55,14 +53,29 @@ new Rat(4, 13)
 ```js
 const r = new Rat(4, 13)
 
-console.log(r.continuedFraction())
+for (let n of r.continuedFraction()) {
+  console.log(n)
+}
 ```
 
 [CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
 
+### Command Line Interface
+
+This feature is under development, it doesn't actually work like this yet.
+
+```console
+# cnum "(5/7) + (2/3) ^ (5/9)"
+42352677594770199369/28000000000000000000
+```
+
+#### In Your Browser
+
+[Try with RunKit](https://npm.runkit.com/cnum)
+
 ## Read the Docs
 
-[cnum Documentation](https://acerix.github.io/cnum/)
+[Documentation](https://acerix.github.io/cnum/)
 
 ## CLI Commands
 
