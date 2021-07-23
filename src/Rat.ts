@@ -1,5 +1,6 @@
-import {EPSILON, MAX_LOOPS} from './config'
+import {EPSILON} from './config'
 import {ZERO, ONE, gcd} from './bigint'
+import {rationalApproximation} from './SternBrocotTree'
 
 /**
  * @class Rational Number
@@ -62,12 +63,12 @@ export class Rat {
       return
     }
 
-    // normalize negative denominator
+    // remove negative denominator
     if (this.d < ZERO) {
       this.n = -this.n
       this.d = -this.d
     }
-
+    
     // reduce numerator and denomitator by the greatest common divisor
     const divisor = gcd(this.n, this.d)
     this.n /= divisor
@@ -294,41 +295,19 @@ export class Rat {
  */
 export const FloatToRat = (n: number): Rat => {
 
-  // Special numbers: 0/0, 1/0, -1/0
+  // Handle special values: 0/0, 1/0, -1/0
   if (isNaN(n)) return new Rat(ZERO, ZERO)
   if (n===Infinity) return new Rat(ONE, ZERO)
   if (n===-Infinity) return new Rat(-ONE, ZERO)
 
-  // Numbers approximating an integer or reciprocal of an integer
+  // Shortcut for numbers close to an integer or 1/integer
   if (Math.abs(n%1) < EPSILON) return new Rat(Math.round(n))
   if (Math.abs(1/n%1) < EPSILON) return new Rat(1, Math.round(1/n))
 
-  // Ignore sign for the search
+  // Traverse the Stern–Brocot tree until a good approximation is found
+  // If negative, search for the positive value and negate the result
   const negative = n < 1
-  n = Math.abs(n)
-
-  // Traverse the Stern–Brocot tree until a good enough approximation is found
-  // const sbt = SternBrocotTree()
-  // while(!sbt.value.approximates(n)) {
-  //   if (+sbt.value > n) sbt.left() else sbt.right()
-  // }
-  const r = new Rat(ONE)
-  const m = [ONE, ZERO, ZERO, ONE]
-  for (let i=0; i<MAX_LOOPS; i++) {
-    if (r.approximates(n)) break
-    if (+r > n) {
-      m[0] += m[1]
-      m[2] += m[3]
-    }
-    else {
-      m[1] += m[0]
-      m[3] += m[2]
-    }
-    r.n = m[0] + m[1]
-    r.d = m[2] + m[3]
-  }
-
-  // Apply original sign
+  const r = rationalApproximation(Math.abs(n))
   return negative ? r.neg() : r
 }
 

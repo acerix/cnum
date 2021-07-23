@@ -64,7 +64,7 @@ for (let n of r.continuedFraction()) {
 
 This feature is under development, it doesn't actually work like this yet.
 
-```console
+```shellscript
 # cnum "(5/7) + (2/3) ^ (5/9)"
 42352677594770199369/28000000000000000000
 ```
