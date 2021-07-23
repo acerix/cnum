@@ -63,7 +63,8 @@
 				</a>
 				<p><a href="https://npmjs.org/package/cnum"><img src="https://img.shields.io/npm/v/cnum.svg" alt="NPM Version"></a>
 					<a href="https://npmjs.org/package/cnum"><img src="https://img.shields.io/npm/dm/cnum.svg" alt="NPM Downloads"></a>
-					<a href="https://github.com/acerix/cnum/actions?query=workflow%3ATest"><img src="https://github.com/acerix/cnum/workflows/Test/badge.svg" alt="Build Status"></a>
+					<a href="https://github.com/acerix/cnum/actions?query=workflow%2ATest"><img src="https://github.com/acerix/cnum/workflows/Test/badge.svg" alt="Build Status"></a>
+					<a href="https://scrutinizer-ci.com/g/acerix/cnum/?branch=main"><img src="https://scrutinizer-ci.com/g/acerix/cnum/badges/quality-score.png?b=main" alt="Scrutinizer Code Quality"></a>
 				<a href="LICENSE"><img src="https://img.shields.io/npm/l/cnum.svg" alt="GPL 3.0"></a></p>
 				<p>Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a <em>bigint</em>eresting way.</p>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
@@ -96,6 +97,7 @@
 				</a>
 				<pre><code class="language-typescript"><span style="color: #008000">// const {Rat} = require(&#039;./node_modules/cnum/dist/esbuild/cli.js&#039;)</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> {</span><span style="color: #0070C1">Rat</span><span style="color: #000000">} = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;cnum&#039;</span><span style="color: #000000">)</span>
+
 <span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">13</span><span style="color: #000000">)</span>
 </code></pre>
 				<a href="#in-your-browser" id="in-your-browser" style="color: inherit; text-decoration: none;">
@@ -108,7 +110,8 @@
 				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;//unpkg.com/cnum&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
 </code></pre>
 				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">r</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">13</span><span style="color: #000000">)</span>
-<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">write</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #795E26">continuedFraction</span><span style="color: #000000">())</span>
 </code></pre>
 				<p><a href="https://codepen.io/acerix/pen/GRmvmYL?editors=0010">CodePen Demo</a></p>
 				<a href="#read-the-docs" id="read-the-docs" style="color: inherit; text-decoration: none;">
