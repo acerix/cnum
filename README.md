@@ -27,7 +27,7 @@ const a = new Rat(71, 7)
 const b = new Rat(35, 113)
 
 // c = a⋅b
-const c = a.multiply(b)
+const c = a.mul(b)
 
 c.toString() // 355/113
 c.valueOf() // 3.1415929203539825
