@@ -1,6 +1,6 @@
 import {EPSILON} from './config'
 import {ZERO, ONE, gcd} from './bigint'
-import {rationalApproximation} from './SternBrocotTree'
+import {rationalApproximation, continuedFraction} from './SternBrocotTree'
 
 /**
  * @class Rational Number
@@ -14,8 +14,8 @@ export class Rat {
    * Initialize a rational number.
    */
   constructor(numerator: bigint|number=ZERO, denominator: bigint|number=ONE) {
-    this.n = typeof numerator === 'bigint' ? numerator : BigInt(numerator)
-    this.d = typeof denominator === 'bigint' ? denominator : BigInt(denominator)
+    this.n = BigInt(numerator)
+    this.d = BigInt(denominator)
     this.normalize()
   }
 
@@ -31,6 +31,20 @@ export class Rat {
    */
   toString(): string {
     return this.n.toString() + ( this.d === ONE ? '' : '/' + this.d.toString() )
+  }
+
+  /**
+   * Returns a text profile of the number in various formats and it's value after common transformations.
+   */
+  public get profile(): string {
+    const p = [`${this.constructor.name}: ${this.toString()} (≈${+this})`]
+    // p.push(`Continued: ${this.continuedFraction()}`)
+    // p.push(`Babylonian: ${this.babylonian()}`)
+    // p.push(`Egyptian: ${this.egyptian()}`)
+    p.push(`psin(t): ${this.psin().toString()}`)
+    p.push(`pcos(t): ${this.pcos().toString()}`)
+    p.push(`ptan(t): ${this.ptan().toString()}`)
+    return p.join('\n')
   }
 
   /**
@@ -136,8 +150,20 @@ export class Rat {
   /**
    * Raise this to the power of that.
    */
-  pow(that: Rat): number {
-    return Math.pow(+this, +that)
+  pow(that: Rat): Rat {
+    // zero
+    if (that.n === ZERO) {
+      return new Rat(ONE)
+    }
+    // integer
+    if (that.d === ONE) {
+      return new Rat(this.n**that.n, this.d**that.n)
+    }
+    // fraction
+    else {
+      const estimate = Math.pow(+this, +that)
+      return FloatToRat(estimate)
+    }
   }
 
   /**
@@ -201,6 +227,13 @@ export class Rat {
   }
 
   /**
+   * Returns true if this is a finite number.
+   */
+  isFinite(): boolean {
+    return this.d !== ZERO
+  }
+
+  /**
    * The reciprocal, or multiplicative inverse, of this.
    */
   inv(): Rat {
@@ -218,11 +251,12 @@ export class Rat {
    * Returns the nth root, a number which approximates this when multiplied by itself n times.
    */
   root(n: number): Rat {
-    // if (rat.equals(a, rat.ZERO)) return rat.copy(out, rat.ZERO);
-    // if (rat.equals(a, rat.ONE)) return rat.copy(out, rat.ONE);
-    // if (rat.equals(a, rat.INFINITY)) return rat.copy(out, rat.INFINITY);
-    // if (rat.equals(a, rat.INFINULL)) return rat.copy(out, rat.INFINULL);
 
+    // Handle 0/1, 1/0, -1/0, 0/0, 1/1
+    if (this.n === ZERO || this.d === ZERO || this.n === this.d) {
+      return this.clone()
+    }
+    
     if (this.isNegative()) {
       throw `Roots of negative numbers like ${this.toString()} are too complex for this basic library`
     }
@@ -239,53 +273,51 @@ export class Rat {
   }
 
   /**
+   * Parametric sine: 2t / (1 + t²)
+   * @see https://youtu.be/Ui8OvmzDn7o?t=245
+   */
+  psin(): Rat {
+    if (this.d === ZERO) return new Rat(ZERO)
+    const one = new Rat(1)
+    const two = new Rat(2)
+    const n = two.mul(this)
+    const d = one.add(this.pow(two))
+    return n.div(d)
+  }
+
+  /**
+   * Parametric cosine: (1 - t²) / (1 + t²)
+   */
+  pcos(): Rat {
+    if (this.d === ZERO) return new Rat(-ONE)
+    const one = new Rat(1)
+    const two = new Rat(2)
+    const t2 = this.pow(two)
+    const n = one.sub(t2)
+    const d = one.add(t2)
+    return n.div(d)
+  }
+
+  /**
+   * Parametric tangent: psin() / pcos()
+   */
+  ptan(): Rat {
+    // const one = new Rat(1)
+    // const two = new Rat(2)
+    // const four = new Rat(4)
+    // const n = this.pow(four).sub(one)
+    // const d = this.pow(two).mul(two)
+    // return n.div(d)
+    return this.psin().div(this.pcos())
+  }
+
+  /**
    * Returns the integers representing the continued fraction.
    */
-  *continuedFraction(): Generator<bigint> {
-
-    yield ZERO
-
-    // @todo less fakey, more makey
-    yield ONE
-    yield BigInt(2)
-
-    // let right = true
-    // let run = ZERO
-
-    // // Traverse the Stern–Brocot tree
-    // const r = new Rat(ONE)
-    // const m = [ONE, ZERO, ZERO, ONE]
-    // for (let i=0; i<MAX_LOOPS; i++) {
-    //   console.log(r.approximates(+this), +this, +r)
-    //   if (r.approximates(+this)) break
-    //   if (+r > +this) {
-    //     if (right) {
-    //       run++
-    //     }
-    //     else {
-    //       yield run
-    //       run = ZERO
-    //       right = false
-    //     }
-    //     m[0] += m[1]
-    //     m[2] += m[3]
-    //   }
-    //   else {
-    //     if (!right) {
-    //       run++
-    //     }
-    //     else {
-    //       yield run
-    //       run = ZERO
-    //       right = true
-    //     }
-    //     m[1] += m[0]
-    //     m[3] += m[2]
-    //   }
-    //   r.n = m[0] + m[1]
-    //   r.d = m[2] + m[3]
-    // }
-
+  *continuedFraction(): Generator<number> {
+    for (const n of continuedFraction(+this)) {
+      yield n
+    }
   }
 
 }
@@ -296,9 +328,9 @@ export class Rat {
 export const FloatToRat = (n: number): Rat => {
 
   // Handle special values: 0/0, 1/0, -1/0
-  if (isNaN(n)) return new Rat(ZERO, ZERO)
-  if (n===Infinity) return new Rat(ONE, ZERO)
-  if (n===-Infinity) return new Rat(-ONE, ZERO)
+  if (isNaN(n)) return new Rat(0, 0)
+  if (n===Infinity) return new Rat(1, 0)
+  if (n===-Infinity) return new Rat(-1, 0)
 
   // Shortcut for numbers close to an integer or 1/integer
   if (Math.abs(n%1) < EPSILON) return new Rat(Math.round(n))

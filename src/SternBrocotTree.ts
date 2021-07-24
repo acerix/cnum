@@ -1,13 +1,13 @@
 import {MAX_LOOPS} from './config'
 import {ZERO, ONE} from './bigint'
-import {Rat} from './Rat'
+import Rat from './Rat'
 
 /**
- * Traverse the tree, returning the rational number that best approximates the floating point number.
+ * Find the rational number that best approximates the floating point number.
  */
 export function rationalApproximation(n: number): Rat {
-  const r = new Rat(ONE)
   const m = [ONE, ZERO, ZERO, ONE]
+  const r = new Rat(ONE)
   for (let i=0; i<MAX_LOOPS; i++) {
     if (r.approximates(n)) break
     if (+r > n) {
@@ -25,20 +25,20 @@ export function rationalApproximation(n: number): Rat {
 }
 
 /**
- * Traverse the tree towards the float, yielding false for each left and true for each right.
+ * Yield false for each left and true for each right.
  */
 export function *pathToValue(n: number): Generator<boolean> {
-  const r = new Rat(ONE)
   const m = [ONE, ZERO, ZERO, ONE]
+  const r = new Rat(ONE)
   for (let i=0; i<MAX_LOOPS; i++) {
     if (r.approximates(n)) break
-    if (+r > n) {
-      yield false
+    const direction = n > +r
+    yield direction
+    if (!direction) {
       m[0] += m[1]
       m[2] += m[3]
     }
     else {
-      yield true
       m[1] += m[0]
       m[3] += m[2]
     }
@@ -48,7 +48,7 @@ export function *pathToValue(n: number): Generator<boolean> {
 }
 
 /**
- * Traverse the tree towards the float, yielding the values of the continued fraction, ie. the length of runs left/right.
+ * Yield the values of the continued fraction, ie. the length of runs left/right.
  */
 export function *continuedFraction(n: number): Generator<number> {
   let last = true

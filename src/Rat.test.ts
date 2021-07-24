@@ -21,6 +21,17 @@ test('Text representation of -222/840 is "-37/140"', () => {
   expect(a.toString()).toBe('-37/140')
 })
 
+test('Profile of 420/69 is as expected', () => {
+  const a = new Rat(420, 69)
+  expect(a.profile).toBe(
+    'Rat: 140/23 (≈6.086956521739131)'
+    // + 'Continued: [0; 1, 2]'
+    + '\n' + 'psin(t): 6440/20129'
+    + '\n' + 'pcos(t): -19071/20129'
+    + '\n' + 'ptan(t): -6440/19071'
+  )
+})
+
 test('Default is zero', () => {
   const a = new Rat()
   expect(+a).toBe(0)
@@ -110,6 +121,18 @@ test('Mediant of 0/1 and 1/1 is 1/2', () => {
   const a = new Rat()
   const b = new Rat(1)
   expect(+a.mediant(b)).toBe(1/2)
+})
+
+test('-33 to the power of 0 is 1', () => {
+  const a = new Rat(-11)
+  const b = new Rat(0)
+  expect(+a.pow(b)).toBe(1)
+})
+
+test('8 to the power of 2/3 is 4', () => {
+  const a = new Rat(8)
+  const b = new Rat(2, 3)
+  expect(+a.pow(b)).toBeCloseTo(4) // @todo make it exactly!
 })
 
 test('5 to the power of 2 is 25', () => {
@@ -205,14 +228,34 @@ test('Opposite of -3/2 is 3/2', () => {
   expect(+a.neg()).toBe(3/2)
 })
 
+test('6/4 is not negative', () => {
+  const a = new Rat(6, 4)
+  expect(a.isNegative()).toBe(false)
+})
+
 test('-7/4 is negative', () => {
   const a = new Rat(-7, 4)
   expect(a.isNegative()).toBe(true)
 })
 
+test('-71/9 is finite', () => {
+  const a = new Rat(-71, 9)
+  expect(a.isFinite()).toBe(true)
+})
+
+test('Infinity is not finite', () => {
+  const a = FloatToRat(Infinity)
+  expect(a.isFinite()).toBe(false)
+})
+
 test('Reciprocol of -3/5 is -5/3', () => {
   const a = new Rat(-3, 5)
   expect(+a.inv()).toBe(-5/3)
+})
+
+test('Square root of one is one', () => {
+  const a = new Rat(1)
+  expect(+a.root(2)).toBe(1)
 })
 
 test('Square root of 256 is 16', () => {
@@ -226,6 +269,12 @@ test('5th root of 759375/16807 is 15/7', () => {
   expect(+a.root(n)).toBe(15/7)
 })
 
+test('Root of infinity is also infinity', () => {
+  const a = new Rat(1, 0)
+  const n = 7
+  expect(+a.root(n)).toBe(Infinity)
+})
+
 test('Root of a negative throws up', () => {
   const a = new Rat(-1)
   expect(() => {+a.sqrt()}).toThrow('Roots of negative numbers like -1 are too complex for this basic library')
@@ -236,11 +285,104 @@ test('4242/666 is rounded to 6', () => {
   expect(Number(a.round())).toBe(6)
 })
 
-test('Continued fraction coefficients of 6/9 are [0, 1, 2]', () => {
+test('psin(0) = 0', () => {
+  const a = new Rat(0)
+  expect(+a.psin()).toBe(0)
+})
+
+test('psin(1) = 1', () => {
+  const a = new Rat(1)
+  expect(+a.psin()).toBe(1)
+})
+
+test('psin(-1) = -1', () => {
+  const a = new Rat(-1)
+  expect(+a.psin()).toBe(-1)
+})
+
+test('psin(Infinity) = 0', () => {
+  const a = FloatToRat(Infinity)
+  expect(+a.psin()).toBe(0)
+})
+
+test('psin(1/2) = 4/5', () => {
+  const a = new Rat(1, 2)
+  expect(a.psin().toString()).toBe('4/5')
+})
+
+test('psin(2) = 4/5', () => {
+  const a = new Rat(2)
+  expect(a.psin().toString()).toBe('4/5')
+})
+
+test('psin(3) = 3/5', () => {
+  const a = new Rat(3)
+  expect(a.psin().toString()).toBe('3/5')
+})
+
+test('pcos(0) = 1', () => {
+  const a = new Rat(0)
+  expect(+a.pcos()).toBe(1)
+})
+
+test('pcos(1) = 0', () => {
+  const a = new Rat(1)
+  expect(+a.pcos()).toBe(0)
+})
+
+test('pcos(-1) = 0', () => {
+  const a = new Rat(-1)
+  expect(+a.pcos()).toBe(0)
+})
+
+test('pcos(Infinity) = -1', () => {
+  const a = FloatToRat(Infinity)
+  expect(+a.pcos()).toBe(-1)
+})
+
+test('pcos(1/2) = 3/5', () => {
+  const a = new Rat(1, 2)
+  expect(a.pcos().toString()).toBe('3/5')
+})
+
+test('pcos(2) = -3/5', () => {
+  const a = new Rat(2)
+  expect(a.pcos().toString()).toBe('-3/5')
+})
+
+test('pcos(3) = -4/5', () => {
+  const a = new Rat(3)
+  expect(a.pcos().toString()).toBe('-4/5')
+})
+
+test('ptan(0) = 0', () => {
+  const a = new Rat(0)
+  expect(+a.ptan()).toBe(0)
+})
+
+test('ptan(1) = Infinity', () => {
+  const a = new Rat(1)
+  expect(+a.ptan()).toBe(Infinity)
+})
+
+test('ptan(-1) = -1/0', () => {
+  const a = new Rat(-1)
+  expect(a.ptan().toString()).toBe('-1/0')
+})
+
+test('ptan(Infinity) = 0', () => {
+  const a = FloatToRat(Infinity)
+  expect(+a.ptan()).toBe(0)
+})
+
+test('Continued fraction coefficients of 6/9 are [0, 1]', () => {
   const a = new Rat(6, 9)
-  const cf = []
-  for (const n of a.continuedFraction()) cf.push(Number(n))
-  expect(cf).toStrictEqual([0, 1, 2])
+  const ex = [0, 1]
+  const r = []
+  for (const n of a.continuedFraction()) {
+    r.push(n)
+  }
+  expect(r).toStrictEqual(ex)
 })
 
 test('0.5 is converted to "1/2"', () => {
