@@ -4,9 +4,10 @@
  */
 class cnum {
   static get version(): string {
-    return '0.0.6'
+    return '0.0.7'
   }
 }
 
 export default cnum
 export {Rat} from './Rat'
+export {Polyrat} from './Polyrat'

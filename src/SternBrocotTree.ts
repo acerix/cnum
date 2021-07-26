@@ -1,13 +1,12 @@
 import {MAX_LOOPS} from './config'
-import {ZERO, ONE} from './bigint'
 import Rat from './Rat'
 
 /**
  * Find the rational number that best approximates the floating point number.
  */
 export function rationalApproximation(n: number): Rat {
-  const m = [ONE, ZERO, ZERO, ONE]
-  const r = new Rat(ONE)
+  const m = [1n, 0n, 0n, 1n]
+  const r = new Rat(1n)
   for (let i=0; i<MAX_LOOPS; i++) {
     if (r.approximates(n)) break
     if (+r > n) {
@@ -28,8 +27,8 @@ export function rationalApproximation(n: number): Rat {
  * Yield false for each left and true for each right.
  */
 export function *pathToValue(n: number): Generator<boolean> {
-  const m = [ONE, ZERO, ZERO, ONE]
-  const r = new Rat(ONE)
+  const m = [1n, 0n, 0n, 1n]
+  const r = new Rat(1n)
   for (let i=0; i<MAX_LOOPS; i++) {
     if (r.approximates(n)) break
     const direction = n > +r

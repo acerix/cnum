@@ -1,4 +1,4 @@
-import Rat, {FloatToRat} from './Rat'
+import Rat, {FloatToRat, StringToRat} from './Rat'
 
 test('New Rat is the expected type', () => {
   const a = new Rat()
@@ -25,7 +25,9 @@ test('Profile of 420/69 is as expected', () => {
   const a = new Rat(420, 69)
   expect(a.profile).toBe(
     'Rat: 140/23 (≈6.086956521739131)'
-    // + 'Continued: [0; 1, 2]'
+    + '\n' + 'Continued: [6; 11]'
+    + '\n' + 'Babylonian: 6 * 60^0 + 5 * 60^-1 + 13 * 60^-2 + 2 * 60^-3 + 36 * 60^-4 + 31 * 60^-5 + 18 * 60^-6 + 15 * 60^-7 + 39 * 60^-8 + 11 * 60^-9 + 43 * 60^-10 + 3 * 60^-11 + 50 * 60^-12 + 54 * 60^-13 + 39 * 60^-14 + 28 * 60^-15 + 27 * 60^-16 + 6 * 60^-17 + 56 * 60^-18 + 41 * 60^-19 + 2 * 60^-20 + 15 * 60^-21 + 21 * 60^-22 + 5 * 60^-23 + 37 * 60^-24 + 30 * 60^-25'
+    //  + '\n' + 'Egyptian: ' // @todo loops?
     + '\n' + 'psin(t): 6440/20129'
     + '\n' + 'pcos(t): -19071/20129'
     + '\n' + 'ptan(t): -6440/19071'
@@ -52,7 +54,7 @@ test('Mutating a clone does not affect the value of the original', () => {
   const a = new Rat(42, -69)
   const original = +a
   const b = a.clone()
-  b.n = BigInt(33)
+  b.n = 33n
   expect(+a).toBe(original)
 })
 
@@ -196,8 +198,8 @@ test('7/3 does not approximate 47/3', () => {
 })
 
 test('1/100000000000000001 approximates 1/100000000000000002', () => {
-  const a = new Rat(1, BigInt('100000000000000001'))
-  const b = new Rat(1, BigInt('100000000000000002'))
+  const a = new Rat(1, 100000000000000001n)
+  const b = new Rat(1, 100000000000000002n)
   expect(a.approximates(+b)).toBe(true)
 })
 
@@ -283,6 +285,11 @@ test('Root of a negative throws up', () => {
 test('4242/666 is rounded to 6', () => {
   const a = new Rat(4242, 666)
   expect(Number(a.round())).toBe(6)
+})
+
+test('Integer part of 420.69 is 420', () => {
+  const a = FloatToRat(420.69)
+  expect(a.floor()).toBe(420n)
 })
 
 test('psin(0) = 0', () => {
@@ -375,6 +382,11 @@ test('ptan(Infinity) = 0', () => {
   expect(+a.ptan()).toBe(0)
 })
 
+test('Continued fraction of 1 is "[1]"', () => {
+  const a = new Rat(1)
+  expect(a.continuedFractionString()).toStrictEqual('[1]')
+})
+
 test('Continued fraction coefficients of 6/9 are [0, 1]', () => {
   const a = new Rat(6, 9)
   const ex = [0, 1]
@@ -383,6 +395,46 @@ test('Continued fraction coefficients of 6/9 are [0, 1]', () => {
     r.push(n)
   }
   expect(r).toStrictEqual(ex)
+})
+
+test('Continued fraction of 2 is "[1]"', () => {
+  const a = new Rat(2)
+  expect(a.continuedFractionString()).toStrictEqual('[1]')
+})
+
+test('Continued fraction of 1/2 is "[0]"', () => {
+  const a = new Rat(1, 2)
+  expect(a.continuedFractionString()).toStrictEqual('[0]')
+})
+
+test('Continued fraction of 5/7 is "[0; 1, 2]"', () => {
+  const a = new Rat(5, 7)
+  expect(a.continuedFractionString()).toStrictEqual('[0; 1, 2]')
+})
+
+test('Babylonian fraction for 1/7 is as expected', () => {
+  const a = new Rat(1, 7)
+  expect(a.babylonianFractionString()).toStrictEqual('8 * 60^-1 + 34 * 60^-2 + 17 * 60^-3 + 8 * 60^-4 + 34 * 60^-5 + 17 * 60^-6 + 8 * 60^-7 + 34 * 60^-8 + 17 * 60^-9 + 6 * 60^-10')
+})
+
+test('Babylonian fraction for 369/11 is as expected', () => {
+  const a = new Rat(369, 11)
+  expect(a.babylonianFractionString()).toStrictEqual('33 * 60^0 + 32 * 60^-1 + 43 * 60^-2 + 38 * 60^-3 + 10 * 60^-4 + 54 * 60^-5 + 32 * 60^-6 + 43 * 60^-7 + 38 * 60^-8 + 23 * 60^-9 + 55 * 60^-10 + 42 * 60^-11 + 19 * 60^-12 + 46 * 60^-13 + 29 * 60^-14 + 30 * 60^-15 + 49 * 60^-16 + 15 * 60^-17 + 35 * 60^-18 + 48 * 60^-19 + 55 * 60^-20 + 32 * 60^-21 + 48 * 60^-22 + 45 * 60^-23')
+})
+
+test('Babylonian fraction for 181237/10 is "5 * 60^2 + 2 * 60^1 + 3 * 60^0 + 42 * 60^-1"', () => {
+  const a = new Rat(181237, 10)
+  expect(a.babylonianFractionString()).toStrictEqual('5 * 60^2 + 2 * 60^1 + 3 * 60^0 + 42 * 60^-1')
+})
+
+test('Egyptian fraction for 5/8 is "1/2 + 1/8"', () => {
+  const a = new Rat(5, 8)
+  expect(a.egyptianFractionString()).toStrictEqual('1/2 + 1/8')
+})
+
+test('Egyptian fraction for 17/360 is "1/22 + 1/566 + 1/1120680"', () => {
+  const a = new Rat(17, 360)
+  expect(a.egyptianFractionString()).toStrictEqual('1/22 + 1/566 + 1/1120680')
 })
 
 test('0.5 is converted to "1/2"', () => {
@@ -418,4 +470,29 @@ test('-1/42069 is converted to "-1/42069"', () => {
 test('-420/69 converted to a float and back to a Rat is "-140/23"', () => {
   const a = new Rat(-420, 69)
   expect(FloatToRat(+a).toString()).toBe('-140/23')
+})
+
+test('Not a number is converted to "0/0"', () => {
+  const n = 'NaN'
+  expect(StringToRat(n).toString()).toBe('0/0')
+})
+
+test('"Infinity" is converted to "1/0"', () => {
+  const n = 'Infinity'
+  expect(StringToRat(n).toString()).toBe('1/0')
+})
+
+test('"-Infinity" is converted to "-1/0"', () => {
+  const n = '-Infinity'
+  expect(StringToRat(n).toString()).toBe('-1/0')
+})
+
+test('"420" converted to a Rat is "420"', () => {
+  const a = '420'
+  expect(StringToRat(a).toString()).toBe('420')
+})
+
+test('"-420/69" converted to a Rat is "-140/23"', () => {
+  const a = '-420/69'
+  expect(StringToRat(a).toString()).toBe('-140/23')
 })

@@ -1,5 +1,5 @@
 import {EPSILON} from './config'
-import {ZERO, ONE, gcd} from './bigint'
+import {gcd} from './bigint'
 import {rationalApproximation, continuedFraction} from './SternBrocotTree'
 
 /**
@@ -13,7 +13,7 @@ export class Rat {
   /**
    * Initialize a rational number.
    */
-  constructor(numerator: bigint|number=ZERO, denominator: bigint|number=ONE) {
+  constructor(numerator: bigint|number=0n, denominator: bigint|number=1n) {
     this.n = BigInt(numerator)
     this.d = BigInt(denominator)
     this.normalize()
@@ -30,7 +30,7 @@ export class Rat {
    * The text representation.
    */
   toString(): string {
-    return this.n.toString() + ( this.d === ONE ? '' : '/' + this.d.toString() )
+    return this.n.toString() + ( this.d === 1n ? '' : '/' + this.d.toString() )
   }
 
   /**
@@ -38,9 +38,9 @@ export class Rat {
    */
   public get profile(): string {
     const p = [`${this.constructor.name}: ${this.toString()} (≈${+this})`]
-    // p.push(`Continued: ${this.continuedFraction()}`)
-    // p.push(`Babylonian: ${this.babylonian()}`)
-    // p.push(`Egyptian: ${this.egyptian()}`)
+    p.push(`Continued: ${this.continuedFractionString()}`)
+    p.push(`Babylonian: ${this.babylonianFractionString()}`)
+    // p.push(`Egyptian: ${this.egyptianFractionString()}`)
     p.push(`psin(t): ${this.psin().toString()}`)
     p.push(`pcos(t): ${this.pcos().toString()}`)
     p.push(`ptan(t): ${this.ptan().toString()}`)
@@ -60,25 +60,25 @@ export class Rat {
   normalize(): void {
 
     // normalize 0/1, 1/0, 0/0
-    if (this.n === ZERO) {
-      if (this.d !== ZERO) {
-        this.d = ONE
+    if (this.n === 0n) {
+      if (this.d !== 0n) {
+        this.d = 1n
       }
       return
     }
-    if (this.d === ZERO) {
-      this.n = this.n > ZERO ? ONE : -ONE
+    if (this.d === 0n) {
+      this.n = this.n > 0n ? 1n : -1n
       return
     }
     
     // normalize 1/1
     if (this.n === this.d) {
-      this.n = this.d = ONE
+      this.n = this.d = 1n
       return
     }
 
     // remove negative denominator
-    if (this.d < ZERO) {
+    if (this.d < 0n) {
       this.n = -this.n
       this.d = -this.d
     }
@@ -152,11 +152,11 @@ export class Rat {
    */
   pow(that: Rat): Rat {
     // zero
-    if (that.n === ZERO) {
-      return new Rat(ONE)
+    if (that.n === 0n) {
+      return new Rat(1n)
     }
     // integer
-    if (that.d === ONE) {
+    if (that.d === 1n) {
       return new Rat(this.n**that.n, this.d**that.n)
     }
     // fraction
@@ -230,7 +230,7 @@ export class Rat {
    * Returns true if this is a finite number.
    */
   isFinite(): boolean {
-    return this.d !== ZERO
+    return this.d !== 0n
   }
 
   /**
@@ -253,7 +253,7 @@ export class Rat {
   root(n: number): Rat {
 
     // Handle 0/1, 1/0, -1/0, 0/0, 1/1
-    if (this.n === ZERO || this.d === ZERO || this.n === this.d) {
+    if (this.n === 0n || this.d === 0n || this.n === this.d) {
       return this.clone()
     }
     
@@ -273,11 +273,18 @@ export class Rat {
   }
 
   /**
+   * Return the integer part.
+   */
+  floor(): bigint {
+    return BigInt(Math.floor(+this))
+  }
+
+  /**
    * Parametric sine: 2t / (1 + t²)
    * @see https://youtu.be/Ui8OvmzDn7o?t=245
    */
   psin(): Rat {
-    if (this.d === ZERO) return new Rat(ZERO)
+    if (this.d === 0n) return new Rat(0n)
     const one = new Rat(1)
     const two = new Rat(2)
     const n = two.mul(this)
@@ -289,7 +296,7 @@ export class Rat {
    * Parametric cosine: (1 - t²) / (1 + t²)
    */
   pcos(): Rat {
-    if (this.d === ZERO) return new Rat(-ONE)
+    if (this.d === 0n) return new Rat(-1n)
     const one = new Rat(1)
     const two = new Rat(2)
     const t2 = this.pow(two)
@@ -302,12 +309,6 @@ export class Rat {
    * Parametric tangent: psin() / pcos()
    */
   ptan(): Rat {
-    // const one = new Rat(1)
-    // const two = new Rat(2)
-    // const four = new Rat(4)
-    // const n = this.pow(four).sub(one)
-    // const d = this.pow(two).mul(two)
-    // return n.div(d)
     return this.psin().div(this.pcos())
   }
 
@@ -318,6 +319,92 @@ export class Rat {
     for (const n of continuedFraction(+this)) {
       yield n
     }
+  }
+
+  /**
+   * Continued fraction as a string.
+   */
+  continuedFractionString(): string {
+    const a: string[] = []
+    for (const r of this.continuedFraction()) {
+      a.push(r.toString())
+    }
+    const n = a.shift()
+    if (n !== undefined) {
+      let s = n.toString()
+      if (a.length) {
+        s += '; ' + a.join(', ')
+      }
+      return `[${s}]`
+    }
+    return '[1]'
+  }
+
+  /**
+   * A dictionary with the exponents of 60 and their coefficents, which add up to this number.
+   */
+  babylonianFraction(): Array<string> {
+    const a: string[] = []
+    let n = Number(this.floor())
+    let r = +this - n
+    let d = 0
+    // consume increasing powers until the integer part is divided
+    for (let p=0; n > 0; p++) {
+      d = n % 60
+      //if (d !== 0) {
+      a.unshift(`${d} * 60^${p}`)
+      //}
+      n = (n - d) / 60
+    }
+    // consume decreasing powers until the remainder is accumulated
+    for (let p=-1; r > 0; p--) {
+      r *= 60
+      d = Math.floor(r)
+      r -= d
+      if (d !== 0) {
+        a.push(`${d} * 60^${p}`)
+      }
+      if (Math.abs(d) < EPSILON) break
+      n = (n - d) / 60
+    }
+    return a
+  }
+
+  /**
+   * Babylonian fraction as a calc string.
+   */
+  babylonianFractionString(): string {
+    const a: string[] = []
+    const f = this.babylonianFraction()
+    for (const i of f) {
+      a.push(`${i}`)
+    }
+    return a.join(' + ')
+  }
+
+  /**
+   * A list of unit fractions which add up to this number.
+   */
+  egyptianFraction(): Array<Rat> {
+    const r: Rat[] = []
+    const f = new Rat(1n)
+    let t = this.abs()
+    while (t.n !== 1n) {
+      f.d++
+      if (t.isGreaterThan(f)) {
+        r.push(f.clone())
+        t = t.sub(f)
+      }
+    }
+    r.push(t)
+    return r
+  }
+
+  /**
+   * Egyptian fraction as a calc string.
+   */
+  egyptianFractionString(): string {
+    return this.egyptianFraction().join(' + ')
   }
 
 }
@@ -342,5 +429,28 @@ export const FloatToRat = (n: number): Rat => {
   const r = rationalApproximation(Math.abs(n))
   return negative ? r.neg() : r
 }
+
+/**
+ * Parse the string for a numeric value and return it as a Rat.
+ */
+export const StringToRat = (s: string): Rat => {
+
+  // Handle special values: 0/0, 1/0, -1/0
+  if (s==='NaN') return new Rat(0, 0)
+  if (s==='Infinity') return new Rat(1, 0)
+  if (s==='-Infinity') return new Rat(-1, 0)
+
+  const [n, d] = s.split('/', 2)
+  if (d === undefined) {
+    return FloatToRat(Number(n))
+  }
+  return new Rat(BigInt(n), BigInt(d))
+
+}
+
+/**
+ * Pi, an approximation of the ratio between a circle's circumference and it's diameter.
+ */
+export const π = new Rat(3141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273724587n, 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000n)
 
 export default Rat

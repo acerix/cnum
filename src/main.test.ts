@@ -1,4 +1,4 @@
-import cnum, {Rat} from './main'
+import cnum, {Rat, Polyrat} from './main'
 
 test('Version matches semver format', () => {
   // @from https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
@@ -10,4 +10,10 @@ test('New Rat from main is the expected type', () => {
   const a = new Rat()
   expect(typeof a).toBe('object')
   expect(a.constructor.name).toBe('Rat')
+})
+
+test('New Polyrat from main is the expected type', () => {
+  const a = new Polyrat()
+  expect(typeof a).toBe('object')
+  expect(a.constructor.name).toBe('Polyrat')
 })
