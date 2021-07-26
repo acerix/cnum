@@ -3,8 +3,8 @@
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][build-image]][build-url]
-[![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
 [![Code Coverage][coverage-image]][coverage-url]
+[![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
 [![GPL 3.0][license-image]](LICENSE)
 
 Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.

@@ -17,4 +17,4 @@ import Rat from './Rat'
 //   }
 // }
 
-console.log(`cnum v${cnum.version} (browser)`)
+console.log(`cnum v${cnum.version}`)
