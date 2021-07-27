@@ -40,7 +40,7 @@ export class Rat {
     const p = [`${this.constructor.name}: ${this.toString()} (≈${+this})`]
     p.push(`Continued: ${this.continuedFractionString()}`)
     p.push(`Babylonian: ${this.babylonianFractionString()}`)
-    // p.push(`Egyptian: ${this.egyptianFractionString()}`)
+    p.push(`Egyptian: ${this.egyptianFractionString()}`)
     p.push(`psin(t): ${this.psin().toString()}`)
     p.push(`pcos(t): ${this.pcos().toString()}`)
     p.push(`ptan(t): ${this.ptan().toString()}`)
@@ -316,8 +316,13 @@ export class Rat {
    * Returns the integers representing the continued fraction.
    */
   *continuedFraction(): Generator<number> {
-    for (const n of continuedFraction(+this)) {
-      yield n
+    if (this.n === 0n) {
+      yield 0
+    }
+    else {
+      for (const n of continuedFraction(+this)) {
+        yield n
+      }
     }
   }
 
@@ -330,14 +335,14 @@ export class Rat {
       a.push(r.toString())
     }
     const n = a.shift()
-    if (n !== undefined) {
+    if (n !== undefined && this.d !== 0n) {
       let s = n.toString()
       if (a.length) {
         s += '; ' + a.join(', ')
       }
       return `[${s}]`
     }
-    return '[1]'
+    return '[]'
   }
 
   /**
@@ -388,7 +393,18 @@ export class Rat {
   egyptianFraction(): Array<Rat> {
     const r: Rat[] = []
     const f = new Rat(1n)
+    // ignore sign
     let t = this.abs()
+
+    // start with the integer part if non-zero
+    const integerPart = t.floor()
+    if (integerPart) {
+      const integerRat = new Rat(integerPart)
+      r.push(integerRat)
+      t = t.sub(integerRat)
+    }
+
+    // increment the denominator of f, substracting it from t when bigger, until t has a numerator of 1
     while (t.n !== 1n) {
       f.d++
       if (t.isGreaterThan(f)) {
@@ -396,7 +412,10 @@ export class Rat {
         t = t.sub(f)
       }
     }
+
+    // include the final t
     r.push(t)
+
     return r
   }
 

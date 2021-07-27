@@ -21,13 +21,39 @@ test('Text representation of -222/840 is "-37/140"', () => {
   expect(a.toString()).toBe('-37/140')
 })
 
+test('Profile of 1/2 is as expected', () => {
+  const a = new Rat(1, 2)
+  expect(a.profile).toBe(
+    'Rat: 1/2 (≈0.5)'
+    + '\n' + 'Continued: [0; 2]'
+    + '\n' + 'Babylonian: 30 * 60^-1'
+    + '\n' + 'Egyptian: 1/2'
+    + '\n' + 'psin(t): 4/5'
+    + '\n' + 'pcos(t): 3/5'
+    + '\n' + 'ptan(t): 4/3'
+  )
+})
+
+test('Profile of 7/5 is as expected', () => {
+  const a = new Rat(7, 5)
+  expect(a.profile).toBe(
+    'Rat: 7/5 (≈1.4)'
+    + '\n' + 'Continued: [1; 2, 2]'
+    + '\n' + 'Babylonian: 1 * 60^0 + 23 * 60^-1 + 59 * 60^-2 + 59 * 60^-3 + 59 * 60^-4 + 59 * 60^-5 + 59 * 60^-6 + 59 * 60^-7 + 59 * 60^-8 + 58 * 60^-9 + 48 * 60^-10 + 23 * 60^-11 + 37 * 60^-12 + 11 * 60^-13 + 14 * 60^-14 + 17 * 60^-15 + 40 * 60^-16 + 29 * 60^-17 + 4 * 60^-18 + 13 * 60^-19'
+    + '\n' + 'Egyptian: 1 + 1/3 + 1/15'
+    + '\n' + 'psin(t): 35/37'
+    + '\n' + 'pcos(t): -12/37'
+    + '\n' + 'ptan(t): -35/12'
+  )
+})
+
 test('Profile of 420/69 is as expected', () => {
   const a = new Rat(420, 69)
   expect(a.profile).toBe(
     'Rat: 140/23 (≈6.086956521739131)'
-    + '\n' + 'Continued: [6; 11]'
+    + '\n' + 'Continued: [6; 11, 2]'
     + '\n' + 'Babylonian: 6 * 60^0 + 5 * 60^-1 + 13 * 60^-2 + 2 * 60^-3 + 36 * 60^-4 + 31 * 60^-5 + 18 * 60^-6 + 15 * 60^-7 + 39 * 60^-8 + 11 * 60^-9 + 43 * 60^-10 + 3 * 60^-11 + 50 * 60^-12 + 54 * 60^-13 + 39 * 60^-14 + 28 * 60^-15 + 27 * 60^-16 + 6 * 60^-17 + 56 * 60^-18 + 41 * 60^-19 + 2 * 60^-20 + 15 * 60^-21 + 21 * 60^-22 + 5 * 60^-23 + 37 * 60^-24 + 30 * 60^-25'
-    //  + '\n' + 'Egyptian: ' // @todo loops?
+    + '\n' + 'Egyptian: 6 + 1/12 + 1/276'
     + '\n' + 'psin(t): 6440/20129'
     + '\n' + 'pcos(t): -19071/20129'
     + '\n' + 'ptan(t): -6440/19071'
@@ -382,14 +408,24 @@ test('ptan(Infinity) = 0', () => {
   expect(+a.ptan()).toBe(0)
 })
 
+test('Continued fraction of 0 is "[0]"', () => {
+  const a = new Rat(0)
+  expect(a.continuedFractionString()).toStrictEqual('[0]')
+})
+
 test('Continued fraction of 1 is "[1]"', () => {
   const a = new Rat(1)
   expect(a.continuedFractionString()).toStrictEqual('[1]')
 })
 
-test('Continued fraction coefficients of 6/9 are [0, 1]', () => {
+test('Continued fraction of Infinity is "[]"', () => {
+  const a = new Rat(1, 0)
+  expect(a.continuedFractionString()).toStrictEqual('[]')
+})
+
+test('Continued fraction coefficients of 6/9 are [0, 1, 2]', () => {
   const a = new Rat(6, 9)
-  const ex = [0, 1]
+  const ex = [0, 1, 2]
   const r = []
   for (const n of a.continuedFraction()) {
     r.push(n)
@@ -397,19 +433,19 @@ test('Continued fraction coefficients of 6/9 are [0, 1]', () => {
   expect(r).toStrictEqual(ex)
 })
 
-test('Continued fraction of 2 is "[1]"', () => {
+test('Continued fraction of 2 is "[2]"', () => {
   const a = new Rat(2)
-  expect(a.continuedFractionString()).toStrictEqual('[1]')
+  expect(a.continuedFractionString()).toStrictEqual('[2]')
 })
 
-test('Continued fraction of 1/2 is "[0]"', () => {
+test('Continued fraction of 1/2 is "[0; 2]"', () => {
   const a = new Rat(1, 2)
-  expect(a.continuedFractionString()).toStrictEqual('[0]')
+  expect(a.continuedFractionString()).toStrictEqual('[0; 2]')
 })
 
 test('Continued fraction of 5/7 is "[0; 1, 2]"', () => {
   const a = new Rat(5, 7)
-  expect(a.continuedFractionString()).toStrictEqual('[0; 1, 2]')
+  expect(a.continuedFractionString()).toStrictEqual('[0; 1, 2, 2]')
 })
 
 test('Babylonian fraction for 1/7 is as expected', () => {

@@ -62,4 +62,5 @@ export function *continuedFraction(n: number): Generator<number> {
       last = direction
     }
   }
+  yield run + 1
 }
