@@ -316,8 +316,8 @@ export class Rat {
    * Returns the integers representing the continued fraction.
    */
   *continuedFraction(): Generator<number> {
-    if (this.n === 0n) {
-      yield 0
+    if (this.n === 0n || this.d === 0n) {
+      yield +this
     }
     else {
       for (const n of continuedFraction(+this)) {

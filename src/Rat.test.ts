@@ -157,12 +157,11 @@ test('-33 to the power of 0 is 1', () => {
   expect(+a.pow(b)).toBe(1)
 })
 
-// @todo why does this take 40 seconds?
-// test('8 to the power of 2/3 is 4', () => {
-//   const a = new Rat(8)
-//   const b = new Rat(2, 3)
-//   expect(+a.pow(b)).toBeCloseTo(4) // @todo make it exactly!
-// })
+test('8 to the power of 2/3 is 4', () => {
+  const a = new Rat(8)
+  const b = new Rat(2, 3)
+  expect(+a.pow(b)).toBeCloseTo(4)
+})
 
 test('5 to the power of 2 is 25', () => {
   const a = new Rat(5)
@@ -419,10 +418,10 @@ test('Continued fraction of 1 is "[1]"', () => {
   expect(a.continuedFractionString()).toStrictEqual('[1]')
 })
 
-// test('Continued fraction of Infinity is "[]"', () => {
-//   const a = new Rat(1, 0)
-//   expect(a.continuedFractionString()).toStrictEqual('[]')
-// })
+test('Continued fraction of Infinity is "[]"', () => {
+  const a = new Rat(1, 0)
+  expect(a.continuedFractionString()).toStrictEqual('[]')
+})
 
 test('Continued fraction coefficients of 6/9 are [0, 1, 2]', () => {
   const a = new Rat(6, 9)

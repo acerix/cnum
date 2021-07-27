@@ -6,4 +6,4 @@ export const EPSILON = 1e-20
 /**
  * Limit on the number of loops in algorithms.
  */
-export const MAX_LOOPS = 1<<24
+export const MAX_LOOPS = 1<<12
