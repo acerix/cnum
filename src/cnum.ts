@@ -3,9 +3,15 @@
  * @name cnum
  */
 class cnum {
+
   static get version(): string {
     return '0.0.8'
   }
+
+  static evaluate(expression: string): string {
+    return expression
+  }
+  
 }
 
 export default cnum

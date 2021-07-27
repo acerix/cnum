@@ -17,3 +17,7 @@ test('New Polyrat from main is the expected type', () => {
   expect(typeof a).toBe('object')
   expect(a.constructor.name).toBe('Polyrat')
 })
+
+test('Evaluation of "1" is "1"', () => {
+  expect(cnum.evaluate('1')).toBe('1')
+})
