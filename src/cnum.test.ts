@@ -1,4 +1,4 @@
-import cnum, {Rat, Polyrat} from './main'
+import cnum, {Rat, Polyrat} from './cnum'
 
 test('Version matches semver format', () => {
   // @from https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string

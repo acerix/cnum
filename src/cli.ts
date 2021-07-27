@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import cnum from './main'
+import cnum from './cnum'
 
 console.log(`cnum v${cnum.version}`)
 
