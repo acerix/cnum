@@ -22,7 +22,7 @@
     "dev": "yarn test --watch",
     "cli": "ts-node src/cli.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
-    "test": "jest --maxWorkers=`nproc --all`",
+    "test": "jest",
     "clean": "rm -rf dist build package",
     "ts-node": "ts-node",
     "docs": "typedoc --entryPoints src/cnum.ts",

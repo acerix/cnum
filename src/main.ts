@@ -1,1 +1,4 @@
-console.log('my main main!')
+console.log('main!')
+module.exports = {
+  wtf: 'aok?'
+}
