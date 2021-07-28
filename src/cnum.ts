@@ -22,5 +22,5 @@ class cnum {
 }
 
 export default cnum
-// export {Rat} from './Rat'
-// export {Polyrat} from './Polyrat'
+export {Rat} from './Rat'
+export {Polyrat} from './Polyrat'
