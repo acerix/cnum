@@ -48,5 +48,8 @@
     "ts-node": "*",
     "typedoc": "*",
     "typescript": "*"
+  },
+  "dependencies": {
+    "tslib": "*"
   }
 }
