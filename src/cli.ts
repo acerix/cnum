@@ -8,7 +8,7 @@ if (process.argv.length > 2) {
   const script = process.argv.shift()
   void(script)
   const input = process.argv.join(' ')
-  console.log(cnum.evaluate(input))
+  process.stdout.write(cnum.evaluate(input))
 }
 // otherwise, prompt for expressions to evaluate
 else {

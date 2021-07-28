@@ -1,17 +1,26 @@
+export const enum TokenType {
+  identifier,
+  keyword,
+  separator,
+  operator,
+  literal,
+  comment
+}
+
 /**
  * @class Token
  * @name Token
  */
 export class Token {
-  type: string
+  type: TokenType
   s: string
 
   /**
    * Initialize a token.
    */
-  constructor(input: string) {
-    this.s = input
-    this.type = 'identifier' // identifier, keyword, separator, operator, literal, comment
+  constructor(type: TokenType, s: string) {
+    this.type = type
+    this.s = s
   }
   
   /**

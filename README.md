@@ -39,9 +39,7 @@ c.valueOf() // 3.1415929203539825
 
 ```js
 const {Rat} = require('cnum')
-
 const r = new Rat(7, 11)
-
 r.profile
 ```
 
@@ -52,10 +50,7 @@ r.profile
 ```
 ```js
 const r = new Rat(4, 13)
-
-for (let n of r.continuedFraction()) {
-  console.log(n)
-}
+document.write(r.profile)
 ```
 
 [CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
@@ -63,10 +58,10 @@ for (let n of r.continuedFraction()) {
 ### Command Line Interface
 
 ```shellscript
-# cnum "(5/7) + (2/3) ^ (5/9)"
+$ cnum "(5/7) + (2/3) ^ (5/9)"
 42352677594770199369/28000000000000000000
 
-# cnum
+$ cnum
 cnum> 2/7
 2/7 (≈0.28571428571428571429)
 ```
