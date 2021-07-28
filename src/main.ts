@@ -1,4 +1,9 @@
-console.log('main!')
+import cnum from './cnum'
+import Rat from './Rat'
+import Polyrat from './Polyrat'
+
 module.exports = {
-  wtf: 'aok?'
+  cnum: cnum,
+  Rat: Rat,
+  Polyrat: Polyrat
 }

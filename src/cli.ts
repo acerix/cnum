@@ -17,8 +17,8 @@ else {
   const stdin = process.openStdin()
   stdin.setEncoding('utf8')
   process.stdout.write(prompt)
-  stdin.on('data', function (result) {
-    console.log(cnum.evaluate(result))
+  stdin.on('data', function (result: string) {
+    process.stdout.write(cnum.evaluate(result.trim()))
     process.stdout.write(prompt)
   })
 }
