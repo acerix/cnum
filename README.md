@@ -42,7 +42,7 @@ const {Rat} = require('cnum')
 
 const r = new Rat(7, 11)
 
-r.continuedFraction()
+r.profile
 ```
 
 ### Script Tags
@@ -63,8 +63,12 @@ for (let n of r.continuedFraction()) {
 ### Command Line Interface
 
 ```shellscript
-# cnum (5/7) + (2/3) ^ (5/9)
+# cnum "(5/7) + (2/3) ^ (5/9)"
 42352677594770199369/28000000000000000000
+
+# cnum
+cnum> 2/7
+2/7 (≈0.28571428571428571429)
 ```
 
 #### In Your Browser
