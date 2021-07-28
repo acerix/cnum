@@ -39,7 +39,7 @@ test('Profile of 7/5 is as expected', () => {
   expect(a.profile).toBe(
     'Rat: 7/5 (≈1.4)'
     + '\n' + 'Continued: [1; 2, 2]'
-    + '\n' + 'Babylonian: 1 * 60^0 + 23 * 60^-1 + 59 * 60^-2 + 59 * 60^-3 + 59 * 60^-4 + 59 * 60^-5 + 59 * 60^-6 + 59 * 60^-7 + 59 * 60^-8 + 58 * 60^-9 + 48 * 60^-10 + 23 * 60^-11 + 37 * 60^-12 + 11 * 60^-13 + 14 * 60^-14 + 17 * 60^-15 + 40 * 60^-16 + 29 * 60^-17 + 4 * 60^-18 + 13 * 60^-19'
+    + '\n' + 'Babylonian: 1 * 60^0 + 23 * 60^-1 + 59 * 60^-2 + 59 * 60^-3 + 59 * 60^-4 + 59 * 60^-5 + 59 * 60^-6 + 59 * 60^-7 + 59 * 60^-8 + 58 * 60^-9 + 48 * 60^-10 + 23 * 60^-11 + 37 * 60^-12 + 11 * 60^-13 + 14 * 60^-14 + 17 * 60^-15 + 40 * 60^-16 + 29 * 60^-17 + 4 * 60^-18 + 13 * 60^-19 + 54 * 60^-21 + 29 * 60^-22 + 31 * 60^-23 + 52 * 60^-24 + 30 * 60^-25'
     + '\n' + 'Egyptian: 1 + 1/3 + 1/15'
     + '\n' + 'psin(t): 35/37'
     + '\n' + 'pcos(t): -12/37'
@@ -448,14 +448,19 @@ test('Continued fraction of 5/7 is "[0; 1, 2]"', () => {
   expect(a.continuedFractionString()).toStrictEqual('[0; 1, 2, 2]')
 })
 
-test('Babylonian fraction for 1/7 is as expected', () => {
-  const a = new Rat(1, 7)
-  expect(a.babylonianFractionString()).toStrictEqual('8 * 60^-1 + 34 * 60^-2 + 17 * 60^-3 + 8 * 60^-4 + 34 * 60^-5 + 17 * 60^-6 + 8 * 60^-7 + 34 * 60^-8 + 17 * 60^-9 + 6 * 60^-10')
+test('Babylonian fraction for 1/60 is as expected', () => {
+  const a = new Rat(1, 60)
+  expect(a.babylonianFractionString()).toStrictEqual('1 * 60^-1')
 })
 
-test('Babylonian fraction for 369/11 is as expected', () => {
-  const a = new Rat(369, 11)
-  expect(a.babylonianFractionString()).toStrictEqual('33 * 60^0 + 32 * 60^-1 + 43 * 60^-2 + 38 * 60^-3 + 10 * 60^-4 + 54 * 60^-5 + 32 * 60^-6 + 43 * 60^-7 + 38 * 60^-8 + 23 * 60^-9 + 55 * 60^-10 + 42 * 60^-11 + 19 * 60^-12 + 46 * 60^-13 + 29 * 60^-14 + 30 * 60^-15 + 49 * 60^-16 + 15 * 60^-17 + 35 * 60^-18 + 48 * 60^-19 + 55 * 60^-20 + 32 * 60^-21 + 48 * 60^-22 + 45 * 60^-23')
+test('Babylonian fraction for 2/3 is as expected', () => {
+  const a = new Rat(2, 3)
+  expect(a.babylonianFractionString()).toStrictEqual('40 * 60^-1')
+})
+
+test('Babylonian fraction for 666/360 is as expected', () => {
+  const a = new Rat(666, 360)
+  expect(a.babylonianFractionString()).toStrictEqual('1 * 60^0 + 51 * 60^-1')
 })
 
 test('Babylonian fraction for 181237/10 is "5 * 60^2 + 2 * 60^1 + 3 * 60^0 + 42 * 60^-1"', () => {
