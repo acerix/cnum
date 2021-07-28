@@ -410,17 +410,17 @@ test('ptan(Infinity) = 0', () => {
 
 test('Continued fraction of 0 is "[0]"', () => {
   const a = new Rat(0)
-  expect(a.continuedFractionString()).toStrictEqual('[0]')
+  expect(a.continuedFractionString()).toBe('[0]')
 })
 
 test('Continued fraction of 1 is "[1]"', () => {
   const a = new Rat(1)
-  expect(a.continuedFractionString()).toStrictEqual('[1]')
+  expect(a.continuedFractionString()).toBe('[1]')
 })
 
 test('Continued fraction of Infinity is "[]"', () => {
   const a = new Rat(1, 0)
-  expect(a.continuedFractionString()).toStrictEqual('[]')
+  expect(a.continuedFractionString()).toBe('[]')
 })
 
 test('Continued fraction coefficients of 6/9 are [0, 1, 2]', () => {
@@ -435,47 +435,52 @@ test('Continued fraction coefficients of 6/9 are [0, 1, 2]', () => {
 
 test('Continued fraction of 2 is "[2]"', () => {
   const a = new Rat(2)
-  expect(a.continuedFractionString()).toStrictEqual('[2]')
+  expect(a.continuedFractionString()).toBe('[2]')
 })
 
 test('Continued fraction of 1/2 is "[0; 2]"', () => {
   const a = new Rat(1, 2)
-  expect(a.continuedFractionString()).toStrictEqual('[0; 2]')
+  expect(a.continuedFractionString()).toBe('[0; 2]')
 })
 
 test('Continued fraction of 5/7 is "[0; 1, 2]"', () => {
   const a = new Rat(5, 7)
-  expect(a.continuedFractionString()).toStrictEqual('[0; 1, 2, 2]')
+  expect(a.continuedFractionString()).toBe('[0; 1, 2, 2]')
 })
 
 test('Babylonian fraction for 1/60 is as expected', () => {
   const a = new Rat(1, 60)
-  expect(a.babylonianFractionString()).toStrictEqual('1 * 60^-1')
+  expect(a.babylonianFractionString()).toBe('1 * 60^-1')
 })
 
 test('Babylonian fraction for 2/3 is as expected', () => {
   const a = new Rat(2, 3)
-  expect(a.babylonianFractionString()).toStrictEqual('40 * 60^-1')
+  expect(a.babylonianFractionString()).toBe('40 * 60^-1')
 })
 
 test('Babylonian fraction for 666/360 is as expected', () => {
   const a = new Rat(666, 360)
-  expect(a.babylonianFractionString()).toStrictEqual('1 * 60^0 + 51 * 60^-1')
+  expect(a.babylonianFractionString()).toBe('1 * 60^0 + 51 * 60^-1')
 })
 
 test('Babylonian fraction for 181237/10 is "5 * 60^2 + 2 * 60^1 + 3 * 60^0 + 42 * 60^-1"', () => {
   const a = new Rat(181237, 10)
-  expect(a.babylonianFractionString()).toStrictEqual('5 * 60^2 + 2 * 60^1 + 3 * 60^0 + 42 * 60^-1')
+  expect(a.babylonianFractionString()).toBe('5 * 60^2 + 2 * 60^1 + 3 * 60^0 + 42 * 60^-1')
+})
+
+test('Babylonian fraction for 420 is as expected', () => {
+  const a = new Rat(420)
+  expect(a.babylonianFractionString()).toBe('7 * 60^1')
 })
 
 test('Egyptian fraction for 5/8 is "1/2 + 1/8"', () => {
   const a = new Rat(5, 8)
-  expect(a.egyptianFractionString()).toStrictEqual('1/2 + 1/8')
+  expect(a.egyptianFractionString()).toBe('1/2 + 1/8')
 })
 
 test('Egyptian fraction for 17/360 is "1/22 + 1/566 + 1/1120680"', () => {
   const a = new Rat(17, 360)
-  expect(a.egyptianFractionString()).toStrictEqual('1/22 + 1/566 + 1/1120680')
+  expect(a.egyptianFractionString()).toBe('1/22 + 1/566 + 1/1120680')
 })
 
 test('0.5 is converted to "1/2"', () => {
