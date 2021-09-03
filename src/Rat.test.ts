@@ -1,4 +1,4 @@
-import Rat, {FloatToRat, StringToRat} from './Rat'
+import Rat, {floatToRat, stringToRat} from './Rat'
 
 test('New Rat is the expected type', () => {
   const a = new Rat()
@@ -25,9 +25,11 @@ test('Profile of 1/2 is as expected', () => {
   const a = new Rat(1, 2)
   expect(a.profile).toBe(
     'Rat: 1/2 (≈0.5)'
+    + '\n' + 'Mixed: 1/2'
     + '\n' + 'Continued: [0; 2]'
-    + '\n' + 'Babylonian: 30 * 60^-1'
+    + '\n' + 'Factorization: 2^-1'
     + '\n' + 'Egyptian: 1/2'
+    + '\n' + 'Babylonian: 30 * 60^-1'
     + '\n' + 'psin(t): 4/5'
     + '\n' + 'pcos(t): 3/5'
     + '\n' + 'ptan(t): 4/3'
@@ -38,9 +40,11 @@ test('Profile of 7/5 is as expected', () => {
   const a = new Rat(7, 5)
   expect(a.profile).toBe(
     'Rat: 7/5 (≈1.4)'
+    + '\n' + 'Mixed: 1 + 2/5'
     + '\n' + 'Continued: [1; 2, 2]'
-    + '\n' + 'Babylonian: 1 * 60^0 + 23 * 60^-1 + 59 * 60^-2 + 59 * 60^-3 + 59 * 60^-4 + 59 * 60^-5 + 59 * 60^-6 + 59 * 60^-7 + 59 * 60^-8 + 58 * 60^-9 + 48 * 60^-10 + 23 * 60^-11 + 37 * 60^-12 + 11 * 60^-13 + 14 * 60^-14 + 17 * 60^-15 + 40 * 60^-16 + 29 * 60^-17 + 4 * 60^-18 + 13 * 60^-19 + 54 * 60^-21 + 29 * 60^-22 + 31 * 60^-23 + 52 * 60^-24 + 30 * 60^-25'
+    + '\n' + 'Factorization: 5^-1 * 7'
     + '\n' + 'Egyptian: 1 + 1/3 + 1/15'
+    + '\n' + 'Babylonian: 1 * 60^0 + 23 * 60^-1 + 59 * 60^-2 + 59 * 60^-3 + 59 * 60^-4 + 59 * 60^-5 + 59 * 60^-6 + 59 * 60^-7 + 59 * 60^-8 + 58 * 60^-9 + 48 * 60^-10 + 23 * 60^-11 + 37 * 60^-12 + 11 * 60^-13 + 14 * 60^-14 + 17 * 60^-15 + 40 * 60^-16 + 29 * 60^-17 + 4 * 60^-18 + 13 * 60^-19 + 54 * 60^-21 + 29 * 60^-22 + 31 * 60^-23 + 52 * 60^-24 + 30 * 60^-25'
     + '\n' + 'psin(t): 35/37'
     + '\n' + 'pcos(t): -12/37'
     + '\n' + 'ptan(t): -35/12'
@@ -51,12 +55,29 @@ test('Profile of 420/69 is as expected', () => {
   const a = new Rat(420, 69)
   expect(a.profile).toBe(
     'Rat: 140/23 (≈6.086956521739131)'
+    + '\n' + 'Mixed: 6 + 2/23'
     + '\n' + 'Continued: [6; 11, 2]'
-    + '\n' + 'Babylonian: 6 * 60^0 + 5 * 60^-1 + 13 * 60^-2 + 2 * 60^-3 + 36 * 60^-4 + 31 * 60^-5 + 18 * 60^-6 + 15 * 60^-7 + 39 * 60^-8 + 11 * 60^-9 + 43 * 60^-10 + 3 * 60^-11 + 50 * 60^-12 + 54 * 60^-13 + 39 * 60^-14 + 28 * 60^-15 + 27 * 60^-16 + 6 * 60^-17 + 56 * 60^-18 + 41 * 60^-19 + 2 * 60^-20 + 15 * 60^-21 + 21 * 60^-22 + 5 * 60^-23 + 37 * 60^-24 + 30 * 60^-25'
+    + '\n' + 'Factorization: 2^2 * 5 * 7 * 23^-1'
     + '\n' + 'Egyptian: 6 + 1/12 + 1/276'
+    + '\n' + 'Babylonian: 6 * 60^0 + 5 * 60^-1 + 13 * 60^-2 + 2 * 60^-3 + 36 * 60^-4 + 31 * 60^-5 + 18 * 60^-6 + 15 * 60^-7 + 39 * 60^-8 + 11 * 60^-9 + 43 * 60^-10 + 3 * 60^-11 + 50 * 60^-12 + 54 * 60^-13 + 39 * 60^-14 + 28 * 60^-15 + 27 * 60^-16 + 6 * 60^-17 + 56 * 60^-18 + 41 * 60^-19 + 2 * 60^-20 + 15 * 60^-21 + 21 * 60^-22 + 5 * 60^-23 + 37 * 60^-24 + 30 * 60^-25'
     + '\n' + 'psin(t): 6440/20129'
     + '\n' + 'pcos(t): -19071/20129'
     + '\n' + 'ptan(t): -6440/19071'
+  )
+})
+
+test('Profile of 355/113 is as expected', () => {
+  const a = new Rat(355, 113)
+  expect(a.profile).toBe(
+    'Rat: 355/113 (≈3.1415929203539825)'
+    + '\n' + 'Mixed: 3 + 16/113'
+    + '\n' + 'Continued: [3; 7, 16]'
+    + '\n' + 'Factorization: 5 * 71 * 113^-1'
+    + '\n' + 'Egyptian: 3 + 1/8 + 1/61 + 1/5014 + 1/27649202 + 1/1911195900442808'
+    + '\n' + 'Babylonian: 3 * 60^0 + 8 * 60^-1 + 29 * 60^-2 + 44 * 60^-3 + 4 * 60^-4 + 14 * 60^-5 + 52 * 60^-6 + 2 * 60^-7 + 7 * 60^-8 + 28 * 60^-9 + 14 * 60^-10 + 8 * 60^-11 + 8 * 60^-12 + 24 * 60^-13 + 46 * 60^-14 + 42 * 60^-15 + 33 * 60^-16 + 4 * 60^-17 + 54 * 60^-18 + 49 * 60^-19 + 5 * 60^-20 + 12 * 60^-21 + 53 * 60^-22 + 26 * 60^-23 + 15 * 60^-24'
+    + '\n' + 'psin(t): 40115/69397'
+    + '\n' + 'pcos(t): -56628/69397'
+    + '\n' + 'ptan(t): -40115/56628'
   )
 })
 
@@ -272,7 +293,7 @@ test('-71/9 is finite', () => {
 })
 
 test('Infinity is not finite', () => {
-  const a = FloatToRat(Infinity)
+  const a = floatToRat(Infinity)
   expect(a.isFinite()).toBe(false)
 })
 
@@ -313,9 +334,19 @@ test('4242/666 is rounded to 6', () => {
   expect(Number(a.round())).toBe(6)
 })
 
-test('Integer part of 420.69 is 420', () => {
-  const a = FloatToRat(420.69)
+test('Flooring 420.69 is 420', () => {
+  const a = floatToRat(420.69)
   expect(a.floor()).toBe(420n)
+})
+
+test('Flooring -42.69 is -43', () => {
+  const a = floatToRat(-42.69)
+  expect(a.floor()).toBe(-43n)
+})
+
+test('Ceilinging -420.69 is -420', () => {
+  const a = floatToRat(-420.69)
+  expect(a.ceil()).toBe(-420n)
 })
 
 test('psin(0) = 0', () => {
@@ -334,7 +365,7 @@ test('psin(-1) = -1', () => {
 })
 
 test('psin(Infinity) = 0', () => {
-  const a = FloatToRat(Infinity)
+  const a = floatToRat(Infinity)
   expect(+a.psin()).toBe(0)
 })
 
@@ -369,7 +400,7 @@ test('pcos(-1) = 0', () => {
 })
 
 test('pcos(Infinity) = -1', () => {
-  const a = FloatToRat(Infinity)
+  const a = floatToRat(Infinity)
   expect(+a.pcos()).toBe(-1)
 })
 
@@ -404,8 +435,13 @@ test('ptan(-1) = -1/0', () => {
 })
 
 test('ptan(Infinity) = 0', () => {
-  const a = FloatToRat(Infinity)
+  const a = floatToRat(Infinity)
   expect(+a.ptan()).toBe(0)
+})
+
+test('Mixed fraction of -33/5 is "-6 + -3/5"', () => {
+  const a = new Rat(-33, 5)
+  expect(a.mixedFractionString()).toBe('-6 + -3/5')
 })
 
 test('Continued fraction of 0 is "[0]"', () => {
@@ -448,6 +484,41 @@ test('Continued fraction of 5/7 is "[0; 1, 2]"', () => {
   expect(a.continuedFractionString()).toBe('[0; 1, 2, 2]')
 })
 
+test('Prime factorization of 360 is "2^3 * 3^2 * 5"', () => {
+  const a = new Rat(360)
+  expect(a.primeFactorizationString()).toBe('2^3 * 3^2 * 5')
+})
+
+test('Prime factorization of 36/31 is "2^2 * 3^2 * 31^-1"', () => {
+  const a = new Rat(36, 31)
+  expect(a.primeFactorizationString()).toBe('2^2 * 3^2 * 31^-1')
+})
+
+test('Prime factorization of 53155782/127979960268013673033516151007 is "?"', () => {
+  const a = new Rat(53155782n, 127979960268013673033516151007n)
+  expect(a.primeFactorizationString()).toBe('2 * 3^2 * 29 * 79 * 433^-1 * 1279^-3 * 1289 * 19387^-4')
+})
+
+test('Prime factorization of 17/360 is "2^-3 * 3^-2 * 5^-1 * 17"', () => {
+  const a = new Rat(17, 360)
+  expect(a.primeFactorizationString()).toBe('2^-3 * 3^-2 * 5^-1 * 17')
+})
+
+test('Egyptian fraction for 5/8 is "1/2 + 1/8"', () => {
+  const a = new Rat(5, 8)
+  expect(a.egyptianFractionString()).toBe('1/2 + 1/8')
+})
+
+test('Egyptian fraction for 17/360 is "1/22 + 1/566 + 1/1120680"', () => {
+  const a = new Rat(17, 360)
+  expect(a.egyptianFractionString()).toBe('1/22 + 1/566 + 1/1120680')
+})
+
+test('Egyptian fraction for -1/12 is "-1 + 1/2 + 1/3 + 1/12"', () => {
+  const a = new Rat(-1, 12)
+  expect(a.egyptianFractionString()).toBe('-1 + 1/2 + 1/3 + 1/12')
+})
+
 test('Babylonian fraction for 1/60 is as expected', () => {
   const a = new Rat(1, 60)
   expect(a.babylonianFractionString()).toBe('1 * 60^-1')
@@ -473,72 +544,62 @@ test('Babylonian fraction for 420 is as expected', () => {
   expect(a.babylonianFractionString()).toBe('7 * 60^1')
 })
 
-test('Egyptian fraction for 5/8 is "1/2 + 1/8"', () => {
-  const a = new Rat(5, 8)
-  expect(a.egyptianFractionString()).toBe('1/2 + 1/8')
-})
-
-test('Egyptian fraction for 17/360 is "1/22 + 1/566 + 1/1120680"', () => {
-  const a = new Rat(17, 360)
-  expect(a.egyptianFractionString()).toBe('1/22 + 1/566 + 1/1120680')
-})
-
 test('0.5 is converted to "1/2"', () => {
   const n = .5
-  expect(FloatToRat(n).toString()).toBe('1/2')
+  expect(floatToRat(n).toString()).toBe('1/2')
 })
 
 test('Not a number is converted to "0/0"', () => {
   const n = 0/0
-  expect(FloatToRat(n).toString()).toBe('0/0')
+  expect(floatToRat(n).toString()).toBe('0/0')
 })
 
 test('Infinity is converted to "1/0"', () => {
   const n = Infinity
-  expect(FloatToRat(n).toString()).toBe('1/0')
+  expect(floatToRat(n).toString()).toBe('1/0')
 })
 
 test('-Infinity is converted to "-1/0"', () => {
   const n = -Infinity
-  expect(FloatToRat(n).toString()).toBe('-1/0')
+  expect(floatToRat(n).toString()).toBe('-1/0')
 })
 
 test('42069 is converted to "42069"', () => {
   const n = 42069
-  expect(FloatToRat(n).toString()).toBe('42069')
+  expect(floatToRat(n).toString()).toBe('42069')
 })
 
 test('-1/42069 is converted to "-1/42069"', () => {
   const n = -1/42069
-  expect(FloatToRat(n).toString()).toBe('-1/42069')
+  expect(floatToRat(n).toString()).toBe('-1/42069')
 })
 
 test('-420/69 converted to a float and back to a Rat is "-140/23"', () => {
   const a = new Rat(-420, 69)
-  expect(FloatToRat(+a).toString()).toBe('-140/23')
+  expect(floatToRat(+a).toString()).toBe('-140/23')
 })
 
 test('Not a number is converted to "0/0"', () => {
   const n = 'NaN'
-  expect(StringToRat(n).toString()).toBe('0/0')
+  expect(stringToRat(n).toString()).toBe('0/0')
 })
 
 test('"Infinity" is converted to "1/0"', () => {
   const n = 'Infinity'
-  expect(StringToRat(n).toString()).toBe('1/0')
+  expect(stringToRat(n).toString()).toBe('1/0')
 })
 
 test('"-Infinity" is converted to "-1/0"', () => {
   const n = '-Infinity'
-  expect(StringToRat(n).toString()).toBe('-1/0')
+  expect(stringToRat(n).toString()).toBe('-1/0')
 })
 
 test('"420" converted to a Rat is "420"', () => {
   const a = '420'
-  expect(StringToRat(a).toString()).toBe('420')
+  expect(stringToRat(a).toString()).toBe('420')
 })
 
 test('"-420/69" converted to a Rat is "-140/23"', () => {
   const a = '-420/69'
-  expect(StringToRat(a).toString()).toBe('-140/23')
+  expect(stringToRat(a).toString()).toBe('-140/23')
 })

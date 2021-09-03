@@ -1,3 +1,4 @@
+import VERSION from './version'
 import Lexer from './Lexer'
 import Parser from './Parser'
 
@@ -8,7 +9,7 @@ import Parser from './Parser'
 class cnum {
 
   static get version(): string {
-    return '0.0.11'
+    return VERSION
   }
 
   static evaluate(expression: string): string {
@@ -19,5 +20,5 @@ class cnum {
 }
 
 export default cnum
-export {Rat} from './Rat'
+export {Rat, floatToRat, stringToRat} from './Rat'
 export {Polyrat} from './Polyrat'

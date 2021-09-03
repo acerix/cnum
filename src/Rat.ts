@@ -1,5 +1,5 @@
 import {EPSILON} from './config'
-import {gcd} from './bigint'
+import {gcd, primeFactors} from './bigint'
 import {rationalApproximation, continuedFraction} from './SternBrocotTree'
 
 /**
@@ -37,10 +37,12 @@ export class Rat {
    * Returns a text profile of the number in various formats and it's value after common transformations.
    */
   public get profile(): string {
-    const p = [`${this.constructor.name}: ${this.toString()} (≈${+this})`]
+    const p = [`Rat: ${this.toString()} (≈${+this})`]
+    p.push(`Mixed: ${this.mixedFractionString()}`)
     p.push(`Continued: ${this.continuedFractionString()}`)
-    p.push(`Babylonian: ${this.babylonianFractionString()}`)
+    p.push(`Factorization: ${this.primeFactorizationString()}`)
     p.push(`Egyptian: ${this.egyptianFractionString()}`)
+    p.push(`Babylonian: ${this.babylonianFractionString()}`)
     p.push(`psin(t): ${this.psin().toString()}`)
     p.push(`pcos(t): ${this.pcos().toString()}`)
     p.push(`ptan(t): ${this.ptan().toString()}`)
@@ -162,7 +164,7 @@ export class Rat {
     // fraction
     else {
       const estimate = Math.pow(+this, +that)
-      return FloatToRat(estimate)
+      return floatToRat(estimate)
     }
   }
 
@@ -261,8 +263,8 @@ export class Rat {
       throw `Roots of negative numbers like ${this.toString()} are too complex for this basic library`
     }
 
-    return FloatToRat(Math.pow(+this, 1/n))
-    // return FunctionToRat(r => r.pow(n), +this)
+    return floatToRat(Math.pow(+this, 1/n))
+    // return functionToRat(r => r.pow(n), +this)
   }
 
   /**
@@ -273,10 +275,17 @@ export class Rat {
   }
 
   /**
-   * Return the integer part.
+   * Returns the largest integer equal to or smaller than.
    */
   floor(): bigint {
     return BigInt(Math.floor(+this))
+  }
+
+  /**
+   * Returns the smallest integer equal to or greater than.
+   */
+  ceil(): bigint {
+    return BigInt(Math.ceil(+this))
   }
 
   /**
@@ -313,6 +322,15 @@ export class Rat {
   }
 
   /**
+   * Mixed fraction as a string.
+   */
+  mixedFractionString(): string {
+    const integerPart = this.isNegative() ? this.ceil() : this.floor()
+    const fractionPart = this.sub(new Rat(integerPart)).toString()
+    return integerPart ? `${integerPart} + ${fractionPart}` : fractionPart
+  }
+
+  /**
    * Returns the integers representing the continued fraction.
    */
   *continuedFraction(): Generator<number> {
@@ -343,6 +361,71 @@ export class Rat {
       return `[${s}]`
     }
     return '[]'
+  }
+
+  /**
+   * Returns an array of the prime factors with their exponents.
+   */
+  primeFactorization(): Array<[bigint, bigint]> {
+    const f: Array<[bigint, bigint]> = []
+    if (this.n !== 1n) {
+      f.push(...primeFactors(this.n))
+    }
+    if (this.d !== 1n) {
+      f.push(...primeFactors(this.d).map(f => {f[1]=-f[1]; return f}))
+    }
+    return f.sort((a, b) => {
+      return Number(a[0] - b[0])
+    })
+  }
+
+  /**
+   * Prime factorization as a calc string.
+   */
+  primeFactorizationString(): string {
+    const a: string[] = []
+    for (const p of this.primeFactorization()) {
+      a.push(p[1]===1n ? p[0].toString() : `${p[0]}^${p[1]}`)
+    }
+    return a.join(' * ')
+  }
+
+  /**
+   * A list of unit fractions which add up to this number.
+   */
+  egyptianFraction(): Array<Rat> {
+    const r: Rat[] = []
+    const f = new Rat(1n)
+    let t = this.clone()
+
+    // start with the integer part if non-zero
+    const integerPart = this.floor()
+    if (integerPart) {
+      const integerRat = new Rat(integerPart)
+      r.push(integerRat)
+      t = t.sub(integerRat)
+    }
+
+    // increment the denominator of f, substracting it from t when bigger, until t has a numerator of 1
+    while (t.n !== 1n) {
+      f.d++
+      if (t.isGreaterThan(f)) {
+        r.push(f.clone())
+        t = t.sub(f)
+      }
+    }
+
+    // include the final t
+    r.push(t)
+
+    return r
+  }
+
+  /**
+   * Egyptian fraction as a calc string.
+   */
+  egyptianFractionString(): string {
+    return this.egyptianFraction().join(' + ')
   }
 
   /**
@@ -387,51 +470,12 @@ export class Rat {
     return a.join(' + ')
   }
 
-  /**
-   * A list of unit fractions which add up to this number.
-   */
-  egyptianFraction(): Array<Rat> {
-    const r: Rat[] = []
-    const f = new Rat(1n)
-    // ignore sign
-    let t = this.abs()
-
-    // start with the integer part if non-zero
-    const integerPart = t.floor()
-    if (integerPart) {
-      const integerRat = new Rat(integerPart)
-      r.push(integerRat)
-      t = t.sub(integerRat)
-    }
-
-    // increment the denominator of f, substracting it from t when bigger, until t has a numerator of 1
-    while (t.n !== 1n) {
-      f.d++
-      if (t.isGreaterThan(f)) {
-        r.push(f.clone())
-        t = t.sub(f)
-      }
-    }
-
-    // include the final t
-    r.push(t)
-
-    return r
-  }
-
-  /**
-   * Egyptian fraction as a calc string.
-   */
-  egyptianFractionString(): string {
-    return this.egyptianFraction().join(' + ')
-  }
-
 }
 
 /**
  * Find a Rat approximation of the floating point number.
  */
-export const FloatToRat = (n: number): Rat => {
+export const floatToRat = (n: number): Rat => {
 
   // Handle special values: 0/0, 1/0, -1/0
   if (isNaN(n)) return new Rat(0, 0)
@@ -452,7 +496,7 @@ export const FloatToRat = (n: number): Rat => {
 /**
  * Parse the string for a numeric value and return it as a Rat.
  */
-export const StringToRat = (s: string): Rat => {
+export const stringToRat = (s: string): Rat => {
 
   // Handle special values: 0/0, 1/0, -1/0
   if (s==='NaN') return new Rat(0, 0)
@@ -461,7 +505,7 @@ export const StringToRat = (s: string): Rat => {
 
   const [n, d] = s.split('/', 2)
   if (d === undefined) {
-    return FloatToRat(Number(n))
+    return floatToRat(Number(n))
   }
   return new Rat(BigInt(n), BigInt(d))
 

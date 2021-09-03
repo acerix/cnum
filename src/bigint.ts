@@ -32,3 +32,20 @@ export function* primes(): Generator<bigint> {
     }
   }
 }
+
+/**
+ * Finds the prime factors, returning them in ascending order as arrays with their exponent as the second element.
+ */
+export const primeFactors = (n: bigint): Array<[bigint, bigint]> => {
+  const f: Array<[bigint, bigint]> = []
+  for (const p of primes()) {
+    let e = 0n
+    while (n % p === 0n) {
+      e++
+      n /= p
+    }
+    if (e) f.push([p, e])
+    if (n === 1n) break
+  }
+  return f
+}
