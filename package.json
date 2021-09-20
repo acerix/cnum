@@ -1,6 +1,6 @@
 {
   "name": "cnum",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Represent rational numbers in comfortably numeric way.",
   "author": "Dylan Ferris <dylan@psilly.com>",
   "contributors": [
@@ -34,10 +34,11 @@
     "cli": "ts-node src/cli.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
+    "example": "node example.js",
     "clean": "rm -rf dist build package",
     "ts-node": "ts-node",
     "docs": "typedoc --entryPoints src/cnum.ts",
-    "prebuild": "echo -e \"export default '`node -p \"require('./package.json').version\"`'\" > src/version.ts",
+    "prebuild-x": "echo -e \"export default '`node -p \"require('./package.json').version\"`'\" > src/version.ts",
     "build": "tsc -p tsconfig.json",
     "build-all": "yarn build && yarn esbuild-node && yarn esbuild-browser",
     "esbuild-browser": "esbuild src/browser.ts --bundle --minify --sourcemap=external --outfile=dist/esbuild/browser.js",
