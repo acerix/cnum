@@ -3,8 +3,10 @@
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][build-image]][build-url]
+[![Build Size][size-image]][size-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![Scrutinizer Code Quality][scrutinizer-image]][scrutinizer-url]
+[![Language Grade][lgtm-image]][lgtm-url]
 [![GPL 3.0][license-image]](LICENSE)
 
 Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.
@@ -46,12 +48,11 @@ r.profile
 ### Script Tags
 
 ```html
-<script src="//unpkg.com/cnum"></script>
-```
-```js
+<script src="https://unpkg.com/cnum"></script>
+<script>
 const r = new Rat(4, 13)
 document.write(r.profile)
-```
+</script>
 
 [CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
 
@@ -98,8 +99,13 @@ cnum> 2/7
 [downloads-url]: https://npmjs.org/package/cnum
 [build-image]: https://github.com/acerix/cnum/workflows/Test/badge.svg
 [build-url]: https://github.com/acerix/cnum/actions?query=workflow%2ATest
+[size-image]: https://badgen.net/bundlephobia/min/cnum
+[size-url]: https://bundlephobia.com/result?p=cnum
 [coverage-image]: https://scrutinizer-ci.com/g/acerix/cnum/badges/coverage.png?b=main
 [coverage-url]: https://scrutinizer-ci.com/g/acerix/cnum/?branch=main
 [scrutinizer-image]: https://scrutinizer-ci.com/g/acerix/cnum/badges/quality-score.png?b=main
 [scrutinizer-url]: https://scrutinizer-ci.com/g/acerix/cnum/?branch=main
+[lgtm-image]: https://img.shields.io/lgtm/alerts/g/acerix/cnum.svg
+[lgtm-url]: https://lgtm.com/projects/g/acerix/cnum/
 [license-image]: https://img.shields.io/npm/l/cnum.svg
+
