@@ -64,8 +64,10 @@
 				<p><a href="https://npmjs.org/package/cnum"><img src="https://img.shields.io/npm/v/cnum.svg" alt="NPM Version"></a>
 					<a href="https://npmjs.org/package/cnum"><img src="https://img.shields.io/npm/dm/cnum.svg" alt="NPM Downloads"></a>
 					<a href="https://github.com/acerix/cnum/actions?query=workflow%2ATest"><img src="https://github.com/acerix/cnum/workflows/Test/badge.svg" alt="Build Status"></a>
+					<a href="https://bundlephobia.com/result?p=cnum"><img src="https://badgen.net/bundlephobia/min/cnum" alt="Build Size"></a>
 					<a href="https://scrutinizer-ci.com/g/acerix/cnum/?branch=main"><img src="https://scrutinizer-ci.com/g/acerix/cnum/badges/coverage.png?b=main" alt="Code Coverage"></a>
 					<a href="https://scrutinizer-ci.com/g/acerix/cnum/?branch=main"><img src="https://scrutinizer-ci.com/g/acerix/cnum/badges/quality-score.png?b=main" alt="Scrutinizer Code Quality"></a>
+					<a href="https://lgtm.com/projects/g/acerix/cnum/"><img src="https://img.shields.io/lgtm/alerts/g/acerix/cnum.svg" alt="Language Grade"></a>
 				<a href="LICENSE"><img src="https://img.shields.io/npm/l/cnum.svg" alt="GPL 3.0"></a></p>
 				<p>Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a <em>bigint</em>eresting way.</p>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
@@ -103,16 +105,18 @@
 				<a href="#script-tags" id="script-tags" style="color: inherit; text-decoration: none;">
 					<h3>Script Tags</h3>
 				</a>
-				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;//unpkg.com/cnum&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
-</code></pre>
-				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">r</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Rat</span><span style="color: #000000">(</span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">13</span><span style="color: #000000">)</span>
-<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">write</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">profile</span><span style="color: #000000">)</span>
-</code></pre>
-				<p><a href="https://codepen.io/acerix/pen/GRmvmYL?editors=0010">CodePen Demo</a></p>
-				<a href="#command-line-interface" id="command-line-interface" style="color: inherit; text-decoration: none;">
-					<h3>Command Line Interface</h3>
-				</a>
-				<pre><code class="language-shellscript"><span style="color: #000000">$ cnum </span><span style="color: #A31515">&quot;(5/7) + (2/3) ^ (5/9)&quot;</span>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://unpkg.com/cnum&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #800000">&lt;script&gt;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000FF"> </span><span style="color: #0070C1">r</span><span style="color: #000000FF"> </span><span style="color: #000000">=</span><span style="color: #000000FF"> </span><span style="color: #0000FF">new</span><span style="color: #000000FF"> </span><span style="color: #795E26">Rat</span><span style="color: #000000FF">(</span><span style="color: #098658">4</span><span style="color: #000000FF">, </span><span style="color: #098658">13</span><span style="color: #000000FF">)</span>
+<span style="color: #001080">document</span><span style="color: #000000FF">.</span><span style="color: #795E26">write</span><span style="color: #000000FF">(</span><span style="color: #001080">r</span><span style="color: #000000FF">.</span><span style="color: #001080">profile</span><span style="color: #000000FF">)</span>
+<span style="color: #800000">&lt;/script&gt;</span>
+
+<span style="color: #000000">[CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)</span>
+
+<span style="color: #000000">### Command Line Interface</span>
+
+<span style="color: #000000">```shellscript</span>
+<span style="color: #000000">$ cnum &quot;(5/7) + (2/3) ^ (5/9)&quot;</span>
 <span style="color: #000000">42352677594770199369/28000000000000000000</span>
 
 <span style="color: #000000">$ cnum</span>
@@ -131,17 +135,17 @@
 					<h2>CLI Commands</h2>
 				</a>
 				<ul>
-					<li>  <code>yarn install</code>: Install dependencies</li>
-					<li>  <code>yarn dev</code>: Run tests when source files are changed</li>
-					<li>  <code>yarn cli</code>: Start a command line interface</li>
-					<li>  <code>yarn lint</code>: Lint with ESLint</li>
-					<li>  <code>yarn test</code>: Run Jest and Enzyme tests</li>
-					<li>  <code>yarn clean</code>: Delete previous build</li>
-					<li>  <code>yarn docs</code>: Build documentation</li>
-					<li>  <code>yarn build</code>: Production build</li>
-					<li>  <code>yarn build-all</code>: Production build all the things</li>
-					<li>  <code>yarn prepublish</code>: Prepare for publishing</li>
-					<li>  <code>yarn publish</code>: Publish to npm</li>
+					<li><code>yarn install</code>: Install dependencies</li>
+					<li><code>yarn dev</code>: Run tests when source files are changed</li>
+					<li><code>yarn cli</code>: Start a command line interface</li>
+					<li><code>yarn lint</code>: Lint with ESLint</li>
+					<li><code>yarn test</code>: Run Jest and Enzyme tests</li>
+					<li><code>yarn clean</code>: Delete previous build</li>
+					<li><code>yarn docs</code>: Build documentation</li>
+					<li><code>yarn build</code>: Production build</li>
+					<li><code>yarn build-all</code>: Production build all the things</li>
+					<li><code>yarn prepublish</code>: Prepare for publishing</li>
+					<li><code>yarn publish</code>: Publish to npm</li>
 				</ul>
 				<a href="#feedback" id="feedback" style="color: inherit; text-decoration: none;">
 					<h2>Feedback</h2>
@@ -169,6 +173,12 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/default.html" class="tsd-kind-icon">default</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#floatToRat" class="tsd-kind-icon">float<wbr>ToRat</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#stringToRat" class="tsd-kind-icon">string<wbr>ToRat</a>
 					</li>
 				</ul>
 			</nav>
