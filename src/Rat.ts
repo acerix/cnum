@@ -61,7 +61,7 @@ export class Rat {
    */
   normalize(): void {
 
-    // normalize 0/1, 1/0, 0/0
+    // normalize 0/±1, ±1/0, 0/0
     if (this.n === 0n) {
       if (this.d !== 0n) {
         this.d = 1n
@@ -254,7 +254,7 @@ export class Rat {
    */
   root(n: number): Rat {
 
-    // Handle 0/1, 1/0, -1/0, 0/0, 1/1
+    // Handle 0/±1, ±1/0, 0/0, ±1/1
     if (this.n === 0n || this.d === 0n || this.n === this.d) {
       return this.clone()
     }
