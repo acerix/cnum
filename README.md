@@ -53,6 +53,7 @@ r.profile
 const r = new Rat(4, 13)
 console.log(r.profile)
 </script>
+```
 
 [CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
 
