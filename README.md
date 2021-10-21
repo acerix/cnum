@@ -51,7 +51,7 @@ r.profile
 <script src="https://unpkg.com/cnum"></script>
 <script>
 const r = new Rat(4, 13)
-document.write(r.profile)
+console.log(r.profile)
 </script>
 
 [CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
