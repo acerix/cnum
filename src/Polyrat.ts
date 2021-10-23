@@ -19,16 +19,10 @@ export class Polyrat {
   /**
    * Initialize a rational polynumber.
    */
-   constructor(coefficents?: Coefficents<Rat>) {
+  constructor(coefficents?: Coefficents<Rat>) {
     if (coefficents) this.coefficents = coefficents
-    if (this.coefficents.length) {
+    if (Object.keys(this.coefficents).length) {
       this.dimension = Object.keys(this.coefficents)[0].split(',').length
-    }
-    // @debug
-    for (const key of Object.keys(this.coefficents)) {
-      if (key.length !== this.dimension) {
-        console.error(`key.length ({$coordinate.length}) !== this.dimension (${this.dimension})`)
-      }
     }
   }
 
@@ -36,29 +30,28 @@ export class Polyrat {
    * Evaluate the result given the parameters for each dimension.
    */
   evaluate(parameters: Rat[]): Rat {
-    let result: Rat = new Rat(0)
+    let result: Rat = new Rat()
     for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
       let value: Rat = coefficent
-      for (const dimension of exponents.split(',')) {
-        const d = parseInt(dimension, 10)
-        value = value.mul(parameters[d])
+      const dimensions = exponents.split(',')
+      for (let i=0; i<dimensions.length; i++) {
+        value = value.mul(parameters[i].pow(new Rat(parseInt(dimensions[i], 10))))
       }
+      result = result.add(value)
     }
     return result
   }
 
   /**
-   * The matrix representation.
-   */
-  toMatrix(): string {
-    return Object.entries(this.coefficents).join(', ')
-  }
-
-  /**
    * The text representation.
    */
-   toString(): string {
-     return JSON.stringify(this.coefficents)
+  toString(): string {
+    const r = []
+    for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
+      r.push(`'${exponents}': ${coefficent.toString()}'`)
+    }
+    return `[${r.join(',')}]`
+    // return JSON.stringify(this.coefficents)
   }
 
   /**
@@ -74,7 +67,7 @@ export class Polyrat {
  * Parse the string and return it as a Polyrat.
  */
 export const stringToPolyrat = (s: string): Polyrat => {
-  return new Polyrat(JSON.parse(s))
+  return new Polyrat(JSON.parse(s) as Coefficents<Rat>)
 }
 
 export default Polyrat

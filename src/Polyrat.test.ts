@@ -18,9 +18,8 @@ test('"[]" is the same after stringToPolyrat then toString.', () => {
   expect(stringToPolyrat(s).toString()).toBe(s)
 })
 
-// test('Evaluation of y = x^2 for x=3 is 9', () => {
-//   const a = new Polyrat()
-//   a.p[2] = new Rat(1n)
-//   const x = new Rat(3n)
-//   expect(+a.evaluate(x)).toBe(9n)
-// })
+test('Evaluation of y = x^2 for x=3 is 9', () => {
+  const a = new Polyrat({'2': new Rat(1n)})
+  const x = new Rat(3n)
+  expect(a.evaluate([x]).toString()).toBe('9')
+})
