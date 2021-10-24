@@ -9,3 +9,7 @@ module.exports = {
   stringToRat: stringToRat,
   Polyrat: Polyrat
 }
+
+export default cnum
+export {Rat, floatToRat, stringToRat} from './Rat'
+export {Polyrat} from './Polyrat'
