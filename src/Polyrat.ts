@@ -1,7 +1,7 @@
 import {Rat} from './Rat'
 import Symbolizer from './Symbolizer'
 
-export interface Coefficents<Rat> {
+export interface Coefficents {
   [Key: string]: Rat;
 }
 
@@ -12,7 +12,7 @@ export interface Coefficents<Rat> {
 export class Polyrat {
 
   // coefficent values are indexed with their the exponents in each dimension, comma-separated, as the key
-  coefficents: Coefficents<Rat> = {}
+  coefficents: Coefficents = {}
 
   // the dimension is how many params there are, defined by the length of the exponent keys
   dimension = 0
@@ -23,13 +23,8 @@ export class Polyrat {
   /**
    * Initialize a rational polynumber.
    */
-  constructor(coefficents?: Coefficents<Rat>) {
+  constructor(coefficents?: Coefficents) {
     if (coefficents) {
-      // for (const i in coefficents) {
-      //   if (typeof coefficents[i] !== typeof Rat) {
-      //     // coefficents[i] = new Rat(coefficents[i])
-      //   }
-      // }
       this.coefficents = coefficents
     }
     if (Object.keys(this.coefficents).length) {
@@ -162,7 +157,7 @@ export class Polyrat {
  * Parse the string and return it as a Polyrat.
  */
 export const stringToPolyrat = (s: string): Polyrat => {
-  return new Polyrat(JSON.parse(s) as Coefficents<Rat>)
+  return new Polyrat(JSON.parse(s) as Coefficents)
 }
 
 export default Polyrat
