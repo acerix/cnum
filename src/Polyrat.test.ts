@@ -21,9 +21,8 @@ test('Cloning maintains the string representation', () => {
   expect(a.toString()).toBe(b.toString())
 })
 
-test('"[]" is the same after stringToPolyrat then toString.', () => {
-  const s = '[]'
-  expect(stringToPolyrat(s).toString()).toBe(s)
+test('Empty stringToPolyrat is empty.', () => {
+  expect(stringToPolyrat('[]').coefficents.toString()).toBe('')
 })
 
 test('Evaluation of y = x^2 for x=3 is 9', () => {

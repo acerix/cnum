@@ -61,12 +61,7 @@ export class Polyrat {
    * The text representation.
    */
   toString(): string {
-    // return JSON.stringify(this.coefficents)
-    const r = []
-    for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
-      r.push(`'${exponents}': ${coefficent.toString()}'`)
-    }
-    return `[${r.join(',')}]`
+    return `${this.constructor.name}(0 = ${this.toCalcFormula()})`
   }
 
   /**
