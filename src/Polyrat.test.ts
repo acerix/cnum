@@ -35,6 +35,10 @@ test('JSONing the Lemniscate of Bernoulli', () => {
   expect(lemniscateOfBernoulli.toJSON()).toBe("['2,0':'-2','4,0':'1','0,2':'2','2,2':'2','0,4':'1']")
 })
 
+test('Formula for evaluating the Lemniscate of Bernoulli in HTML', () => {
+  expect(lemniscateOfBernoulli.toHTMLFormula()).toBe('-2x<sup>2</sup> + x<sup>4</sup> + 2y<sup>2</sup> + 2x<sup>2</sup>y<sup>2</sup> + y<sup>4</sup>')
+})
+
 test('Formula for evaluating the Lemniscate of Bernoulli in calc', () => {
   expect(lemniscateOfBernoulli.toCalcFormula()).toBe('-2*x^2 + x^4 + 2*y^2 + 2*x^2*y^2 + y^4')
 })

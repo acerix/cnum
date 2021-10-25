@@ -61,7 +61,7 @@ export class Polyrat {
    * The text representation.
    */
   toString(): string {
-    return `${this.constructor.name}(0 = ${this.toCalcFormula()})`
+    return `${this.constructor.name}(${this.toJSON()})`
   }
 
   /**
@@ -77,6 +77,26 @@ export class Polyrat {
   }
 
   /**
+   * The formula in the human way with exponents as HTML sups.
+   */
+  toHTMLFormula(): string {
+    const r: string[] = []
+    for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
+      const t: string[] = []
+      const f = coefficent.toString()
+      if (f !== '1') t.push(f)
+      const dimensions = exponents.split(',')
+      for (let i=0; i<dimensions.length; i++) {
+        if (dimensions[i] !== '0') {
+          t.push(dimensions[i] === '1' ? this.symbols[i] : `${this.symbols[i]}<sup>${parseInt(dimensions[i], 10)}</sup>`)
+        }
+      }
+      if (t) r.push(t.join(''))
+    }
+    return r.join(' + ')
+  }
+
+  /**
    * The "calc" code for evaluating the value.
    */
   toCalcFormula(): string {
@@ -88,7 +108,7 @@ export class Polyrat {
       const dimensions = exponents.split(',')
       for (let i=0; i<dimensions.length; i++) {
         if (dimensions[i] !== '0') {
-          t.push(`${this.symbols[i]}^${parseInt(dimensions[i], 10)}`)
+          t.push(dimensions[i] === '1' ? this.symbols[i] : `${this.symbols[i]}^${parseInt(dimensions[i], 10)}`)
         }
       }
       if (t) r.push(t.join('*'))
