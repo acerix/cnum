@@ -99,5 +99,5 @@ test('Formula for zero function in GLSL', () => {
 })
 
 test('GLSL formula for the Lemniscate of Bernoulli', () => {
-  expect(lemniscateOfBernoulli.toGLSLFormula()).toBe('-2.0*pow(x,2.0)+pow(x,4.0)+2.0*pow(y,2.0)+2.0*pow(x,2.0)*pow(y,2.0)+pow(y,4.0)')
+  expect(lemniscateOfBernoulli.toGLSLFormula()).toBe('-2.0*x*x+x*x*x*x+2.0*y*y+2.0*x*x*y*y+y*y*y*y')
 })
