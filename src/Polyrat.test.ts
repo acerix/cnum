@@ -95,9 +95,16 @@ test('Formula for evaluating the Lemniscate of Bernoulli in calc', () => {
 })
 
 test('Formula for zero function in GLSL', () => {
-  expect(new Polyrat({}).toGLSLFormula()).toBe('0')
+  expect(new Polyrat({}).toGLSLFormula()).toBe('0.0')
 })
 
 test('GLSL formula for the Lemniscate of Bernoulli', () => {
   expect(lemniscateOfBernoulli.toGLSLFormula()).toBe('-2.0*x*x+x*x*x*x+2.0*y*y+2.0*x*x*y*y+y*y*y*y')
+})
+
+test('GLSL formula with negative exponent', () => {
+  expect(new Polyrat({
+    '-2,0': new Rat(1),
+    '0,1': new Rat(-1)
+  }).toGLSLFormula()).toBe('1.0/1.0*x*x+-1.0*y')
 })

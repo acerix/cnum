@@ -135,16 +135,20 @@ export class Polyrat {
       const dimensions = exponents.split(',')
       for (let i=0; i<dimensions.length; i++) {
         if (dimensions[i] !== '0') {
-          const exponent = parseInt(dimensions[i], 10)
-          // pow doesn't work for < 0?
+          let exponent = parseInt(dimensions[i], 10)
+          // pow doesn't work for < 0
           // t.push(`pow(${this.symbols[i]},${exponent}.0)`)
-          // multiple muliply instead
+          // muliply instead
+          if (exponent < 0) {
+            t.push('1.0/1.0')
+            exponent = -exponent
+          }
           t.push(this.symbols[i].repeat(exponent).split('').join('*'))
         }
       }
       if (t) r.push(t.join('*'))
     }
-    if (r.length === 0) return '0'
+    if (r.length === 0) return '0.0'
     return r.join('+')
   }
 
