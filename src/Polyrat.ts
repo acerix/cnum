@@ -1,7 +1,7 @@
 import {Rat} from './Rat'
 import Symbolizer from './Symbolizer'
 
-interface Coefficents<Rat> {
+export interface Coefficents<Rat> {
   [Key: string]: Rat;
 }
 
@@ -24,7 +24,14 @@ export class Polyrat {
    * Initialize a rational polynumber.
    */
   constructor(coefficents?: Coefficents<Rat>) {
-    if (coefficents) this.coefficents = coefficents
+    if (coefficents) {
+      // for (const i in coefficents) {
+      //   if (typeof coefficents[i] !== typeof Rat) {
+      //     // coefficents[i] = new Rat(coefficents[i])
+      //   }
+      // }
+      this.coefficents = coefficents
+    }
     if (Object.keys(this.coefficents).length) {
       this.dimension = Object.keys(this.coefficents)[0].split(',').length
     }
