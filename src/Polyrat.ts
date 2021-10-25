@@ -88,11 +88,17 @@ export class Polyrat {
       const dimensions = exponents.split(',')
       for (let i=0; i<dimensions.length; i++) {
         if (dimensions[i] !== '0') {
-          t.push(dimensions[i] === '1' ? this.symbols[i] : `${this.symbols[i]}<sup>${parseInt(dimensions[i], 10)}</sup>`)
+          if (dimensions[i] === '1') {
+            t.push(this.symbols[i])
+          }
+          else {
+            t.push(`${this.symbols[i]}<sup>${parseInt(dimensions[i], 10)}</sup>`)
+          }
         }
       }
       if (t) r.push(t.join(''))
     }
+    if (r.length === 0) return '0'
     return r.join(' + ')
   }
 
@@ -108,11 +114,17 @@ export class Polyrat {
       const dimensions = exponents.split(',')
       for (let i=0; i<dimensions.length; i++) {
         if (dimensions[i] !== '0') {
-          t.push(dimensions[i] === '1' ? this.symbols[i] : `${this.symbols[i]}^${parseInt(dimensions[i], 10)}`)
+          if (dimensions[i] === '1') {
+            t.push(this.symbols[i])
+          }
+          else {
+            t.push(`${this.symbols[i]}^${parseInt(dimensions[i], 10)}`)
+          }
         }
       }
       if (t) r.push(t.join('*'))
     }
+    if (r.length === 0) return '0'
     return r.join(' + ')
   }
 
@@ -133,6 +145,7 @@ export class Polyrat {
       }
       if (t) r.push(t.join('*'))
     }
+    if (r.length === 0) return '0'
     return r.join('+')
   }
 
