@@ -72,7 +72,7 @@ export class Polyrat {
   /**
    * The JSON representation.
    */
-   toJSON(): string {
+  toJSON(): string {
     // return JSON.stringify(this.coefficents)
     const r = []
     for (const [exponents, coefficent] of Object.entries(this.coefficents)) {

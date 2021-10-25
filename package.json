@@ -1,6 +1,6 @@
 {
   "name": "cnum",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Represent rational numbers in comfortably numeric way.",
   "author": "Dylan Ferris <dylan@psilly.com>",
   "contributors": [
