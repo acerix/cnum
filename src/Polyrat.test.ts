@@ -142,3 +142,9 @@ test('GLSL formula with negative exponent', () => {
     '0,1': new Rat(-1)
   }).toGLSLFormula()).toBe('1.0/(1.0*x*x*1.0)+-1.0*y')
 })
+
+// test('JSON formula is the same as JSON', () => {
+//   const json = lemniscateOfBernoulli.toJSON()
+//   const obj = JSON.parse(json) as Coefficents
+//   expect(JSON.stringify(obj)).toBe(json)
+// })
