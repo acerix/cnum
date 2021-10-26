@@ -1,4 +1,4 @@
-import Polyrat, { stringToPolyrat } from './Polyrat'
+import Polyrat, { Coefficents, stringToPolyrat } from './Polyrat'
 import Rat from './Rat'
 
 const line = new Polyrat({
@@ -48,7 +48,7 @@ test('Evaluation of y = x^2 for x=3 is 9', () => {
 })
 
 test('JSONing the Lemniscate of Bernoulli', () => {
-  expect(lemniscateOfBernoulli.toJSON()).toBe("['2,0':'-2','4,0':'1','0,2':'2','2,2':'2','0,4':'1']")
+  expect(lemniscateOfBernoulli.toJSON()).toBe('{"2,0":"-2","4,0":"1","0,2":"2","2,2":"2","0,4":"1"}')
 })
 
 test('Formula for zero function in HTML', () => {
@@ -143,8 +143,8 @@ test('GLSL formula with negative exponent', () => {
   }).toGLSLFormula()).toBe('1.0/(1.0*x*x*1.0)+-1.0*y')
 })
 
-// test('JSON formula is the same as JSON', () => {
-//   const json = lemniscateOfBernoulli.toJSON()
-//   const obj = JSON.parse(json) as Coefficents
-//   expect(JSON.stringify(obj)).toBe(json)
-// })
+test('JSON formula is the same as JSON', () => {
+  const json = lemniscateOfBernoulli.toJSON()
+  const obj = JSON.parse(json) as Coefficents
+  expect(JSON.stringify(obj)).toBe(json)
+})
