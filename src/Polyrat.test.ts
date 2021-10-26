@@ -71,6 +71,40 @@ test('Formula for evaluating the Lemniscate of Bernoulli in HTML', () => {
   expect(lemniscateOfBernoulli.toHTMLFormula()).toBe('-2x<sup>2</sup> + x<sup>4</sup> + 2y<sup>2</sup> + 2x<sup>2</sup>y<sup>2</sup> + y<sup>4</sup>')
 })
 
+test('Formula for zero function in standard alpha form in HTML', () => {
+  expect(new Polyrat({}).toStandardAlphaFormHTML()).toBe('0')
+})
+
+test('Formula for one function in standard alpha form in HTML', () => {
+  expect(new Polyrat({0: new Rat(1)}).toStandardAlphaFormHTML()).toBe('1')
+})
+
+test('Formula for 1/x function in standard alpha form in HTML', () => {
+  expect(new Polyrat({'-1': new Rat(1)}).toStandardAlphaFormHTML()).toBe('1') // @todo should be 1/x ??
+})
+
+test('Formula for some function in standard alpha form in HTML', () => {
+  expect(new Polyrat({'42': new Rat(42)}).toStandardAlphaFormHTML()).toBe('42x<sup>42</sup>')
+})
+
+test('Formula for evaluating the basic line in standard alpha form in HTML', () => {
+  expect(line.toStandardAlphaFormHTML()).toBe('x + -1y')
+})
+
+test('Formula for evaluating a function with a negative one exponent in standard alpha form in HTML', () => {
+  expect(new Polyrat({
+    '1,0': new Rat(1),
+    '0,-1': new Rat(1)
+  }).toStandardAlphaFormHTML()).toBe('x / y')
+})
+
+test('Formula for evaluating a function with a negative exponent less than one in standard alpha form in HTML', () => {
+  expect(new Polyrat({
+    '1,0': new Rat(1),
+    '0,-69': new Rat(1)
+  }).toStandardAlphaFormHTML()).toBe('x / y<sup>69</sup>')
+})
+
 test('Formula for zero function in calc', () => {
   expect(new Polyrat({}).toCalcFormula()).toBe('0')
 })
@@ -106,5 +140,5 @@ test('GLSL formula with negative exponent', () => {
   expect(new Polyrat({
     '-2,0': new Rat(1),
     '0,1': new Rat(-1)
-  }).toGLSLFormula()).toBe('1.0/1.0*x*x+-1.0*y')
+  }).toGLSLFormula()).toBe('1.0/(1.0*x*x*1.0)+-1.0*y')
 })

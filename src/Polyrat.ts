@@ -98,6 +98,48 @@ export class Polyrat {
   }
 
   /**
+   * The formula in the standard alpha form as HTML.
+   */
+  toStandardAlphaFormHTML(): string {
+    const rn: string[] = []
+    const rd: string[] = []
+    if (!Object.keys(this.coefficents).length) return '0'
+    for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
+      const tn: string[] = []
+      const td: string[] = []
+      const f = coefficent.toString()
+      if (f !== '1') tn.push(f)
+      const dimensions = exponents.split(',')
+      for (let i=0; i<dimensions.length; i++) {
+        if (dimensions[i] !== '0') {
+          if (dimensions[i] === '1') {
+            tn.push(this.symbols[i])
+          }
+          else {
+            const exponent = parseInt(dimensions[i], 10)
+            if (exponent > 0) {
+              tn.push(`${this.symbols[i]}<sup>${exponent}</sup>`)
+            }
+            else {
+              if (exponent === -1) {
+                td.push(this.symbols[i])
+              }
+              else {
+                td.push(`${this.symbols[i]}<sup>${-exponent}</sup>`)
+              }
+            }
+          }
+        }
+      }
+      if (tn.length) rn.push(tn.join(''))
+      if (td.length) rd.push(td.join(''))
+    }
+    if (rn.length === 0) return '1'
+    if (rd.length === 0) return rn.join(' + ')
+    return rn.join(' + ') + ' / ' + rd.join(' + ')
+  }
+  
+  /**
    * The "calc" code for evaluating the value.
    */
   toCalcFormula(): string {
@@ -117,7 +159,7 @@ export class Polyrat {
           }
         }
       }
-      if (t) r.push(t.join('*'))
+      if (t.length) r.push(t.join('*'))
     }
     if (r.length === 0) return '0'
     return r.join(' + ')
@@ -136,17 +178,22 @@ export class Polyrat {
       for (let i=0; i<dimensions.length; i++) {
         if (dimensions[i] !== '0') {
           let exponent = parseInt(dimensions[i], 10)
+          const recipricol = exponent < 0
           // pow doesn't work for < 0
           // t.push(`pow(${this.symbols[i]},${exponent}.0)`)
           // muliply instead
-          if (exponent < 0) {
-            t.push('1.0/1.0')
+          if (recipricol) {
+            t.push('1.0/(1.0')
             exponent = -exponent
           }
           t.push(this.symbols[i].repeat(exponent).split('').join('*'))
+          if (recipricol) {
+            t.push('1.0)')
+            exponent = -exponent
+          }
         }
       }
-      if (t) r.push(t.join('*'))
+      if (t.length) r.push(t.join('*'))
     }
     if (r.length === 0) return '0.0'
     return r.join('+')
