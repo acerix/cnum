@@ -2,7 +2,7 @@ import {Rat} from './Rat'
 import Symbolizer from './Symbolizer'
 
 export interface Coefficents {
-  [Key: string]: Rat;
+  [Key: string]: bigint;
 }
 
 /**
@@ -18,7 +18,8 @@ export class Polyrat {
   dimension = 0
 
   // unique symbols for each dimension
-  symbols = ''
+  latinSymbols = ''
+  greekSymbols = ''
 
   /**
    * Initialize a rational polynumber.
@@ -30,9 +31,13 @@ export class Polyrat {
     if (Object.keys(this.coefficents).length) {
       this.dimension = Object.keys(this.coefficents)[0].split(',').length
     }
-    const sg = (new Symbolizer('xyzw')).generator()
+    const lsg = (new Symbolizer('xyzw')).generator()
     for (let i=0; i<this.dimension; i++) {
-      this.symbols += sg.next().value
+      this.latinSymbols += lsg.next().value
+    }
+    const gsg = (new Symbolizer()).generator()
+    for (let i=0; i<this.dimension; i++) {
+      this.greekSymbols += gsg.next().value
     }
   }
 
@@ -42,7 +47,7 @@ export class Polyrat {
   evaluate(parameters: Rat[]): Rat {
     let result: Rat = new Rat()
     for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
-      let value: Rat = coefficent
+      let value: Rat = new Rat(coefficent)
       const dimensions = exponents.split(',')
       for (let i=0; i<dimensions.length; i++) {
         value = value.mul(parameters[i].pow(new Rat(parseInt(dimensions[i], 10))))
@@ -84,10 +89,10 @@ export class Polyrat {
       for (let i=0; i<dimensions.length; i++) {
         if (dimensions[i] !== '0') {
           if (dimensions[i] === '1') {
-            t.push(this.symbols[i])
+            t.push(this.latinSymbols[i])
           }
           else {
-            t.push(`${this.symbols[i]}<sup>${parseInt(dimensions[i], 10)}</sup>`)
+            t.push(`${this.latinSymbols[i]}<sup>${parseInt(dimensions[i], 10)}</sup>`)
           }
         }
       }
@@ -113,19 +118,19 @@ export class Polyrat {
       for (let i=0; i<dimensions.length; i++) {
         if (dimensions[i] !== '0') {
           if (dimensions[i] === '1') {
-            tn.push(this.symbols[i])
+            tn.push(this.greekSymbols[i])
           }
           else {
             const exponent = parseInt(dimensions[i], 10)
             if (exponent > 0) {
-              tn.push(`${this.symbols[i]}<sup>${exponent}</sup>`)
+              tn.push(`${this.greekSymbols[i]}<sup>${exponent}</sup>`)
             }
             else {
               if (exponent === -1) {
-                td.push(this.symbols[i])
+                td.push(this.greekSymbols[i])
               }
               else {
-                td.push(`${this.symbols[i]}<sup>${-exponent}</sup>`)
+                td.push(`${this.greekSymbols[i]}<sup>${-exponent}</sup>`)
               }
             }
           }
@@ -134,7 +139,7 @@ export class Polyrat {
       if (tn.length) rn.push(tn.join(''))
       if (td.length) rd.push(td.join(''))
     }
-    if (rn.length === 0) return '1'
+    if (rn.length === 0) rn.push('1')
     if (rd.length === 0) return rn.join(' + ')
     return rn.join(' + ') + ' / ' + rd.join(' + ')
   }
@@ -152,10 +157,10 @@ export class Polyrat {
       for (let i=0; i<dimensions.length; i++) {
         if (dimensions[i] !== '0') {
           if (dimensions[i] === '1') {
-            t.push(this.symbols[i])
+            t.push(this.latinSymbols[i])
           }
           else {
-            t.push(`${this.symbols[i]}^${parseInt(dimensions[i], 10)}`)
+            t.push(`${this.latinSymbols[i]}^${parseInt(dimensions[i], 10)}`)
           }
         }
       }
@@ -186,7 +191,7 @@ export class Polyrat {
             t.push('1.0/(1.0')
             exponent = -exponent
           }
-          t.push(this.symbols[i].repeat(exponent).split('').join('*'))
+          t.push(this.latinSymbols[i].repeat(exponent).split('').join('*'))
           if (recipricol) {
             t.push('1.0)')
             exponent = -exponent

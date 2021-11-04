@@ -2,27 +2,27 @@ import Polyrat, { Coefficents, stringToPolyrat } from './Polyrat'
 import Rat from './Rat'
 
 const line = new Polyrat({
-  '1,0': new Rat( 1),
-  '0,1': new Rat(-1)
+  '1,0': 1n,
+  '0,1': -1n
 })
 
 const parabola = new Polyrat({
-  '2,0': new Rat( 1),
-  '0,1': new Rat(-1)
+  '2,0': 1n,
+  '0,1': -1n
 })
 
 const fermatCurve = new Polyrat({
-  '0,0': new Rat(-1),
-  '3,0': new Rat( 1),
-  '0,3': new Rat( 1)
+  '0,0': -1n,
+  '3,0': 1n,
+  '0,3': 1n
 })
 
 const lemniscateOfBernoulli = new Polyrat({
-  '2,0': new Rat(-2),
-  '4,0': new Rat( 1),
-  '0,2': new Rat( 2),
-  '2,2': new Rat( 2),
-  '0,4': new Rat( 1)
+  '2,0': -2n,
+  '4,0': 1n,
+  '0,2': 2n,
+  '2,2': 2n,
+  '0,4': 1n
 })
 
 test('New Polyrat is the expected type', () => {
@@ -32,7 +32,7 @@ test('New Polyrat is the expected type', () => {
 })
 
 test('Cloning maintains the string representation', () => {
-  const a = new Polyrat({'0': new Rat(2)})
+  const a = new Polyrat({'0': 2n})
   const b = a.clone()
   expect(a.toString()).toBe(b.toString())
 })
@@ -42,7 +42,7 @@ test('Empty stringToPolyrat is empty.', () => {
 })
 
 test('Evaluation of y = x^2 for x=3 is 9', () => {
-  const a = new Polyrat({'2': new Rat(1n)})
+  const a = new Polyrat({'2': 1n})
   const x = new Rat(3n)
   expect(a.evaluate([x]).toString()).toBe('9')
 })
@@ -76,33 +76,47 @@ test('Formula for zero function in standard alpha form in HTML', () => {
 })
 
 test('Formula for one function in standard alpha form in HTML', () => {
-  expect(new Polyrat({0: new Rat(1)}).toStandardAlphaFormHTML()).toBe('1')
+  expect(new Polyrat({0: 1n}).toStandardAlphaFormHTML()).toBe('1')
 })
 
 test('Formula for 1/x function in standard alpha form in HTML', () => {
-  expect(new Polyrat({'-1': new Rat(1)}).toStandardAlphaFormHTML()).toBe('1') // @todo should be 1/x ??
+  expect(new Polyrat({'-1': 1n}).toStandardAlphaFormHTML()).toBe('1 / α')
 })
 
 test('Formula for some function in standard alpha form in HTML', () => {
-  expect(new Polyrat({'42': new Rat(42)}).toStandardAlphaFormHTML()).toBe('42x<sup>42</sup>')
+  expect(new Polyrat({'42': 42n}).toStandardAlphaFormHTML()).toBe('42α<sup>42</sup>')
 })
 
+test('Formula for the Lemniscate of Bernoulli in standard alpha form in HTML', () => {
+  expect(lemniscateOfBernoulli.toStandardAlphaFormHTML()).toBe('-2α<sup>2</sup> + α<sup>4</sup> + 2β<sup>2</sup> + 2α<sup>2</sup>β<sup>2</sup> + β<sup>4</sup>')
+})
+
+// test('Formula for some polynomial in standard alpha form in HTML', () => {
+//   expect(new Polyrat({
+//     '0,0': -13n,
+//     '0,0': 11n,
+//     '2,2': -5, 3,
+//     '-2,2': -5, 3,
+//     '0,2': -1,
+//   }).toStandardAlphaFormHTML()).toBe('-13/11 + -5α<sup>2</sup>β<sup>2</sup> - β<sup>4</sup> + β<sup>9</sup> / 3α<sup>2</sup>β<sup>2</sup> + 7β<sup>4</sup>')
+// })
+
 test('Formula for evaluating the basic line in standard alpha form in HTML', () => {
-  expect(line.toStandardAlphaFormHTML()).toBe('x + -1y')
+  expect(line.toStandardAlphaFormHTML()).toBe('α + -1β')
 })
 
 test('Formula for evaluating a function with a negative one exponent in standard alpha form in HTML', () => {
   expect(new Polyrat({
-    '1,0': new Rat(1),
-    '0,-1': new Rat(1)
-  }).toStandardAlphaFormHTML()).toBe('x / y')
+    '1,0': 1n,
+    '0,-1': 1n,
+  }).toStandardAlphaFormHTML()).toBe('α / β')
 })
 
 test('Formula for evaluating a function with a negative exponent less than one in standard alpha form in HTML', () => {
   expect(new Polyrat({
-    '1,0': new Rat(1),
-    '0,-69': new Rat(1)
-  }).toStandardAlphaFormHTML()).toBe('x / y<sup>69</sup>')
+    '1,0': 1n,
+    '0,-69': 1n
+  }).toStandardAlphaFormHTML()).toBe('α / β<sup>69</sup>')
 })
 
 test('Formula for zero function in calc', () => {
@@ -111,8 +125,8 @@ test('Formula for zero function in calc', () => {
 
 test('Formula for constant function in calc', () => {
   expect(new Polyrat({
-    '0': new Rat( 42),
-    '1': new Rat(-1)
+    '0': 42n,
+    '1': -1n
   }).toCalcFormula()).toBe('42 + -1*x')
 })
 
@@ -138,8 +152,8 @@ test('GLSL formula for the Lemniscate of Bernoulli', () => {
 
 test('GLSL formula with negative exponent', () => {
   expect(new Polyrat({
-    '-2,0': new Rat(1),
-    '0,1': new Rat(-1)
+    '-2,0': 1n,
+    '0,1': -1n
   }).toGLSLFormula()).toBe('1.0/(1.0*x*x*1.0)+-1.0*y')
 })
 
