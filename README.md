@@ -9,7 +9,7 @@
 [![Language Grade][lgtm-image]][lgtm-url]
 [![GPL 3.0][license-image]](LICENSE)
 
-Comfortably Numbers (cnum) represents rational numbers and related mathamatical expressions in a *bigint*eresting way.
+Comfortably Numbers (cnum) represents rational numbers and related mathematical expressions in a *bigint*eresting way.
 
 ## Install
 
