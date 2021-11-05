@@ -194,7 +194,6 @@ export class Polyrat {
           t.push(this.latinSymbols[i].repeat(exponent).split('').join('*'))
           if (recipricol) {
             t.push('1.0)')
-            exponent = -exponent
           }
         }
       }
