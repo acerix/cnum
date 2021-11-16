@@ -1,4 +1,4 @@
-import Rat, {floatToRat, stringToRat} from './Rat'
+import Rat, {floatToRat, parseRat} from './Rat'
 
 test('New Rat is the expected type', () => {
   const a = new Rat()
@@ -581,25 +581,25 @@ test('-420/69 converted to a float and back to a Rat is "-140/23"', () => {
 
 test('Not a number is converted to "0/0"', () => {
   const n = 'NaN'
-  expect(stringToRat(n).toString()).toBe('0/0')
+  expect(parseRat(n).toString()).toBe('0/0')
 })
 
 test('"Infinity" is converted to "1/0"', () => {
   const n = 'Infinity'
-  expect(stringToRat(n).toString()).toBe('1/0')
+  expect(parseRat(n).toString()).toBe('1/0')
 })
 
 test('"-Infinity" is converted to "-1/0"', () => {
   const n = '-Infinity'
-  expect(stringToRat(n).toString()).toBe('-1/0')
+  expect(parseRat(n).toString()).toBe('-1/0')
 })
 
 test('"420" converted to a Rat is "420"', () => {
   const a = '420'
-  expect(stringToRat(a).toString()).toBe('420')
+  expect(parseRat(a).toString()).toBe('420')
 })
 
 test('"-420/69" converted to a Rat is "-140/23"', () => {
   const a = '-420/69'
-  expect(stringToRat(a).toString()).toBe('-140/23')
+  expect(parseRat(a).toString()).toBe('-140/23')
 })

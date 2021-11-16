@@ -30,6 +30,6 @@
       "DOM"
     ]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*", "tests/**/*"],
   "exclude": ["node_modules"]
 }

@@ -5,13 +5,13 @@ import cnum from './cnum'
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
 (window as any).cnum = cnum
 
-import Rat, {floatToRat, stringToRat} from './Rat'
+import Rat, {floatToRat, parseRat} from './Rat'
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
 (window as any).Rat = Rat;
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
 (window as any).floatToRat = floatToRat;
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-(window as any).stringToRat = stringToRat
+(window as any).parseRat = parseRat
 
 import Polyrat from './Polyrat'
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any

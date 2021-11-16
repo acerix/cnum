@@ -496,7 +496,7 @@ export const floatToRat = (n: number): Rat => {
 /**
  * Parse the string for a numeric value and return it as a Rat.
  */
-export const stringToRat = (s: string): Rat => {
+export const parseRat = (s: string): Rat => {
 
   // Handle special values: 0/0, 1/0, -1/0
   if (s==='NaN') return new Rat(0, 0)

@@ -11,6 +11,11 @@
 
 Comfortably Numbers (cnum) represents rational numbers and related mathematical expressions in a *bigint*eresting way.
 
+## Demo
+
+[CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
+
+
 ## Install
 
 ```bash

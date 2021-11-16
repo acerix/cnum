@@ -20,5 +20,5 @@ class cnum {
 }
 
 export default cnum
-export {Rat, floatToRat, stringToRat} from './Rat'
+export {Rat, floatToRat, parseRat} from './Rat'
 export {Polyrat} from './Polyrat'
