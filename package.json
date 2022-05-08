@@ -1,6 +1,6 @@
 {
   "name": "cnum",
-  "version": "0.0.30",
+  "version": "0.1.0",
   "description": "Represent rational numbers in comfortably numeric way.",
   "license": "GPL-3.0",
   "keywords": [
