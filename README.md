@@ -54,7 +54,7 @@ r.profile
 ```html
 <script src="https://unpkg.com/cnum"></script>
 <script>
-const r = new Rat(4, 13)
+const r = new cnum.Rat(4, 13)
 console.log(r.profile)
 </script>
 ```
