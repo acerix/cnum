@@ -410,6 +410,10 @@ export class Rat {
       t = t.sub(integerRat)
     }
 
+    if (t.n === 0n) {
+      return r
+    }
+
     // increment the denominator of f, substracting it from t when bigger, until t has a numerator of 1
     while (t.n !== 1n) {
       f.d++

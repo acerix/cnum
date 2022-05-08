@@ -550,6 +550,11 @@ test('Egyptian fraction for -1/12 is "-1 + 1/2 + 1/3 + 1/12"', () => {
   expect(a.egyptianFractionString()).toBe('-1 + 1/2 + 1/3 + 1/12')
 })
 
+test('Egyptian fraction for 4096 is as expected', () => {
+  const a = new Rat(4096)
+  expect(a.egyptianFractionString()).toBe('4096')
+})
+
 test('Babylonian fraction for 1/60 is as expected', () => {
   const a = new Rat(1, 60)
   expect(a.babylonianFractionString()).toBe('1 * 60^-1')
