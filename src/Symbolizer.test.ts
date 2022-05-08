@@ -11,7 +11,7 @@ test('Default symbolizer generates "αβγδεζηθικλμνξοπρςστυφ
   const g = a.generator()
   const x = 'αβγδεζηθικλμνξοπρςστυφχψω'
   let s = ''
-  for (let i=0; i<x.length; i++) {
+  for (let i = 0; i < x.length; i++) {
     s += g.next().value
   }
   expect(s).toBe(x)
@@ -22,7 +22,7 @@ test('Custom symbolizer generates as specified, followed by default symbols', ()
   const g = a.generator()
   const x = 'xyzwαβγδ'
   let s = ''
-  for (let i=0; i<x.length; i++) {
+  for (let i = 0; i < x.length; i++) {
     s += g.next().value
   }
   expect(s).toBe(x)

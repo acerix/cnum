@@ -1,7 +1,11 @@
-import {rationalApproximation, pathToValue, continuedFraction} from './SternBrocotTree'
+import {
+  rationalApproximation,
+  pathToValue,
+  continuedFraction,
+} from './SternBrocotTree'
 
 test('Rational number for 13/7 is as expected', () => {
-  expect(rationalApproximation(13/7).toString()).toBe('13/7')
+  expect(rationalApproximation(13 / 7).toString()).toBe('13/7')
 })
 
 test('Path to 1 is empty', () => {
@@ -12,7 +16,7 @@ test('Path to 1 is empty', () => {
 })
 
 test('Path to 3/7 is as expected', () => {
-  const a = 3/7
+  const a = 3 / 7
   const ex = [false, false, true, true]
   const r = []
   for (const n of pathToValue(a)) {
@@ -33,7 +37,7 @@ test('Continued fraction for Φ is all ones ending with a 2', () => {
 })
 
 test('Continued fraction integers for 355/113 are [3, 7, 16]', () => {
-  const a = 355/113
+  const a = 355 / 113
   const ex = [3, 7, 16]
   const r = []
   for (const n of continuedFraction(a)) {
@@ -61,7 +65,7 @@ test('Continued fraction for e is as expected', () => {
 })
 
 test('Continued fraction for √2 is as expected', () => {
-  const ex = [1].concat( Array(21).fill(2) )
+  const ex = [1].concat(Array(21).fill(2))
   const r = []
   for (const n of continuedFraction(Math.SQRT2)) {
     r.push(n)

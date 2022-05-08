@@ -1,11 +1,11 @@
-export type TensorInput = Array<TensorInput|bigint>
+export type TensorInput = Array<TensorInput | bigint>
 
 /**
  * Find the number of dimensions of the array.
  */
 export const arrayDepth = (a: TensorInput): number => {
-  let i=0
-  for (let current=a; Array.isArray(current[0]); i++) {
+  let i = 0
+  for (let current = a; Array.isArray(current[0]); i++) {
     current = current[0]
   }
   return i
@@ -22,9 +22,9 @@ export class Tensor {
   /**
    * Initialize a tensor.
    */
-  constructor(values: TensorInput, shape?:[number, number]) {
+  constructor(values: TensorInput, shape?: [number, number]) {
     this.shape = shape ?? [values.length, arrayDepth(values)]
-    for (let i=0; i<this.shape[0]; i++) {
+    for (let i = 0; i < this.shape[0]; i++) {
       // const row = []
       // for (let j=0; j<this.shape[1]; j++) {
       //   // row.push(values[i][j])
@@ -46,7 +46,6 @@ export class Tensor {
   toString(): string {
     return this.values.toString()
   }
-
 }
 
 export default Tensor

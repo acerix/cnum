@@ -53,12 +53,20 @@ test('Lex of "chummy 69 chum" is as expected', () => {
 
 test('Lex of "!?*&" throws invalid operator', () => {
   const a = new Lexer('!?*&')
-  expect(() => {for (const t of a.lex()) {void(t)} }).toThrow('Invalid operator "!?"')
+  expect(() => {
+    for (const t of a.lex()) {
+      void t
+    }
+  }).toThrow('Invalid operator "!?"')
 })
 
 test('Lex of "abc %^" throws invalid operator', () => {
   const a = new Lexer('abc %^')
-  expect(() => {for (const t of a.lex()) {void(t)} }).toThrow('Invalid operator "%^"')
+  expect(() => {
+    for (const t of a.lex()) {
+      void t
+    }
+  }).toThrow('Invalid operator "%^"')
 })
 
 test('Lex of "zzzz420" is "zzzz420"', () => {

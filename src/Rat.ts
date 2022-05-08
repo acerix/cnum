@@ -1,6 +1,6 @@
-import {EPSILON} from './config'
-import {gcd, primeFactors} from './bigint'
-import {rationalApproximation, continuedFraction} from './SternBrocotTree'
+import { EPSILON } from './config'
+import { gcd, primeFactors } from './bigint'
+import { rationalApproximation, continuedFraction } from './SternBrocotTree'
 
 /**
  * @class Rational Number
@@ -13,7 +13,10 @@ export class Rat {
   /**
    * Initialize a rational number.
    */
-  constructor(numerator: bigint|number=0n, denominator: bigint|number=1n) {
+  constructor(
+    numerator: bigint | number = 0n,
+    denominator: bigint | number = 1n,
+  ) {
     this.n = BigInt(numerator)
     this.d = BigInt(denominator)
     this.normalize()
@@ -30,7 +33,7 @@ export class Rat {
    * The text representation.
    */
   toString(): string {
-    return this.n.toString() + ( this.d === 1n ? '' : '/' + this.d.toString() )
+    return this.n.toString() + (this.d === 1n ? '' : '/' + this.d.toString())
   }
 
   /**
@@ -60,7 +63,6 @@ export class Rat {
    * Normalize the numerator and denominator by factoring out the common denominators.
    */
   normalize(): void {
-
     // normalize 0/±1, ±1/0, 0/0
     if (this.n === 0n) {
       if (this.d !== 0n) {
@@ -72,7 +74,7 @@ export class Rat {
       this.n = this.n > 0n ? 1n : -1n
       return
     }
-    
+
     // normalize 1/1
     if (this.n === this.d) {
       this.n = this.d = 1n
@@ -84,12 +86,11 @@ export class Rat {
       this.n = -this.n
       this.d = -this.d
     }
-    
+
     // reduce numerator and denomitator by the greatest common divisor
     const divisor = gcd(this.n, this.d)
     this.n /= divisor
     this.d /= divisor
-
   }
 
   /**
@@ -159,7 +160,7 @@ export class Rat {
     }
     // integer
     if (that.d === 1n) {
-      return new Rat(this.n**that.n, this.d**that.n)
+      return new Rat(this.n ** that.n, this.d ** that.n)
     }
     // fraction
     else {
@@ -248,22 +249,21 @@ export class Rat {
   sqrt(): Rat {
     return this.root(2)
   }
- 
+
   /**
    * Returns the nth root, a number which approximates this when multiplied by itself n times.
    */
   root(n: number): Rat {
-
     // Handle 0/±1, ±1/0, 0/0, ±1/1
     if (this.n === 0n || this.d === 0n || this.n === this.d) {
       return this.clone()
     }
-    
+
     if (this.isNegative()) {
       throw `Roots of negative numbers like ${this.toString()} are too complex for this basic library`
     }
 
-    return floatToRat(Math.pow(+this, 1/n))
+    return floatToRat(Math.pow(+this, 1 / n))
     // return functionToRat(r => r.pow(n), +this)
   }
 
@@ -336,8 +336,7 @@ export class Rat {
   *continuedFraction(): Generator<number> {
     if (this.n === 0n || this.d === 0n) {
       yield +this
-    }
-    else {
+    } else {
       for (const n of continuedFraction(+this)) {
         yield n
       }
@@ -372,7 +371,12 @@ export class Rat {
       f.push(...primeFactors(this.n))
     }
     if (this.d !== 1n) {
-      f.push(...primeFactors(this.d).map(f => {f[1]=-f[1]; return f}))
+      f.push(
+        ...primeFactors(this.d).map((f) => {
+          f[1] = -f[1]
+          return f
+        }),
+      )
     }
     return f.sort((a, b) => {
       return Number(a[0] - b[0])
@@ -385,7 +389,7 @@ export class Rat {
   primeFactorizationString(): string {
     const a: string[] = []
     for (const p of this.primeFactorization()) {
-      a.push(p[1]===1n ? p[0].toString() : `${p[0]}^${p[1]}`)
+      a.push(p[1] === 1n ? p[0].toString() : `${p[0]}^${p[1]}`)
     }
     return a.join(' * ')
   }
@@ -437,7 +441,7 @@ export class Rat {
     let r = Math.abs(+this - n)
     let d = 0
     // consume increasing powers until the integer part is divided
-    for (let p=0; n > 0; p++) {
+    for (let p = 0; n > 0; p++) {
       d = n % 60
       if (d !== 0) {
         a.unshift(`${d} * 60^${p}`)
@@ -446,7 +450,7 @@ export class Rat {
     }
     // consume decreasing powers until the remainder is accumulated
     // @todo use a more precise calculation to get rid of this abhorrent epsilon
-    for (let p=-1; r > 1e-10; p--) {
+    for (let p = -1; r > 1e-10; p--) {
       r *= 60
       d = Math.floor(r)
       r -= d
@@ -469,22 +473,20 @@ export class Rat {
     }
     return a.join(' + ')
   }
-
 }
 
 /**
  * Find a Rat approximation of the floating point number.
  */
 export const floatToRat = (n: number): Rat => {
-
   // Handle special values: 0/0, 1/0, -1/0
   if (isNaN(n)) return new Rat(0, 0)
-  if (n===Infinity) return new Rat(1, 0)
-  if (n===-Infinity) return new Rat(-1, 0)
+  if (n === Infinity) return new Rat(1, 0)
+  if (n === -Infinity) return new Rat(-1, 0)
 
   // Shortcut for numbers close to an integer or 1/integer
-  if (Math.abs(n%1) < EPSILON) return new Rat(Math.round(n))
-  if (Math.abs(1/n%1) < EPSILON) return new Rat(1, Math.round(1/n))
+  if (Math.abs(n % 1) < EPSILON) return new Rat(Math.round(n))
+  if (Math.abs((1 / n) % 1) < EPSILON) return new Rat(1, Math.round(1 / n))
 
   // Traverse the Stern–Brocot tree until a good approximation is found
   // If negative, search for the positive value and negate the result
@@ -497,18 +499,16 @@ export const floatToRat = (n: number): Rat => {
  * Parse the string for a numeric value and return it as a Rat.
  */
 export const parseRat = (s: string): Rat => {
-
   // Handle special values: 0/0, 1/0, -1/0
-  if (s==='NaN') return new Rat(0, 0)
-  if (s==='Infinity') return new Rat(1, 0)
-  if (s==='-Infinity') return new Rat(-1, 0)
+  if (s === 'NaN') return new Rat(0, 0)
+  if (s === 'Infinity') return new Rat(1, 0)
+  if (s === '-Infinity') return new Rat(-1, 0)
 
   const [n, d] = s.split('/', 2)
   if (d === undefined) {
     return floatToRat(Number(n))
   }
-  return new Rat(BigInt(n), BigInt(d))
-
+  return new Rat(BigInt(n ?? 1), BigInt(d))
 }
 
 /**

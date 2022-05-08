@@ -6,7 +6,10 @@ export const gcd = (a: bigint, b: bigint): bigint => {
     return 1n
   }
   while (b !== 0n) {
-    [a, b] = [b, a % b]
+    //[a, b] = [b, a % b] // not pretty???
+    const t = a % b
+    a = b
+    b = t
   }
   return a < 0n ? -a : a
 }
@@ -16,8 +19,8 @@ export const gcd = (a: bigint, b: bigint): bigint => {
  */
 export const isPrime = (n: bigint): boolean => {
   if (n === 1n) return false
-  for (let i = 2n; i*i <= n; i++) {
-    if (n%i === 0n) return false
+  for (let i = 2n; i * i <= n; i++) {
+    if (n % i === 0n) return false
   }
   return true
 }

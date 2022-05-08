@@ -1,4 +1,6 @@
-# cnum - Comfortably Numbers
+# cnum
+
+Comfortably Numbers (cnum) represents rational numbers and related mathematical expressions in a *bigint*eresting way.
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
@@ -9,12 +11,9 @@
 [![Language Grade][lgtm-image]][lgtm-url]
 [![GPL 3.0][license-image]](LICENSE)
 
-Comfortably Numbers (cnum) represents rational numbers and related mathematical expressions in a *bigint*eresting way.
-
 ## Demo
 
 [CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
-
 
 ## Install
 
@@ -60,8 +59,6 @@ console.log(r.profile)
 </script>
 ```
 
-[CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
-
 ### Command Line Interface
 
 ```shellscript
@@ -73,9 +70,9 @@ cnum> 2/7
 2/7 (≈0.28571428571428571429)
 ```
 
-#### In Your Browser
+#### CLI in Browser
 
-[Try with RunKit](https://npm.runkit.com/cnum)
+[RunKit](https://npm.runkit.com/cnum)
 
 ## Read the Docs
 
@@ -85,19 +82,20 @@ cnum> 2/7
 
 *   `yarn install`: Install dependencies
 *   `yarn dev`: Run tests when source files are changed
-*   `yarn cli`: Start a command line interface
-*   `yarn lint`: Lint with ESLint
-*   `yarn test`: Run Jest and Enzyme tests
-*   `yarn clean`: Delete previous build
-*   `yarn docs`: Build documentation
+*   `yarn lint --fix`: Lint with ESLint
+*   `yarn test`: Run Jest tests
+*   `yarn doc`: Build documentation
 *   `yarn build`: Production build
-*   `yarn build-all`: Production build all the things
 *   `yarn prepublish`: Prepare for publishing
 *   `yarn publish`: Publish to npm
 
 ## Feedback
 
-* Please report bug and feature requests as [GitHub Issues](https://github.com/acerix/cnum/issues)
+* Report bug and feature requests as [GitHub Issues](https://github.com/acerix/cnum/issues)
+
+## Sponsorship
+
+* [Sponsor acerix](https://github.com/sponsors/acerix)
 
 [npm-image]: https://img.shields.io/npm/v/cnum.svg
 [npm-url]: https://npmjs.org/package/cnum

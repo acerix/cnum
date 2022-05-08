@@ -1,7 +1,7 @@
-import { Token, TokenType } from "./Token"
+import { Token, TokenType } from './Token'
 
 interface Identifiers<T> {
-  [Key: string]: T;
+  [Key: string]: T
 }
 
 /**
@@ -24,12 +24,12 @@ export class Parser {
    */
   evaluate(): bigint {
     let n = 0n
-    for(const x of this.tokens) {
+    for (const x of this.tokens) {
       if (x.type === TokenType.identifier) {
         if (!(x.s in this.identifiers)) {
           throw `"${x.s}" is undefined`
         }
-        n += BigInt(this.identifiers[x.s])
+        n += BigInt(this.identifiers[x.s] ?? -1)
       }
       // else if (x.type === TokenType.separator) {
       // }
@@ -50,7 +50,6 @@ export class Parser {
   toString(): string {
     return this.evaluate().toString()
   }
-
 }
 
 export default Parser

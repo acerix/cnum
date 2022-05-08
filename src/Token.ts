@@ -4,7 +4,7 @@ export const enum TokenType {
   separator,
   operator,
   literal,
-  comment
+  comment,
 }
 
 /**
@@ -22,14 +22,13 @@ export class Token {
     this.type = type
     this.s = s
   }
-  
+
   /**
    * The text representation.
    */
   toString(): string {
     return `${this.type}(${this.s})`
   }
-
 }
 
 export default Token

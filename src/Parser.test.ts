@@ -19,7 +19,9 @@ test('Parse literal with space', () => {
 
 test('Parser with undefined identifier throws error', () => {
   const a = new Parser(new Lexer('wtf').lex())
-  expect(() => {a.evaluate()}).toThrow('"wtf" is undefined')
+  expect(() => {
+    a.evaluate()
+  }).toThrow('"wtf" is undefined')
 })
 
 test('Parser with defined identifier returns the value', () => {

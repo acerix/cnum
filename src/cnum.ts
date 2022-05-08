@@ -7,7 +7,6 @@ import Parser from './Parser'
  * @name cnum
  */
 class cnum {
-
   static get version(): string {
     return VERSION
   }
@@ -20,5 +19,5 @@ class cnum {
 }
 
 export default cnum
-export {Rat, floatToRat, parseRat} from './Rat'
-export {Polyrat} from './Polyrat'
+export { Rat, floatToRat, parseRat } from './Rat'
+export { Polyrat } from './Polyrat'

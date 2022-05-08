@@ -11,16 +11,15 @@ export class Symbolizer {
   constructor(symbols?: string) {
     if (symbols) this.symbols = symbols.split('')
   }
-  
+
   /**
    * Symbol generator.
    */
   *generator(): Generator<string> {
-    for (let i=0;;i++) {
+    for (let i = 0; ; i++) {
       if (i < this.symbols.length) {
-        yield this.symbols[i]
-      }
-      else {
+        yield this.symbols[i] ?? '?'
+      } else {
         yield String.fromCharCode(945 + i - this.symbols.length)
       }
     }
