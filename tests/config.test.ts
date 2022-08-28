@@ -1,4 +1,4 @@
-import { EPSILON, MAX_LOOPS } from './config'
+import { EPSILON, MAX_LOOPS } from '../src/config'
 
 test('Epsilon is reasonable', () => {
   expect(EPSILON).toBeTruthy()

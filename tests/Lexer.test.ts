@@ -1,4 +1,4 @@
-import Lexer from './Lexer'
+import Lexer from '../src/Lexer'
 
 test('New Lexer is the expected type', () => {
   const a = new Lexer('')

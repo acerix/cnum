@@ -131,12 +131,10 @@ export class Polyrat {
             const exponent = parseInt(dimensions[i] ?? '0', 10)
             if (exponent > 0) {
               tn.push(`${this.greekSymbols[i] ?? '?'}<sup>${exponent}</sup>`)
+            } else if (exponent === -1) {
+              td.push(this.greekSymbols[i] ?? '?')
             } else {
-              if (exponent === -1) {
-                td.push(this.greekSymbols[i] ?? '?')
-              } else {
-                td.push(`${this.greekSymbols[i] ?? '?'}<sup>${-exponent}</sup>`)
-              }
+              td.push(`${this.greekSymbols[i] ?? '?'}<sup>${-exponent}</sup>`)
             }
           }
         }
@@ -146,7 +144,7 @@ export class Polyrat {
     }
     if (rn.length === 0) rn.push('1')
     if (rd.length === 0) return rn.join(' + ')
-    return rn.join(' + ') + ' / ' + rd.join(' + ')
+    return `${rn.join(' + ')  } / ${  rd.join(' + ')}`
   }
 
   /**
@@ -187,7 +185,7 @@ export class Polyrat {
     for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
       const t: string[] = []
       const f = coefficent.toString()
-      if (f !== '1') t.push(f + '.0')
+      if (f !== '1') t.push(`${f  }.0`)
       const dimensions = exponents.split(',')
       for (let i = 0; i < dimensions.length; i++) {
         if (dimensions[i] !== '0') {

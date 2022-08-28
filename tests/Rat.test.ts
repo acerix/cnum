@@ -1,4 +1,4 @@
-import Rat, { floatToRat, parseRat } from './Rat'
+import Rat, { floatToRat, parseRat } from '../src/Rat'
 
 test('New Rat is the expected type', () => {
   const a = new Rat()
@@ -91,6 +91,7 @@ test('Profile of 420/69 is as expected', () => {
 })
 
 // @todo too slow
+// eslint-disable-next-line jest/no-commented-out-tests
 // test('Profile of 355/113 is as expected', () => {
 //   const a = new Rat(355, 113)
 //   expect(a.profile).toBe(
@@ -130,6 +131,7 @@ test('Mutating a clone does not affect the value of the original', () => {
   expect(+a).toBe(original)
 })
 
+// eslint-disable-next-line jest/no-commented-out-tests
 // test('The reciprocol of zero divided by a negative number is negative infinity', () => {
 //   const a = new Rat(0, -69)
 //   expect(+a.inv()).toBe(-Infinity)
@@ -150,6 +152,7 @@ test('Zero over a positive number is still zero', () => {
   expect(+a).toBe(0)
 })
 
+// eslint-disable-next-line jest/no-commented-out-tests
 // test('Zero over a negative number is negative zero', () => {
 //   const a = new Rat(0, -21)
 //   expect(+a).toBe(-0)
@@ -587,9 +590,14 @@ test('0.5 is converted to "1/2"', () => {
   expect(floatToRat(n).toString()).toBe('1/2')
 })
 
-test('Not a number is converted to "0/0"', () => {
+test('0/0 is converted to "0/0"', () => {
   const n = 0 / 0
   expect(floatToRat(n).toString()).toBe('0/0')
+})
+
+test('Not a number is converted to "0/0"', () => {
+  const n = 'NaN'
+  expect(parseRat(n).toString()).toBe('0/0')
 })
 
 test('Infinity is converted to "1/0"', () => {
@@ -615,11 +623,6 @@ test('-1/42069 is converted to "-1/42069"', () => {
 test('-420/69 converted to a float and back to a Rat is "-140/23"', () => {
   const a = new Rat(-420, 69)
   expect(floatToRat(+a).toString()).toBe('-140/23')
-})
-
-test('Not a number is converted to "0/0"', () => {
-  const n = 'NaN'
-  expect(parseRat(n).toString()).toBe('0/0')
 })
 
 test('"Infinity" is converted to "1/0"', () => {

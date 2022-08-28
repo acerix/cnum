@@ -1,4 +1,4 @@
-import Symbolizer from './Symbolizer'
+import Symbolizer from '../src/Symbolizer'
 
 test('New Symbolizer is the expected type', () => {
   const a = new Symbolizer()

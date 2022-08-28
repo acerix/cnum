@@ -1,5 +1,5 @@
-import Lexer from './Lexer'
-import Parser from './Parser'
+import Lexer from '../src/Lexer'
+import Parser from '../src/Parser'
 
 test('New Parser is the expected type', () => {
   const a = new Parser(new Lexer('').lex())

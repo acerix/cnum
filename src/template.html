@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title><% preact.title %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <% preact.headEnd %>
+  </head>
+  <body>
+    <h1>cnum browser test</h1>
+    <p>
+      <em>cnum v<span id="version">0.0.0</span></em>
+    </p>
+    <pre id="output" class="output"></pre>
+    <% preact.bodyEnd %>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // document.getElementById('version').innerText = cnum.version
+        const out = document.getElementById('output')
+        out.innerHTML = new Date()
+      })
+    </script>
+  </body>
+</html>

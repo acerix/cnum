@@ -33,7 +33,7 @@ export class Rat {
    * The text representation.
    */
   toString(): string {
-    return this.n.toString() + (this.d === 1n ? '' : '/' + this.d.toString())
+    return this.n.toString() + (this.d === 1n ? '' : `/${  this.d.toString()}`)
   }
 
   /**
@@ -160,13 +160,11 @@ export class Rat {
     }
     // integer
     if (that.d === 1n) {
-      return new Rat(this.n ** that.n, this.d ** that.n)
+      return new Rat(Number(this.n) ** Number(that.n), Number(this.d) ** Number(that.n))
     }
     // fraction
-    else {
-      const estimate = Math.pow(+this, +that)
-      return floatToRat(estimate)
-    }
+    const estimate = Math.pow(+this, +that)
+    return floatToRat(estimate)
   }
 
   /**
@@ -355,7 +353,7 @@ export class Rat {
     if (n !== undefined && this.d !== 0n) {
       let s = n.toString()
       if (a.length) {
-        s += '; ' + a.join(', ')
+        s += `; ${  a.join(', ')}`
       }
       return `[${s}]`
     }

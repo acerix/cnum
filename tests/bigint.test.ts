@@ -1,4 +1,4 @@
-import { gcd, isPrime, primes } from './bigint'
+import { gcd, isPrime, primes } from '../src/bigint'
 
 test('Greatest commen denominator of 100000 and 10000 is 10000', () => {
   const a = 100000n

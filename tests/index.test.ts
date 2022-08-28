@@ -1,4 +1,4 @@
-import cnum from './'
+import cnum from '../src/cnum'
 
 describe('version number', () => {
   it('matches semver format', () => {

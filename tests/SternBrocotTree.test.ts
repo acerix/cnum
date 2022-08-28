@@ -2,7 +2,7 @@ import {
   rationalApproximation,
   pathToValue,
   continuedFraction,
-} from './SternBrocotTree'
+} from '../src/SternBrocotTree'
 
 test('Rational number for 13/7 is as expected', () => {
   expect(rationalApproximation(13 / 7).toString()).toBe('13/7')

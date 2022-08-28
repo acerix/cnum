@@ -1,5 +1,5 @@
-import Polyrat, { Coefficents, stringToPolyrat } from './Polyrat'
-import Rat from './Rat'
+import Polyrat, { Coefficents, stringToPolyrat } from '../src/Polyrat'
+import Rat from '../src/Rat'
 
 const line = new Polyrat({
   '1,0': 1n,
@@ -32,7 +32,7 @@ test('New Polyrat is the expected type', () => {
 })
 
 test('Cloning maintains the string representation', () => {
-  const a = new Polyrat({ '0': 2n })
+  const a = new Polyrat({ 0: 2n })
   const b = a.clone()
   expect(a.toString()).toBe(b.toString())
 })
@@ -42,7 +42,7 @@ test('Empty stringToPolyrat is empty.', () => {
 })
 
 test('Evaluation of y = x^2 for x=3 is 9', () => {
-  const a = new Polyrat({ '2': 1n })
+  const a = new Polyrat({ 2: 1n })
   const x = new Rat(3n)
   expect(a.evaluate([x]).toString()).toBe('9')
 })
@@ -88,7 +88,7 @@ test('Formula for 1/x function in standard alpha form in HTML', () => {
 })
 
 test('Formula for some function in standard alpha form in HTML', () => {
-  expect(new Polyrat({ '42': 42n }).toStandardAlphaFormHTML()).toBe(
+  expect(new Polyrat({ 42: 42n }).toStandardAlphaFormHTML()).toBe(
     '42α<sup>42</sup>',
   )
 })
@@ -98,16 +98,6 @@ test('Formula for the Lemniscate of Bernoulli in standard alpha form in HTML', (
     '-2α<sup>2</sup> + α<sup>4</sup> + 2β<sup>2</sup> + 2α<sup>2</sup>β<sup>2</sup> + β<sup>4</sup>',
   )
 })
-
-// test('Formula for some polynomial in standard alpha form in HTML', () => {
-//   expect(new Polyrat({
-//     '0,0': -13n,
-//     '0,0': 11n,
-//     '2,2': -5, 3,
-//     '-2,2': -5, 3,
-//     '0,2': -1,
-//   }).toStandardAlphaFormHTML()).toBe('-13/11 + -5α<sup>2</sup>β<sup>2</sup> - β<sup>4</sup> + β<sup>9</sup> / 3α<sup>2</sup>β<sup>2</sup> + 7β<sup>4</sup>')
-// })
 
 test('Formula for evaluating the basic line in standard alpha form in HTML', () => {
   expect(line.toStandardAlphaFormHTML()).toBe('α + -1β')
@@ -138,8 +128,8 @@ test('Formula for zero function in calc', () => {
 test('Formula for constant function in calc', () => {
   expect(
     new Polyrat({
-      '0': 42n,
-      '1': -1n,
+      0: 42n,
+      1: -1n,
     }).toCalcFormula(),
   ).toBe('42 + -1*x')
 })

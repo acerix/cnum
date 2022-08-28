@@ -11,10 +11,6 @@ Comfortably Numbers (cnum) represents rational numbers and related mathematical 
 [![Language Grade][lgtm-image]][lgtm-url]
 [![GPL 3.0][license-image]](LICENSE)
 
-## Demo
-
-[CodePen Demo](https://codepen.io/acerix/pen/GRmvmYL?editors=0010)
-
 ## Install
 
 ```bash
@@ -80,22 +76,22 @@ cnum> 2/7
 
 ## CLI Commands
 
-*   `yarn install`: Install dependencies
-*   `yarn dev`: Run tests when source files are changed
-*   `yarn lint --fix`: Lint with ESLint
-*   `yarn test`: Run Jest tests
-*   `yarn doc`: Build documentation
-*   `yarn build`: Production build
-*   `yarn prepublish`: Prepare for publishing
-*   `yarn publish`: Publish to npm
+- `yarn install`: Install dependencies
+- `yarn dev`: Test in browser, rebuilding when source files are changed
+- `yarn lint --fix`: Lint with ESLint
+- `yarn test`: Run tests
+- `yarn doc`: Build documentation
+- `yarn build`: Production build
+- `yarn prepublish`: Prepare for publishing
+- `yarn publish`: Publish to npm
 
 ## Feedback
 
-* Report bug and feature requests as [GitHub Issues](https://github.com/acerix/cnum/issues)
+- Report bug and feature requests as [GitHub Issues](https://github.com/acerix/cnum/issues)
 
 ## Sponsorship
 
-* [Sponsor acerix](https://github.com/sponsors/acerix)
+- [Sponsor cnum](https://github.com/sponsors/acerix)
 
 [npm-image]: https://img.shields.io/npm/v/cnum.svg
 [npm-url]: https://npmjs.org/package/cnum

@@ -1,4 +1,4 @@
-import Token, { TokenType } from './Token'
+import Token, { TokenType } from '../src/Token'
 
 test('New Token is the expected type', () => {
   const a = new Token(TokenType.identifier, '')

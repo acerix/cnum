@@ -16,7 +16,7 @@ export const arrayDepth = (a: TensorInput): number => {
  * @name Tensor
  */
 export class Tensor {
-  values: BigInt[] = []
+  values: bigint[] = []
   shape: [number, number]
 
   /**
