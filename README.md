@@ -77,7 +77,7 @@ cnum> 2/7
 ## CLI Commands
 
 - `yarn install`: Install dependencies
-- `yarn dev`: Test in browser, rebuilding when source files are changed
+- `yarn dev`: Run tests when source files are changed
 - `yarn lint --fix`: Lint with ESLint
 - `yarn test`: Run tests
 - `yarn doc`: Build documentation
