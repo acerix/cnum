@@ -209,7 +209,8 @@ export class Polyrat {
         f = -f
         t += '-'
       }
-      if (f !== 1n) t += f
+      let products: string[] = []
+      if (f !== 1n) products.push(f.toString())
       const dimensions = exponents.split(',')
       for (let i = 0; i < dimensions.length; i++) {
         if (dimensions[i] !== '0') {
@@ -217,9 +218,10 @@ export class Polyrat {
           if (dimensions[i] !== '1') {
             term += `^${parseInt(dimensions[i] ?? '0', 10)}`
           }
-          t += term
+          products.push(term)
         }
       }
+      if (products.length) t += products.join('*')
       if (t) s.s += t
     }
     return s.toString()
@@ -241,7 +243,7 @@ export class Polyrat {
           const recipricol = exponent < 0
           // pow doesn't work for < 0
           // t.push(`pow(${this.symbols[i]},${exponent}.0)`)
-          // muliply instead
+          // multiply instead
           if (recipricol) {
             t.push('1.0/(1.0')
             exponent = -exponent
