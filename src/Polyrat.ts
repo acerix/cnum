@@ -5,6 +5,14 @@ export interface Coefficents {
   [Key: string]: bigint
 }
 
+class TermSimplifier {
+  s = ''
+  toString(): string {
+    if (this.s === '') return '0'
+    return this.s
+  }
+}
+
 /**
  * @class Rational polynumber
  * @name Polyrat
@@ -84,97 +92,137 @@ export class Polyrat {
    * The formula in the human way with exponents as HTML sups.
    */
   toHTMLFormula(): string {
-    const r: string[] = []
+    const s = new TermSimplifier()
     for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
-      const t: string[] = []
-      const f = coefficent.toString()
-      if (f !== '1') t.push(f)
+      let t = ''
+      let f = coefficent
+      if (s.s.length) {
+        t += ' '
+        if (f < 0) {
+          f = -f
+          t += '- '
+        } else {
+          t += '+ '
+        }
+      } else if (f < 0) {
+        f = -f
+        t = `${t}-${f}`
+      }
       const dimensions = exponents.split(',')
       for (let i = 0; i < dimensions.length; i++) {
         if (dimensions[i] !== '0') {
-          if (dimensions[i] === '1') {
-            t.push(this.latinSymbols[i] ?? '?')
-          } else {
-            t.push(
-              `${this.latinSymbols[i] ?? '?'}<sup>${parseInt(
-                dimensions[i] ?? '?',
-                10,
-              )}</sup>`,
-            )
+          let term = this.latinSymbols[i] ?? '?'
+          if (dimensions[i] !== '1') {
+            term += `<sup>${parseInt(dimensions[i] ?? '?', 10)}</sup>`
           }
+          t += term
         }
       }
-      if (t) r.push(t.join(''))
+      if (t) s.s += t
     }
-    if (r.length === 0) return '0'
-    return r.join(' + ')
+    return s.toString()
   }
 
   /**
    * The formula in the standard alpha form as HTML.
    */
   toStandardAlphaFormHTML(): string {
-    const rn: string[] = []
-    const rd: string[] = []
-    if (!Object.keys(this.coefficents).length) return '0'
+    const sn = new TermSimplifier()
+    const sd = new TermSimplifier()
+    if (Object.keys(this.coefficents).length === 0) return '0'
     for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
-      const tn: string[] = []
-      const td: string[] = []
-      const f = coefficent.toString()
-      if (f !== '1') tn.push(f)
+      let tn = ''
+      let td = ''
+      let f = coefficent
+      if (sn.s.length) {
+        tn += ' '
+        if (f < 0) {
+          f = -f
+          tn += '- '
+        } else {
+          tn += '+ '
+        }
+      } else if (f < 0) {
+        f = -f
+        tn += '-'
+      }
+      if (sd.s.length) {
+        td += ' '
+        if (f < 0) {
+          f = -f
+          td += '- '
+        } else {
+          td += '+ '
+        }
+      } else if (f < 0) {
+        f = -f
+        td += '-'
+      }
+      if (f !== 1n) tn += f
       const dimensions = exponents.split(',')
       for (let i = 0; i < dimensions.length; i++) {
+        const term = this.greekSymbols[i] ?? '?'
         if (dimensions[i] !== '0') {
           if (dimensions[i] === '1') {
-            tn.push(this.greekSymbols[i] ?? '?')
+            tn += term
           } else {
             const exponent = parseInt(dimensions[i] ?? '0', 10)
             if (exponent > 0) {
-              tn.push(`${this.greekSymbols[i] ?? '?'}<sup>${exponent}</sup>`)
+              if (tn.length === 0) tn = term
+              tn += `<sup>${exponent}</sup>`
             } else if (exponent === -1) {
-              td.push(this.greekSymbols[i] ?? '?')
+              td += term
             } else {
-              td.push(`${this.greekSymbols[i] ?? '?'}<sup>${-exponent}</sup>`)
+              td += `<sup>${-exponent}</sup>`
             }
           }
+          // else {
+          //   tn = term
+          // }
         }
       }
-      if (tn.length) rn.push(tn.join(''))
-      if (td.length) rd.push(td.join(''))
+      if (tn) sn.s += tn
+      if (td) sd.s += td
     }
-    if (rn.length === 0) rn.push('1')
-    if (rd.length === 0) return rn.join(' + ')
-    return `${rn.join(' + ')  } / ${  rd.join(' + ')}`
+    if (sn.s.length === 0) sn.s = '1'
+    if (sd.s.length === 0) return sn.s
+    return `${sn} / ${sd}`
   }
 
   /**
    * The "calc" code for evaluating the value.
    */
   toCalcFormula(): string {
-    const r: string[] = []
+    const s = new TermSimplifier()
     for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
-      const t: string[] = []
-      const f = coefficent.toString()
-      if (f !== '1') t.push(f)
+      let t = ''
+      let f = coefficent
+      if (s.s.length) {
+        t += ' '
+        if (f < 0) {
+          f = -f
+          t += '- '
+        } else {
+          t += '+ '
+        }
+      } else if (f < 0) {
+        f = -f
+        t += '-'
+      }
+      if (f !== 1n) t += f
       const dimensions = exponents.split(',')
       for (let i = 0; i < dimensions.length; i++) {
         if (dimensions[i] !== '0') {
-          if (dimensions[i] === '1') {
-            t.push(this.latinSymbols[i] ?? '?')
-          } else {
-            t.push(
-              `${this.latinSymbols[i] ?? '?'}^${parseInt(
-                dimensions[i] ?? '0',
-                10,
-              )}`,
-            )
+          let term = this.latinSymbols[i] ?? '?'
+          if (dimensions[i] !== '1') {
+            term += `^${parseInt(dimensions[i] ?? '0', 10)}`
           }
+          t += term
         }
       }
-      if (t.length) r.push(t.join('*'))
+      if (t) s.s += t
     }
-    if (r.length === 0) return '0'
-    return r.join(' + ')
+    return s.toString()
   }
 
   /**
@@ -185,7 +233,7 @@ export class Polyrat {
     for (const [exponents, coefficent] of Object.entries(this.coefficents)) {
       const t: string[] = []
       const f = coefficent.toString()
-      if (f !== '1') t.push(`${f  }.0`)
+      if (f !== '1') t.push(`${f}.0`)
       const dimensions = exponents.split(',')
       for (let i = 0; i < dimensions.length; i++) {
         if (dimensions[i] !== '0') {
@@ -199,7 +247,7 @@ export class Polyrat {
             exponent = -exponent
           }
           t.push(
-            (this.latinSymbols[i] ?? '?').repeat(exponent).split('').join('*'),
+            (this.latinSymbols[i] ?? '?').repeat(exponent).split('').join('*')
           )
           if (recipricol) {
             t.push('1.0)')

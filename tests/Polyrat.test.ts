@@ -49,7 +49,7 @@ test('Evaluation of y = x^2 for x=3 is 9', () => {
 
 test('JSONing the Lemniscate of Bernoulli', () => {
   expect(lemniscateOfBernoulli.toJSON()).toBe(
-    '{"2,0":"-2","4,0":"1","0,2":"2","2,2":"2","0,4":"1"}',
+    '{"2,0":"-2","4,0":"1","0,2":"2","2,2":"2","0,4":"1"}'
   )
 })
 
@@ -58,20 +58,20 @@ test('Formula for zero function in HTML', () => {
 })
 
 test('Formula for evaluating the basic line in HTML', () => {
-  expect(line.toHTMLFormula()).toBe('x + -1y')
+  expect(line.toHTMLFormula()).toBe('x - y')
 })
 
 test('Formula for evaluating the basic parabola in HTML', () => {
-  expect(parabola.toHTMLFormula()).toBe('x<sup>2</sup> + -1y')
+  expect(parabola.toHTMLFormula()).toBe('x<sup>2</sup> - y')
 })
 
 test('Formula for evaluating the Fermat curve in HTML', () => {
-  expect(fermatCurve.toHTMLFormula()).toBe('-1 + x<sup>3</sup> + y<sup>3</sup>')
+  expect(fermatCurve.toHTMLFormula()).toBe('-x<sup>3</sup> + y<sup>3</sup>')
 })
 
 test('Formula for evaluating the Lemniscate of Bernoulli in HTML', () => {
   expect(lemniscateOfBernoulli.toHTMLFormula()).toBe(
-    '-2x<sup>2</sup> + x<sup>4</sup> + 2y<sup>2</sup> + 2x<sup>2</sup>y<sup>2</sup> + y<sup>4</sup>',
+    '-2x<sup>2</sup> + x<sup>4</sup> + 2y<sup>2</sup> + 2x<sup>2</sup>y<sup>2</sup> + y<sup>4</sup>'
   )
 })
 
@@ -89,18 +89,18 @@ test('Formula for 1/x function in standard alpha form in HTML', () => {
 
 test('Formula for some function in standard alpha form in HTML', () => {
   expect(new Polyrat({ 42: 42n }).toStandardAlphaFormHTML()).toBe(
-    '42α<sup>42</sup>',
+    '42α<sup>42</sup>'
   )
 })
 
 test('Formula for the Lemniscate of Bernoulli in standard alpha form in HTML', () => {
   expect(lemniscateOfBernoulli.toStandardAlphaFormHTML()).toBe(
-    '-2α<sup>2</sup> + α<sup>4</sup> + 2β<sup>2</sup> + 2α<sup>2</sup>β<sup>2</sup> + β<sup>4</sup>',
+    '-2α<sup>2</sup> + α<sup>4</sup> + 2β<sup>2</sup> + 2α<sup>2</sup>β<sup>2</sup> + β<sup>4</sup>'
   )
 })
 
 test('Formula for evaluating the basic line in standard alpha form in HTML', () => {
-  expect(line.toStandardAlphaFormHTML()).toBe('α + -1β')
+  expect(line.toStandardAlphaFormHTML()).toBe('α - β')
 })
 
 test('Formula for evaluating a function with a negative one exponent in standard alpha form in HTML', () => {
@@ -108,7 +108,7 @@ test('Formula for evaluating a function with a negative one exponent in standard
     new Polyrat({
       '1,0': 1n,
       '0,-1': 1n,
-    }).toStandardAlphaFormHTML(),
+    }).toStandardAlphaFormHTML()
   ).toBe('α / β')
 })
 
@@ -117,7 +117,7 @@ test('Formula for evaluating a function with a negative exponent less than one i
     new Polyrat({
       '1,0': 1n,
       '0,-69': 1n,
-    }).toStandardAlphaFormHTML(),
+    }).toStandardAlphaFormHTML()
   ).toBe('α / β<sup>69</sup>')
 })
 
@@ -130,21 +130,21 @@ test('Formula for constant function in calc', () => {
     new Polyrat({
       0: 42n,
       1: -1n,
-    }).toCalcFormula(),
-  ).toBe('42 + -1*x')
+    }).toCalcFormula()
+  ).toBe('42 - x')
 })
 
 test('Formula for evaluating the basic line in calc', () => {
-  expect(line.toCalcFormula()).toBe('x + -1*y')
+  expect(line.toCalcFormula()).toBe('x - y')
 })
 
 test('Formula for evaluating the basic parabola in calc', () => {
-  expect(parabola.toCalcFormula()).toBe('x^2 + -1*y')
+  expect(parabola.toCalcFormula()).toBe('x^2 - y')
 })
 
 test('Formula for evaluating the Lemniscate of Bernoulli in calc', () => {
   expect(lemniscateOfBernoulli.toCalcFormula()).toBe(
-    '-2*x^2 + x^4 + 2*y^2 + 2*x^2*y^2 + y^4',
+    '-2*x^2 + x^4 + 2*y^2 + 2*x^2*y^2 + y^4'
   )
 })
 
@@ -154,7 +154,7 @@ test('Formula for zero function in GLSL', () => {
 
 test('GLSL formula for the Lemniscate of Bernoulli', () => {
   expect(lemniscateOfBernoulli.toGLSLFormula()).toBe(
-    '-2.0*x*x+x*x*x*x+2.0*y*y+2.0*x*x*y*y+y*y*y*y',
+    '-2.0*x*x+x*x*x*x+2.0*y*y+2.0*x*x*y*y+y*y*y*y'
   )
 })
 
@@ -163,8 +163,8 @@ test('GLSL formula with negative exponent', () => {
     new Polyrat({
       '-2,0': 1n,
       '0,1': -1n,
-    }).toGLSLFormula(),
-  ).toBe('1.0/(1.0*x*x*1.0)+-1.0*y')
+    }).toGLSLFormula()
+  ).toBe('1.0/(x*x)-y')
 })
 
 test('JSON formula is the same as JSON', () => {
