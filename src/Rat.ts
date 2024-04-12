@@ -1,5 +1,5 @@
 import { EPSILON } from './config'
-import { gcd, primeFactors } from './bigint'
+import { greatestCommonDenominator, primeFactors } from './bigint'
 import { rationalApproximation, continuedFraction } from './SternBrocotTree'
 
 /**
@@ -88,7 +88,7 @@ export class Rat {
     }
 
     // reduce numerator and denomitator by the greatest common divisor
-    const divisor = gcd(this.n, this.d)
+    const divisor = greatestCommonDenominator(this.n, this.d)
     this.n /= divisor
     this.d /= divisor
   }
