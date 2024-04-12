@@ -88,7 +88,7 @@ export class Rat {
     }
 
     // reduce numerator and denomitator by the greatest common divisor
-    const divisor = greatestCommonDenominator(this.n, this.d)
+    const divisor = greatestCommonDenominator([this.n, this.d])
     this.n /= divisor
     this.d /= divisor
   }

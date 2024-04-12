@@ -1,17 +1,19 @@
 /**
  * Find the greatest common denominator of the two numbers.
  */
-export const greatestCommonDenominator = (a: bigint, b: bigint): bigint => {
-  if (b === 1n || a === 1n) {
-    return 1n
-  }
+export const greatestCommonDenominator = (numbers: Array<bigint>): bigint => {
+  if (numbers.length === 1) return numbers[0]
+
+  // only works for 2 numbers
+  let a = numbers[0]
+  let b = numbers[1]
   while (b !== 0n) {
-    //[a, b] = [b, a % b] // not pretty???
     const t = a % b
     a = b
     b = t
   }
   return a < 0n ? -a : a
+
 }
 export const gcd = greatestCommonDenominator
 
