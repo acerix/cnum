@@ -1,7 +1,7 @@
 /**
  * Find the greatest common denominator of the two numbers.
  */
-export const gcd = (a: bigint, b: bigint): bigint => {
+export const greatestCommonDenominator = (a: bigint, b: bigint): bigint => {
   if (b === 1n || a === 1n) {
     return 1n
   }
@@ -13,6 +13,7 @@ export const gcd = (a: bigint, b: bigint): bigint => {
   }
   return a < 0n ? -a : a
 }
+export const gcd = greatestCommonDenominator
 
 /**
  * Returns true if the number is prime.
